@@ -188,7 +188,7 @@ export default function SpecialTable(props) {
                         {
                             props.headers.map(header => {
                               if(header === 'Unit') {
-                                return (<TableCell align="center" key={header}><div className="champion"><img className="champion-icon" src={server + '/champions/' + row[header].toLowerCase() + '.png'} alt="" /> {row[header]}</div></TableCell>);
+                                return (<TableCell align="center" key={header}><div className="champion"><img className="champion-icon" src={server + '/champions/TFT4_' + row[header] + '.png'} alt="" /> {row[header]}</div></TableCell>);
                               }
                               if(header === 'Items') {
                                 return (<TableCell align="center" key={header}>
