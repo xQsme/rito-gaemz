@@ -40,7 +40,8 @@ const returnRegion = (region:number) => ({
     payload: region,
 });
 
-export const changeRegion = () => (region:number) => {
+export const changeRegion = (region:number) => {
+    console.log(region)
     return async (dispatch:Function) => {
         dispatch(returnRegion(region));
     };
