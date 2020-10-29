@@ -1,5 +1,3 @@
-import { nextTick } from "process";
-
 const express = require('express');
 const router = express.Router();
 const tftService = require('./tft-service');
@@ -9,8 +7,8 @@ router.get('/units/:server', getUnits);
 module.exports = router;
 
 interface Body {
-    code?: number
-    data?: object
+    code: number
+    data: object
 }
 
 export {};

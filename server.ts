@@ -23,6 +23,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/tft', require('./tft/tft-controller'));
+app.use('/summoners', require('./summoners/summoners-controller'));
 //Serve react pages
 app.use(express.static(path.join(__dirname, './react/build/')));
 

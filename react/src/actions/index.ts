@@ -1,1 +1,2 @@
-export * from './tft';
+export * from './tftInsights';
+export * from './search';

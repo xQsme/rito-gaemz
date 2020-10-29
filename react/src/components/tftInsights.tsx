@@ -5,10 +5,10 @@ import Tab from "@material-ui/core/Tab";
 import SpecialTable from "./elements/special_table";
 import Button from "@material-ui/core/Button";
 import { toast } from "react-toastify";
-import { requestInsights, changeRegion } from "../actions";
+import { requestInsights, changeTFTInsightsRegion } from "../actions";
 
 function TFTInsights(props: any) {
-  const { requested, units, totalMatches, region, error } = props.tft;
+  const { requested, units, totalMatches, region, error } = props.tftInsights;
 
   const requestUnits = async (region: number) => {
     const result = await props.requestInsights(region);
@@ -26,7 +26,7 @@ function TFTInsights(props: any) {
   };
 
   const handleChange = (stuff: any, region: number) => {
-    props.changeRegion(region);
+    props.changeTFTInsightsRegion(region);
     props.requestInsights(region);
   };
 
@@ -48,7 +48,7 @@ function TFTInsights(props: any) {
       {error ? (
         <div className="full-width">
           <Button
-            className="btn-main"
+            className="btn-main retry-button"
             variant="contained"
             color="primary"
             onClick={() => {
@@ -99,13 +99,13 @@ function TFTInsights(props: any) {
   );
 }
 
-function mapStateToProps({ tft }: any) {
+function mapStateToProps({ tftInsights }: any) {
   return {
-    tft,
+    tftInsights,
   };
 }
 
 export default connect(mapStateToProps, {
   requestInsights,
-  changeRegion,
+  changeTFTInsightsRegion,
 })(TFTInsights);

@@ -1,6 +1,6 @@
+const axios = require('axios');
 const { EUW,  NA, KR, AMERICAS, ASIA, EUROPE } = require('../config');
 const { key } = require('../secretconfig');
-const axios = require('axios');
 
 module.exports  = {
     getUnits,
@@ -121,3 +121,5 @@ async function getUnits(serverNumber: number) {
         }
     }
 }
+
+export {};

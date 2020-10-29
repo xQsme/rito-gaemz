@@ -3,7 +3,8 @@ import ReduxThunk from 'redux-thunk';
 import { persistStore, persistCombineReducers } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import tft from './reducers/tft';
+import tftInsights from './reducers/tftInsights';
+import search from './reducers/search';
 
 const isDevVersion:boolean = process.env.NODE_ENV === 'development';
 const composeEnhancers:Function = (window as { [key: string]: any })['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compose;
@@ -26,7 +27,8 @@ const config:Config = {
 };
 
 const reducers:any = persistCombineReducers(config, {
-    tft,
+    tftInsights,
+    search,
 });
 
 export const configureStore = () => {

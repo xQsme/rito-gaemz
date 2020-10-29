@@ -1,9 +1,10 @@
 import { REHYDRATE } from 'redux-persist';
 
 import {
-    RETURN_INSIGHTS,
-    FAIL_RETURN_INSIGHTS,
-    CHANGE_REGION,
+    RETURN_TFT_INSIGHTS,
+    FAIL_RETURN_TFT_INSIGHTS,
+    CHANGE_TFT_INSIGHTS_REGION,
+    START_TFT_INSIGHTS_REQUEST,
 } from '../actions/types';
 
 interface TFTInsightsReducer {
@@ -31,19 +32,25 @@ export default function (state = INITIAL_STATE, { type, payload }:any) {
                 };
             }
             return state;
-        case RETURN_INSIGHTS:
+        case START_TFT_INSIGHTS_REQUEST:
+            return {
+                ...state,
+                requested: false,
+                error: false,
+            }
+        case RETURN_TFT_INSIGHTS:
             return {
                 ...state,
                 ...payload,
                 requested: true,
                 error: false,
             };
-        case FAIL_RETURN_INSIGHTS:
+        case FAIL_RETURN_TFT_INSIGHTS:
             return{
                 ...state,
                 error: true,
             }
-        case CHANGE_REGION:
+        case CHANGE_TFT_INSIGHTS_REGION:
             return {
                 ...state,
                 region: payload,

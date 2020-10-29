@@ -64,6 +64,7 @@ body{
 }
 
 .nav{
+    padding-top: 5px;
     background-color: $secondarybg;
 }
 
@@ -321,11 +322,15 @@ td{
     border-color: $text !important;
 }
   
+.retry-button{
+    margin-top: 20px !important;
+}
 
 .search-container{
     display: flex;
 
     .search-bar{
+        display: flex;
         padding: 25px;
         background-color: $secondarybg;
         border-radius: 15px;

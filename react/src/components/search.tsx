@@ -1,12 +1,25 @@
 import React from "react";
+import { connect } from "react-redux";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from "@material-ui/icons/Search";
+import { requestSummoners, changeSearchRegion } from "../actions";
 
-export default function Search() {
+function Search(props:any) {
   const [search, setSearch] = React.useState<String>("");
   const [option, setOption] = React.useState<Number>(0);
+  
+  const handleSearchSubmit = (evt:any) => {
+    if (evt.key === 'Enter') {
+      submitSearch();
+    }
+  }
+
+  const submitSearch = () => {
+    props.requestSummoners(option, search);
+  }
+
   return (
     <div className="search-container">
       <div className="search-bar">
@@ -16,12 +29,12 @@ export default function Search() {
           placeholder="Summoner Search"
           value={search}
           onChange={(evt) => setSearch(evt.target.value)}
-          // onKeyDown={this.handleSearchSubmit}
+          onKeyDown={handleSearchSubmit}
           margin="normal"
           InputProps={{
             startAdornment: (
               <SearchIcon
-                // onClick={() => this.search()}
+                onClick={submitSearch}
                 className="red-icon clickable"
                 color="secondary"
               />
@@ -42,3 +55,14 @@ export default function Search() {
     </div>
   );
 }
+
+function mapStateToProps({ search }: any) {
+  return {
+    search,
+  };
+}
+
+export default connect(mapStateToProps, {
+  requestSummoners,
+  changeSearchRegion,
+})(Search);

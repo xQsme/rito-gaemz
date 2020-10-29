@@ -74,7 +74,6 @@ export default function NavBar() {
     <nav className="nav">
       <Tabs
         variant="scrollable"
-        centered
         value={page}
         onChange={handleTabChange}
         indicatorColor="primary"
