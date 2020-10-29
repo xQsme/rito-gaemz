@@ -20,11 +20,9 @@ export const requestInsights = (region:number)  => {
     return async (dispatch:Function) => {
         try {
             const result:any = await axios.get(ADDRESS + '/tft/units/' + region);
-            console.log(result);
             dispatch(returnInsights(result.data));
             return '';
         } catch (error) {
-            console.log(error);
             dispatch(failReturn());
             if(error && error.response && error.response.status === 403) {
                 return '❌ API Key Expired!';

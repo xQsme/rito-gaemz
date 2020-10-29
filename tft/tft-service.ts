@@ -45,6 +45,9 @@ async function getUnits(serverNumber: number) {
         const totalPlayers = 5;
         let totalMatches = 3;
         const topPlayers = 4;
+        // const totalPlayers = 1;
+        // let totalMatches = 1;
+        // const topPlayers = 4;
         for(let p = 0; p < totalPlayers; p++) {
             response = await axios.get('https://' + server + '/tft/summoner/v1/summoners/' + challengers[p].summonerId + '?api_key=' + key);
             const summoner = {...challengers[0], ...response.data};
