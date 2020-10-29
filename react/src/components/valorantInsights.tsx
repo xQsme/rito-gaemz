@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Valorant() {
+export default function ValorantInsights() {
     return (
         <div>
-            <h1>Valorant Profile</h1>
+            <h1>Valorant Insights</h1>
         </div>
     )
 }

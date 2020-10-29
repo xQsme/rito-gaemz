@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Home() {
+export default function LoRProfile() {
     return (
         <div>
-            <h1>Home</h1>
+            <h1>LoR Profile</h1>
         </div>
     )
 }

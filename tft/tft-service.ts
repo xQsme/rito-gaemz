@@ -109,7 +109,6 @@ async function getUnits(serverNumber: number) {
             data: {units: unitsArray, totalMatches},
         }
     } catch (error) {
-        console.log(error);
         if(error.response.data.status.status_code === 403) {
             return {
                 code: 403,

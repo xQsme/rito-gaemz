@@ -1,17 +1,19 @@
 import React from "react";
 import "./assets/styles/main.scss";
 import { ToastContainer } from "react-toastify";
-import Home from "./components/home";
+import Search from "./components/search";
 import TFTInsights from "./components/tftInsights";
 import TFTProfile from "./components/tftProfile";
 import RiftInsights from "./components/riftInsights";
 import RiftProfile from "./components/riftProfile";
 import ValorantProfile from "./components/valorantProfile";
 import ValorantInsights from "./components/valorantInsights";
+import LoRProfile from "./components/lorProfile";
+import LoRInsights from "./components/lorInsights";
 import NavBar from "./components/elements/navbar";
 import { Router, RouteComponentProps } from "@reach/router";
 import { Scrollbars } from "react-custom-scrollbars";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   HOME_ROUTE,
@@ -20,6 +22,9 @@ import {
   RIFT_INSIGHTS_ROUTE,
   RIFT_PROFILE_ROUTE,
   VALORANT_PROFILE_ROUTE,
+  VALORANT_INSIGHTS_ROUTE,
+  LOR_INSIGHTS_ROUTE,
+  LOR_PROFILE_ROUTE,
 } from "./constants/routes";
 
 const RouterPage = (
@@ -31,7 +36,7 @@ export default function App() {
   return (
     <React.Fragment>
       <ToastContainer />
-      <NavBar />{" "}
+      <NavBar />
       <Scrollbars
         autoHide
         className="scrollbar"
@@ -49,7 +54,7 @@ export default function App() {
         )}
       >
         <Router className="router-container">
-          <RouterPage path={HOME_ROUTE} pageComponent={<Home />} />
+          <RouterPage default path={HOME_ROUTE} pageComponent={<Search />} />
           <RouterPage
             path={TFT_INSIGHTS_ROUTE}
             pageComponent={<TFTInsights />}
@@ -68,8 +73,13 @@ export default function App() {
             pageComponent={<ValorantProfile />}
           />
           <RouterPage
-            path={VALORANT_PROFILE_ROUTE}
+            path={VALORANT_INSIGHTS_ROUTE}
             pageComponent={<ValorantInsights />}
+          />
+          <RouterPage path={LOR_PROFILE_ROUTE} pageComponent={<LoRProfile />} />
+          <RouterPage
+            path={LOR_INSIGHTS_ROUTE}
+            pageComponent={<LoRInsights />}
           />
         </Router>
       </Scrollbars>

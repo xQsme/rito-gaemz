@@ -12,7 +12,6 @@ function TFTInsights(props: any) {
 
   const requestUnits = async (region: number) => {
     const result = await props.requestInsights(region);
-    console.log(result);
     if (result) {
       toast(result, {
         position: "top-right",
@@ -35,7 +34,6 @@ function TFTInsights(props: any) {
 
   return (
     <div className="app-container">
-      <h3 className="center">TFT Insights</h3>
       <Tabs
         value={region}
         onChange={handleChange}

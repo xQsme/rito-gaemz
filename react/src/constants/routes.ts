@@ -5,3 +5,5 @@ export const RIFT_INSIGHTS_ROUTE = '/rift/insights';
 export const RIFT_PROFILE_ROUTE = '/rift/profile';
 export const VALORANT_PROFILE_ROUTE = '/valorant/profile';
 export const VALORANT_INSIGHTS_ROUTE = '/valorant/insights';
+export const LOR_PROFILE_ROUTE = '/lor/profile';
+export const LOR_INSIGHTS_ROUTE = '/lor/insights';
