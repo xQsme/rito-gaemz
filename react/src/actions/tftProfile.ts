@@ -7,21 +7,23 @@ import {
     FAIL_RETURN_TFT_PROFILE
 } from './types';
 
-const startRequest = () => ({
+import type { TFTProfileResult } from '../interfaces';
+
+const startRequest = ():{type:string} => ({
     type: START_TFT_PROFILE_REQUEST,
 });
 
-const returnProfile = (data:any) => ({
+const returnProfile = (data:TFTProfileResult):{type:string, payload:any} => ({
     type: RETURN_TFT_PROFILE,
     payload: data,
 });
 
-const failReturn = () => ({
+const failReturn = ():{type:string} => ({
     type: FAIL_RETURN_TFT_PROFILE,
 });
 
 export const requestTFTProfile = (region: number, summonerId:string)  => {
-    return async (dispatch:Function) => {
+    return async (dispatch:(obj:{type:string, payload?: TFTProfileResult}) => string) => {
         try {
             dispatch(startRequest());
             const result:any = await axios.get(ADDRESS + '/tft/profile/' + region + '/' + summonerId);

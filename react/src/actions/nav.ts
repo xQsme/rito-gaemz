@@ -1,12 +1,10 @@
 import { SET_TAB } from "./types";
 
-const returnTab = (tab: number) => ({
-  type: SET_TAB,
-  payload: tab,
-});
-
 export const setTab = (tab: number) => {
-  return async (dispatch: Function) => {
-    dispatch(returnTab(tab));
+  return async (dispatch:(obj:{type:string, payload: number}) => void) => {
+    dispatch({
+      type: SET_TAB,
+      payload: tab,
+    });
   };
 };

@@ -33,9 +33,9 @@ function getRegion(serverNumber: number) {
 }
 
 async function getSummoners(serverNumber: number, name:string) {
+    const server = getServer(serverNumber);
+    const region = getRegion(serverNumber);
     try{
-        const server = getServer(serverNumber);
-        const region = getRegion(serverNumber);
         let rift = await axios.get('https://' + server + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=' + key);
         let tft = await axios.get('https://' + server + '/tft/summoner/v1/summoners/by-name/' + name + '?api_key=' + key);
         let lor = null;
@@ -47,9 +47,16 @@ async function getSummoners(serverNumber: number, name:string) {
             data: {rift: rift ? rift.data : null, tft: tft ? tft.data : null, lor: lor ? lor.data : null},
         }
     } catch (error) {
+        console.log(error);
         if(error.response.data.status.status_code === 403) {
             return {
                 code: 403,
+                data: 'Error',
+            }
+        }
+        if(error.response.data.status.status_code === 404) {
+            return {
+                code: 404,
                 data: 'Error',
             }
         }

@@ -7,13 +7,7 @@ import {
     START_TFT_INSIGHTS_REQUEST,
 } from '../actions/types';
 
-interface TFTInsightsReducer {
-    requested: boolean,
-    units: any,
-    totalMatches: number,
-    region: number,
-    error: boolean,
-}
+import type { TFTInsightsReducer } from '../interfaces';
 
 const INITIAL_STATE:TFTInsightsReducer = {
     requested: false,
@@ -23,7 +17,7 @@ const INITIAL_STATE:TFTInsightsReducer = {
     error: false,
 };
 
-export default function (state = INITIAL_STATE, { type, payload }:any) {
+export default function (state = INITIAL_STATE, { type, payload }:any):TFTInsightsReducer {
     switch (type) {
         case REHYDRATE:
             if (payload && payload.tftInsights) {

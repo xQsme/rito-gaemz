@@ -20,10 +20,10 @@ function LoRSummoner(props: any) {
         }}
       >
         <div className="summoner-info-container">
-          <span className="label">Summoner Name</span>
+          <span className="label">Riot Account</span>
           <span className="summoner-name">{gameName}</span>
-          <span className="label">Server</span>
-          <span className="summoner-name">{tagLine}</span>
+          <span className="label">Tag</span>
+          <span className="summoner-name">#{tagLine}</span>
           {clickable && (
             <img className="summoner-type-icon" src={LoR} alt="LoR" />
           )}

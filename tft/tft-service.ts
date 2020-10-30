@@ -125,16 +125,14 @@ async function getUnits(serverNumber: number) {
 
 async function getProfile(serverNumber: number, summonerId: string) {
     const server = getServer(serverNumber);
-    console.log(server);
-    console.log(summonerId)
     try{
         let response = await axios.get('https://' + server + '/tft/league/v1/entries/by-summoner/' + summonerId + '?api_key=' + key);
-        console.log(response.data);
         return {
             code: 202,
             data: response.data.length > 0 ? response.data[0] : {tier: 'Unranked'},
         }
     } catch (error) {
+        console.log(error);
         if(error.response.data.status.status_code === 403) {
             return {
                 code: 403,

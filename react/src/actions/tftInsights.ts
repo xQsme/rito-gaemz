@@ -8,21 +8,24 @@ import {
     START_TFT_INSIGHTS_REQUEST,
 } from './types';
 
-const startRequest = () => ({
+
+import type { TFTInsightsResult } from '../interfaces';
+
+const startRequest = ():{type:string} => ({
     type: START_TFT_INSIGHTS_REQUEST,
 });
 
-const returnInsights = (data:any) => ({
+const returnInsights = (data:TFTInsightsResult):{type:string, payload:any} => ({
     type: RETURN_TFT_INSIGHTS,
     payload: data,
 });
 
-const failReturn = () => ({
+const failReturn = ():{type:string} => ({
     type: FAIL_RETURN_TFT_INSIGHTS,
 });
 
 export const requestInsights = (region:number)  => {
-    return async (dispatch:Function) => {
+    return async (dispatch:(obj:{type:string, payload?: TFTInsightsResult}) => string) => {
         try {
             dispatch(startRequest());
             const result:any = await axios.get(ADDRESS + '/tft/units/' + region);
@@ -39,13 +42,11 @@ export const requestInsights = (region:number)  => {
     };
 };
 
-const returnRegion = (region:number) => ({
-    type: CHANGE_TFT_INSIGHTS_REGION,
-    payload: region,
-});
-
 export const changeTFTInsightsRegion = (region:number) => {
-    return async (dispatch:Function) => {
-        dispatch(returnRegion(region));
+    return async (dispatch:(obj:{type:string, payload?: number}) => void) => {
+        dispatch({
+            type: CHANGE_TFT_INSIGHTS_REGION,
+            payload: region,
+        });
     };
 }

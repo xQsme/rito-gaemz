@@ -2,13 +2,7 @@ import { REHYDRATE } from "redux-persist";
 
 import { RETURN_SUMMONERS, RESET_PROFILES } from "../actions/types";
 
-interface SearchReducer {
-  requested: boolean;
-  rift: any;
-  tft: any;
-  lor: any;
-  error: boolean;
-}
+import type { SearchReducer } from '../interfaces';
 
 const INITIAL_STATE: SearchReducer = {
   requested: false,
@@ -16,9 +10,10 @@ const INITIAL_STATE: SearchReducer = {
   tft: null,
   lor: null,
   error: false,
+  region: 0,
 };
 
-export default function (state = INITIAL_STATE, { type, payload }: any) {
+export default function (state = INITIAL_STATE, { type, payload }:any):SearchReducer {
   switch (type) {
     case REHYDRATE:
       if (payload && payload.search) {

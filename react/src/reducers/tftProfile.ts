@@ -7,12 +7,7 @@ import {
   RESET_PROFILES,
 } from "../actions/types";
 
-interface TFTProfileReducer {
-  requested: boolean;
-  error: boolean;
-  rank: string;
-  tier: string,
-}
+import type { TFTProfileReducer } from '../interfaces';
 
 const INITIAL_STATE: TFTProfileReducer = {
   requested: false,
@@ -21,7 +16,7 @@ const INITIAL_STATE: TFTProfileReducer = {
   tier: "",
 };
 
-export default function (state = INITIAL_STATE, { type, payload }: any) {
+export default function (state = INITIAL_STATE, { type, payload }:any):TFTProfileReducer {
   switch (type) {
     case REHYDRATE:
       if (payload && payload.tftProfile) {

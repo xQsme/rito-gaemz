@@ -10,7 +10,7 @@ const INITIAL_STATE: NavReducer = {
   tab: 0
 };
 
-export default function (state = INITIAL_STATE, { type, payload }: any) {
+export default function (state = INITIAL_STATE, { type, payload }:any):NavReducer {
   switch (type) {
     case REHYDRATE:
       if (payload && payload.nav) {

@@ -8,21 +8,23 @@ import {
     RESET_PROFILES,
 } from './types';
 
-const returnSummoners = (data:any) => ({
+import type { SearchResult } from '../interfaces';
+
+const returnSummoners = (data:SearchResult):{type:string, payload:any} => ({
     type: RETURN_SUMMONERS,
     payload: data,
 });
 
-const failReturn = () => ({
+const failReturn = ():{type:string} => ({
     type: FAIL_RETURN_SUMMONERS,
 });
 
-const resetProfiles = () => ({
+const resetProfiles = ():{type:string} => ({
     type: RESET_PROFILES,
 });
 
 export const requestSummoners = (region:number, name:string)  => {
-    return async (dispatch:Function) => {
+    return async (dispatch:(obj:{type:string, payload?: SearchResult}) => string) => {
         try {
             dispatch(resetProfiles());
             const result:any = await axios.get(ADDRESS + '/summoners/' + region + '/' + name);
@@ -32,6 +34,8 @@ export const requestSummoners = (region:number, name:string)  => {
             dispatch(failReturn());
             if(error && error.response && error.response.status === 403) {
                 return '❌ API Key Expired!';
+            } else if(error && error.response && error.response.status === 404) {
+                return '❌ Summoner Not Found!';
             } else {
                 return '❌ Request Limit Reached!';
             }
@@ -39,13 +43,11 @@ export const requestSummoners = (region:number, name:string)  => {
     };
 };
 
-const returnRegion = (region:number) => ({
-    type: CHANGE_SUMMONERS_REGION,
-    payload: region,
-});
-
 export const changeSearchRegion = (region:number) => {
-    return async (dispatch:Function) => {
-        dispatch(returnRegion(region));
+    return async (dispatch:(obj:{type:string, payload?: number}) => void) => {
+        dispatch({
+            type: CHANGE_SUMMONERS_REGION,
+            payload: region,
+        });
     };
 }
