@@ -1,13 +1,25 @@
 import React from "react";
 import server from "../../constants/server";
 import TFT from "../../assets/images/tft.webp";
+import { navigate } from "@reach/router";
+import { TFT_PROFILE_ROUTE } from "../../constants/routes";
+import { setTab } from "../../actions";
+import { connect } from "react-redux";
 
-export default function TFTSummoner(props: any) {
-  const { tftProfile, clickable } = props;
+function TFTSummoner(props: any) {
+  const { tftProfile, clickable, setTab } = props;
   const { profileIconId, name, summonerLevel } = props.tft;
   return (
     <div className="summoner-container">
-      <div className={"tft-summoner" + (clickable ? ' clickable' : '')}>
+      <div
+        className={"tft-summoner" + (clickable ? " clickable" : "")}
+        onClick={() => {
+          if (clickable) {
+            navigate(TFT_PROFILE_ROUTE);
+            setTab(3);
+          }
+        }}
+      >
         <div className="summoner-icon-container">
           <img
             className="summoner-icon"
@@ -22,7 +34,9 @@ export default function TFTSummoner(props: any) {
           {tftProfile && (
             <React.Fragment>
               <span className="label">Rank</span>
-              <span className="capitalized">{tftProfile.tier.toLowerCase()}</span>
+              <span className="capitalized">
+                {tftProfile.tier.toLowerCase()}
+              </span>
               {tftProfile.rank && (
                 <React.Fragment>
                   <span className="label">Division</span>
@@ -39,3 +53,9 @@ export default function TFTSummoner(props: any) {
     </div>
   );
 }
+
+function mapStateToProps() {
+  return {};
+}
+
+export default connect(mapStateToProps, { setTab })(TFTSummoner);

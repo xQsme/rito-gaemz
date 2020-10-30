@@ -1,13 +1,25 @@
 import React from "react";
 import server from "../../constants/server";
 import League2 from "../../assets/images/league-of-legends2.png";
+import { navigate } from "@reach/router";
+import { RIFT_PROFILE_ROUTE } from "../../constants/routes";
+import { setTab } from "../../actions";
+import { connect } from "react-redux";
 
-export default function RiftSummoner(props: any) {
-  const { clickable } = props;
+function RiftSummoner(props: any) {
+  const { clickable, setTab } = props;
   const { profileIconId, name, summonerLevel } = props.rift;
   return (
     <div className="summoner-container">
-      <div className={"rift-summoner" + (clickable ? " clickable" : "")}>
+      <div
+        className={"rift-summoner" + (clickable ? " clickable" : "")}
+        onClick={() => {
+          if (clickable) {
+            navigate(RIFT_PROFILE_ROUTE);
+            setTab(1);
+          }
+        }}
+      >
         <div className="summoner-icon-container">
           <img
             className="summoner-icon"
@@ -27,3 +39,9 @@ export default function RiftSummoner(props: any) {
     </div>
   );
 }
+
+function mapStateToProps() {
+  return {};
+}
+
+export default connect(mapStateToProps, { setTab })(RiftSummoner);

@@ -7,14 +7,14 @@ import {
   RESET_PROFILES,
 } from "../actions/types";
 
-interface TFTInsightsReducer {
+interface TFTProfileReducer {
   requested: boolean;
   error: boolean;
   rank: string;
   tier: string,
 }
 
-const INITIAL_STATE: TFTInsightsReducer = {
+const INITIAL_STATE: TFTProfileReducer = {
   requested: false,
   error: false,
   rank: "",

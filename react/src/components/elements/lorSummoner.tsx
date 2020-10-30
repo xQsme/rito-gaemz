@@ -1,12 +1,24 @@
 import React from "react";
 import LoR from "../../assets/images/runeterra.png";
+import { setTab } from "../../actions";
+import { navigate } from "@reach/router";
+import { connect } from "react-redux";
+import { LOR_PROFILE_ROUTE } from "../../constants/routes";
 
-export default function LoRSummoner(props: any) {
-  const { clickable } = props;
+function LoRSummoner(props: any) {
+  const { clickable, setTab } = props;
   const { gameName, tagLine } = props.lor;
   return (
     <div className="summoner-container">
-      <div className={"lor-summoner" + (clickable ? " clickable" : "")}>
+      <div
+        className={"lor-summoner" + (clickable ? " clickable" : "")}
+        onClick={() => {
+          if (clickable) {
+            navigate(LOR_PROFILE_ROUTE);
+            setTab(7);
+          }
+        }}
+      >
         <div className="summoner-info-container">
           <span className="label">Summoner Name</span>
           <span className="summoner-name">{gameName}</span>
@@ -20,3 +32,9 @@ export default function LoRSummoner(props: any) {
     </div>
   );
 }
+
+function mapStateToProps() {
+  return {};
+}
+
+export default connect(mapStateToProps, { setTab })(LoRSummoner);

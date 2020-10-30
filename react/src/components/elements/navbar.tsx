@@ -12,6 +12,8 @@ import Spat from "../../assets/images/spat.jpg";
 import Search from "../../assets/images/search.svg";
 import Valorant from "../../assets/images/valorant.png";
 import Radiant from "../../assets/images/radiant.webp";
+import { connect } from "react-redux";
+import { setTab } from '../../actions';
 
 import {
   HOME_ROUTE,
@@ -25,7 +27,8 @@ import {
   LOR_INSIGHTS_ROUTE
 } from "../../constants/routes";
 
-export default function NavBar() {
+function NavBar(props:any) {
+  const { tab } = props.nav;
   let value = 0;
   switch (history.location.pathname) {
     case LOR_INSIGHTS_ROUTE:
@@ -55,10 +58,16 @@ export default function NavBar() {
     default:
   }
 
-  const [page, setPage] = React.useState(value);
+  //Component Did Mount
+  React.useEffect(() => {
+    if(value !== tab) {
+      props.setTab(value);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
 
   const handleTabChange = (stuff: any, route: number) => {
-    setPage(route);
+    props.setTab(route);
   };
 
   const TabIcon = React.forwardRef((props: any, ref: any) => {
@@ -74,7 +83,7 @@ export default function NavBar() {
     <nav className="nav">
       <Tabs
         variant="scrollable"
-        value={page}
+        value={tab}
         onChange={handleTabChange}
         indicatorColor="primary"
         textColor="primary"
@@ -146,3 +155,11 @@ export default function NavBar() {
     </nav>
   );
 }
+
+function mapStateToProps({ nav }: any) {
+  return {
+    nav,
+  };
+}
+
+export default connect(mapStateToProps, { setTab })(NavBar);
