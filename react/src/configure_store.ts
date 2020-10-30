@@ -4,6 +4,7 @@ import { persistStore, persistCombineReducers } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import tftInsights from './reducers/tftInsights';
+import tftProfile from './reducers/tftProfile';
 import search from './reducers/search';
 
 const isDevVersion:boolean = process.env.NODE_ENV === 'development';
@@ -27,8 +28,9 @@ const config:Config = {
 };
 
 const reducers:any = persistCombineReducers(config, {
-    tftInsights,
     search,
+    tftInsights,
+    tftProfile,
 });
 
 export const configureStore = () => {

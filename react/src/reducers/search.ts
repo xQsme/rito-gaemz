@@ -1,6 +1,6 @@
 import { REHYDRATE } from "redux-persist";
 
-import { RETURN_SUMMONERS } from "../actions/types";
+import { RETURN_SUMMONERS, RESET_PROFILES } from "../actions/types";
 
 interface SearchReducer {
   requested: boolean;
@@ -27,6 +27,10 @@ export default function (state = INITIAL_STATE, { type, payload }: any) {
         };
       }
       return state;
+    case RESET_PROFILES:
+      return {
+        ...INITIAL_STATE,
+      };
     case RETURN_SUMMONERS:
       return {
         ...state,

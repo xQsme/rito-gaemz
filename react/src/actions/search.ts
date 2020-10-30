@@ -5,6 +5,7 @@ import {
     RETURN_SUMMONERS,
     FAIL_RETURN_SUMMONERS,
     CHANGE_SUMMONERS_REGION,
+    RESET_PROFILES,
 } from './types';
 
 const returnSummoners = (data:any) => ({
@@ -16,11 +17,16 @@ const failReturn = () => ({
     type: FAIL_RETURN_SUMMONERS,
 });
 
+const resetProfiles = () => ({
+    type: RESET_PROFILES,
+});
+
 export const requestSummoners = (region:number, name:string)  => {
     return async (dispatch:Function) => {
         try {
+            dispatch(resetProfiles());
             const result:any = await axios.get(ADDRESS + '/summoners/' + region + '/' + name);
-            dispatch(returnSummoners(result.data));
+            dispatch(returnSummoners({...result.data, region}));
             return '';
         } catch (error) {
             dispatch(failReturn());

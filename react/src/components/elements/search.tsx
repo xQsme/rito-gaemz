@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import SearchIcon from "@material-ui/icons/Search";
 import { requestSummoners, changeSearchRegion } from "../../actions";
+import { toast } from "react-toastify";
 
 function Search(props:any) {
   const [search, setSearch] = React.useState<String>("");
@@ -16,8 +17,19 @@ function Search(props:any) {
     }
   }
 
-  const submitSearch = () => {
-    props.requestSummoners(option, search);
+  const submitSearch = async () => {
+    const result = await props.requestSummoners(option, search);
+    if (result) {
+      toast(result, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   }
 
   return (

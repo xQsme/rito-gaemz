@@ -423,6 +423,10 @@ td{
     }
 }
 
+.capitalized{
+    text-transform: capitalize;
+}
+
 
 
 @include mq(650px) {

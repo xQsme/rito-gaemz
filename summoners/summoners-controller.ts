@@ -14,7 +14,7 @@ interface Body {
 export {};
 
 function getSummoners(req: any, res: any, next: any) {
-    console.log('invoked getSummoners');
+    console.log('invoked summoners.getSummoners');
     const server:number = parseInt(req.params.server);
     const name:string = req.params.name;
     searchService.getSummoners(server, name)

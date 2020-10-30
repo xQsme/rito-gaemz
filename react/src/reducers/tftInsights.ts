@@ -26,7 +26,7 @@ const INITIAL_STATE:TFTInsightsReducer = {
 export default function (state = INITIAL_STATE, { type, payload }:any) {
     switch (type) {
         case REHYDRATE:
-            if (payload && payload.tft) {
+            if (payload && payload.tftInsights) {
                 return {
                     ...INITIAL_STATE,
                 };

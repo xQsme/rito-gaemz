@@ -11,11 +11,11 @@ function Summoners(props: any) {
     <React.Fragment>
       <Search />
       {rift && 
-        <RiftSummoner rift={rift}/>
+        <RiftSummoner rift={rift} clickable/>
       }
       {tft && 
-        <TFTSummoner tft={tft}/>}
-      {lor && <LoRSummoner lor={lor}/>}
+        <TFTSummoner tft={tft} clickable/>}
+      {lor && <LoRSummoner lor={lor} clickable/>}
     </React.Fragment>
   );
 }

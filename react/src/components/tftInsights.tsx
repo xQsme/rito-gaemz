@@ -32,7 +32,7 @@ function TFTInsights(props: any) {
 
   //Component Did Mount
   React.useEffect(() => {
-    requestUnits(region);
+    units.length === 0 && requestUnits(region);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
