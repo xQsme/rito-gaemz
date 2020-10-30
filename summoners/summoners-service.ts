@@ -38,10 +38,13 @@ async function getSummoners(serverNumber: number, name:string) {
         const region = getRegion(serverNumber);
         let rift = await axios.get('https://' + server + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=' + key);
         let tft = await axios.get('https://' + server + '/tft/summoner/v1/summoners/by-name/' + name + '?api_key=' + key);
-        let account = await axios.get('https://' + region + '/riot/account/v1/accounts/by-puuid/' + rift.data.puuid + '?api_key=' + key);
+        let lor = null;
+        if((rift && rift.data && rift.data.puuid) || (tft && tft.data && tft.data.puuid)) {
+            lor = await axios.get('https://' + region + '/riot/account/v1/accounts/by-puuid/' + (rift.data.puuid ? rift.data.puuid : tft.data.puuid) + '?api_key=' + key);
+        }
         return {
             code: 202,
-            data: {rift: rift.data, tft: tft.data, account: account.data},
+            data: {rift: rift ? rift.data : null, tft: tft ? tft.data : null, lor: lor ? lor.data : null},
         }
     } catch (error) {
         if(error.response.data.status.status_code === 403) {

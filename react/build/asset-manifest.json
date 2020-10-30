@@ -1,22 +1,33 @@
 {
   "files": {
-    "main.css": "/static/css/main.673e013a.chunk.css",
-    "main.js": "/static/js/main.8071c47d.chunk.js",
-    "main.js.map": "/static/js/main.8071c47d.chunk.js.map",
+    "main.css": "/static/css/main.85ffeeff.chunk.css",
+    "main.js": "/static/js/main.29fa46c0.chunk.js",
+    "main.js.map": "/static/js/main.29fa46c0.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.31574dda.js",
     "runtime-main.js.map": "/static/js/runtime-main.31574dda.js.map",
-    "static/js/2.281e56a2.chunk.js": "/static/js/2.281e56a2.chunk.js",
-    "static/js/2.281e56a2.chunk.js.map": "/static/js/2.281e56a2.chunk.js.map",
+    "static/css/2.d34346ea.chunk.css": "/static/css/2.d34346ea.chunk.css",
+    "static/js/2.47e2c8e4.chunk.js": "/static/js/2.47e2c8e4.chunk.js",
+    "static/js/2.47e2c8e4.chunk.js.map": "/static/js/2.47e2c8e4.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.cd344800a4af3ae41a5ee3bc3b58807f.js": "/precache-manifest.cd344800a4af3ae41a5ee3bc3b58807f.js",
+    "precache-manifest.d31f7dbed4ee9581b416189fb7c7a255.js": "/precache-manifest.d31f7dbed4ee9581b416189fb7c7a255.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.673e013a.chunk.css.map": "/static/css/main.673e013a.chunk.css.map",
-    "static/js/2.281e56a2.chunk.js.LICENSE.txt": "/static/js/2.281e56a2.chunk.js.LICENSE.txt"
+    "static/css/2.d34346ea.chunk.css.map": "/static/css/2.d34346ea.chunk.css.map",
+    "static/css/main.85ffeeff.chunk.css.map": "/static/css/main.85ffeeff.chunk.css.map",
+    "static/js/2.47e2c8e4.chunk.js.LICENSE.txt": "/static/js/2.47e2c8e4.chunk.js.LICENSE.txt",
+    "static/media/league-of-legends.png": "/static/media/league-of-legends.2b12dce1.png",
+    "static/media/league-of-legends2.png": "/static/media/league-of-legends2.c81e94e9.png",
+    "static/media/radiant.webp": "/static/media/radiant.3d3da302.webp",
+    "static/media/runeterra.png": "/static/media/runeterra.8b25ae32.png",
+    "static/media/runeterra2.png": "/static/media/runeterra2.dbc72420.png",
+    "static/media/search.svg": "/static/media/search.be918d6e.svg",
+    "static/media/spat.jpg": "/static/media/spat.e770535e.jpg",
+    "static/media/tft.webp": "/static/media/tft.28e4bf03.webp"
   },
   "entrypoints": [
     "static/js/runtime-main.31574dda.js",
-    "static/js/2.281e56a2.chunk.js",
-    "static/css/main.673e013a.chunk.css",
-    "static/js/main.8071c47d.chunk.js"
+    "static/css/2.d34346ea.chunk.css",
+    "static/js/2.47e2c8e4.chunk.js",
+    "static/css/main.85ffeeff.chunk.css",
+    "static/js/main.29fa46c0.chunk.js"
   ]
 }

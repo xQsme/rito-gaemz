@@ -188,7 +188,7 @@ export default function SpecialTable(props) {
                         {
                             props.headers.map(header => {
                               if(header === 'Unit') {
-                                return (<TableCell align="center" key={header}><div className="champion"><img className="champion-icon" src={server + '/champions/TFT4_' + row[header] + '.png'} alt="" /> {row[header]}</div></TableCell>);
+                                return (<TableCell align="center" key={header}><div className="champion"><img className="champion-icon" src={server + '/tft/champions/TFT4_' + row[header] + '.png'} alt="" /> {row[header]}</div></TableCell>);
                               }
                               if(header === 'Items') {
                                 return (<TableCell align="center" key={header}>
@@ -196,7 +196,7 @@ export default function SpecialTable(props) {
                                     {row[header].map(item => {
                                       return(
                                         <div className="item" key={item.id}>
-                                          <img className="item-icon"  src={server + '/items/' + (item.id > 9 ? item.id : '0' + item.id) + '.png'} alt="" />
+                                          <img className="item-icon"  src={server + '/tft/items/' + (item.id > 9 ? item.id : '0' + item.id) + '.png'} alt="" />
                                           <span>{item.percent}</span>
                                         </div>
                                       );

@@ -30,10 +30,14 @@ function TFTInsights(props: any) {
     props.requestInsights(region);
   };
 
-  units.length === 0 && !requested && !error && requestUnits(region);
+  //Component Did Mount
+  React.useEffect(() => {
+    requestUnits(region);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <div className="app-container">
+    <div className="tft-insights-container">
       <Tabs
         value={region}
         onChange={handleChange}

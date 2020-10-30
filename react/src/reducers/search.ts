@@ -6,7 +6,7 @@ interface SearchReducer {
   requested: boolean;
   rift: any;
   tft: any;
-  account: any;
+  lor: any;
   error: boolean;
 }
 
@@ -14,14 +14,14 @@ const INITIAL_STATE: SearchReducer = {
   requested: false,
   rift: null,
   tft: null,
-  account: null,
+  lor: null,
   error: false,
 };
 
 export default function (state = INITIAL_STATE, { type, payload }: any) {
   switch (type) {
     case REHYDRATE:
-      if (payload && payload.tft) {
+      if (payload && payload.search) {
         return {
           ...INITIAL_STATE,
         };

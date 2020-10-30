@@ -1,7 +1,7 @@
 import React from "react";
 import "./assets/styles/main.scss";
 import { ToastContainer } from "react-toastify";
-import Search from "./components/search";
+import Summoners from "./components/summoners";
 import TFTInsights from "./components/tftInsights";
 import TFTProfile from "./components/tftProfile";
 import RiftInsights from "./components/riftInsights";
@@ -54,7 +54,7 @@ export default function App() {
         )}
       >
         <Router className="router-container">
-          <RouterPage default path={HOME_ROUTE} pageComponent={<Search />} />
+          <RouterPage default path={HOME_ROUTE} pageComponent={<Summoners />} />
           <RouterPage
             path={TFT_INSIGHTS_ROUTE}
             pageComponent={<TFTInsights />}
