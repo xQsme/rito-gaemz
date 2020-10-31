@@ -7,7 +7,16 @@ import Button from "@material-ui/core/Button";
 import { toast } from "react-toastify";
 import { requestInsights, changeTFTInsightsRegion } from "../actions";
 
-function TFTInsights(props: any) {
+import type { TFTInsightsReducer } from '../interfaces';
+
+interface TFTInsightsProps {
+  tftInsights:TFTInsightsReducer;
+  requestInsights:(region:number) => Promise<string>;
+  changeTFTInsightsRegion:(region:number) => void;
+}
+
+
+function TFTInsights(props:TFTInsightsProps) {
   const { requested, units, totalMatches, region, error } = props.tftInsights;
 
   const requestUnits = async (region: number) => {

@@ -3,7 +3,13 @@ import Search from "./elements/search";
 import { connect } from "react-redux";
 import RiftSummoner from "./elements/riftSummoner";
 
-function RiftProfile(props: any) {
+import type { SearchReducer } from '../interfaces';
+
+interface RiftProfileProps {
+  search:SearchReducer,
+}
+
+function RiftProfile(props: RiftProfileProps) {
   const { rift } = props.search;
   return (
     <React.Fragment>

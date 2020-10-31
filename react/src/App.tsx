@@ -37,6 +37,7 @@ export default function App() {
     <React.Fragment>
       <ToastContainer />
       <NavBar />
+      <div className="nav-spacer"><div/></div>
       <Scrollbars
         autoHide
         className="scrollbar"

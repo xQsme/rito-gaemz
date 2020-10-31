@@ -6,7 +6,15 @@ import TFTSummoner from "./elements/tftSummoner";
 
 import { requestTFTProfile } from "../actions";
 
-function TFTProfile(props: any) {
+import type { SearchReducer, TFTProfileReducer } from '../interfaces';
+
+interface TFTProfileProps {
+  search:SearchReducer,
+  requestTFTProfile:(region:number, id:string) => Promise<string>;
+  tftProfile:TFTProfileReducer,
+}
+
+function TFTProfile(props:TFTProfileProps) {
   const { region, tft } = props.search;
   const { tier } = props.tftProfile;
 

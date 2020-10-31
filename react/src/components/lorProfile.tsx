@@ -3,7 +3,13 @@ import Search from "./elements/search";
 import { connect } from "react-redux";
 import LoRSummoner from "./elements/lorSummoner";
 
-function LoRProfile(props: any) {
+import type { SearchReducer } from '../interfaces';
+
+interface LoRProfileProps {
+  search:SearchReducer,
+}
+
+function LoRProfile(props:LoRProfileProps) {
   const { lor } = props.search;
   return (
     <React.Fragment>

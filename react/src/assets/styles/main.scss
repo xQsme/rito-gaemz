@@ -105,6 +105,16 @@ body{
     }
 }
 
+.nav-spacer{
+    position: sticky;
+    z-index: 100;
+    div{
+        position: absolute;
+        background-color: $background;
+        height: 20px;
+        width: 100%;
+    }
+}
 
 .MuiPaper-root{
     background-color: $secondarybg !important;
@@ -220,6 +230,7 @@ body{
     bottom: 0;
     right: 1px;
     border-radius: 3px;
+    z-index: 101;
   
     .thumb-vertical {
         position: relative;
