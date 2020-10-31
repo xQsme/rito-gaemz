@@ -13,7 +13,7 @@ const startRequest = ():{type:string} => ({
     type: START_TFT_PROFILE_REQUEST,
 });
 
-const returnProfile = (data:TFTProfileResult):{type:string, payload:any} => ({
+const returnProfile = (data:TFTProfileResult):{type:string, payload:TFTProfileResult} => ({
     type: RETURN_TFT_PROFILE,
     payload: data,
 });

@@ -10,7 +10,7 @@ import {
 
 import type { SearchResult } from '../interfaces';
 
-const returnSummoners = (data:SearchResult):{type:string, payload:any} => ({
+const returnSummoners = (data:SearchResult):{type:string, payload:SearchResult} => ({
     type: RETURN_SUMMONERS,
     payload: data,
 });

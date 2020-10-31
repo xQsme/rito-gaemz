@@ -8,14 +8,13 @@ import {
     START_TFT_INSIGHTS_REQUEST,
 } from './types';
 
-
 import type { TFTInsightsResult } from '../interfaces';
 
 const startRequest = ():{type:string} => ({
     type: START_TFT_INSIGHTS_REQUEST,
 });
 
-const returnInsights = (data:TFTInsightsResult):{type:string, payload:any} => ({
+const returnInsights = (data:TFTInsightsResult):{type:string, payload:TFTInsightsResult} => ({
     type: RETURN_TFT_INSIGHTS,
     payload: data,
 });

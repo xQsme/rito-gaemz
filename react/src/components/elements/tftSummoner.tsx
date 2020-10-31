@@ -6,7 +6,16 @@ import { TFT_PROFILE_ROUTE } from "../../constants/routes";
 import { setTab } from "../../actions";
 import { connect } from "react-redux";
 
-function TFTSummoner(props: any) {
+import type { Summoner, TFTProfileReducer } from "../../interfaces";
+
+interface TFTSummonerProps {
+  clickable?: boolean;
+  setTab: (tab: number) => void;
+  tft: Summoner;
+  tftProfile?: TFTProfileReducer;
+}
+
+function TFTSummoner(props: TFTSummonerProps) {
   const { tftProfile, clickable, setTab } = props;
   const { profileIconId, name, summonerLevel } = props.tft;
   return (

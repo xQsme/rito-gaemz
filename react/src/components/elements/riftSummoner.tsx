@@ -6,7 +6,15 @@ import { RIFT_PROFILE_ROUTE } from "../../constants/routes";
 import { setTab } from "../../actions";
 import { connect } from "react-redux";
 
-function RiftSummoner(props: any) {
+import type { Summoner } from "../../interfaces";
+
+interface RiftSummonerProps {
+  clickable?: boolean;
+  setTab: (tab: number) => void;
+  rift: Summoner;
+}
+
+function RiftSummoner(props: RiftSummonerProps) {
   const { clickable, setTab } = props;
   const { profileIconId, name, summonerLevel } = props.rift;
   return (

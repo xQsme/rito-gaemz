@@ -5,7 +5,15 @@ import { navigate } from "@reach/router";
 import { connect } from "react-redux";
 import { LOR_PROFILE_ROUTE } from "../../constants/routes";
 
-function LoRSummoner(props: any) {
+import type { Account } from "../../interfaces";
+
+interface LoRSummonerProps {
+  clickable?: boolean;
+  setTab: (tab: number) => void;
+  lor: Account;
+}
+
+function LoRSummoner(props: LoRSummonerProps) {
   const { clickable, setTab } = props;
   const { gameName, tagLine } = props.lor;
   return (

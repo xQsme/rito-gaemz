@@ -13,7 +13,7 @@ import Search from "../../assets/images/search.svg";
 import Valorant from "../../assets/images/valorant.png";
 import Radiant from "../../assets/images/radiant.webp";
 import { connect } from "react-redux";
-import { setTab } from '../../actions';
+import { setTab } from "../../actions";
 
 import {
   HOME_ROUTE,
@@ -24,10 +24,15 @@ import {
   VALORANT_PROFILE_ROUTE,
   VALORANT_INSIGHTS_ROUTE,
   LOR_PROFILE_ROUTE,
-  LOR_INSIGHTS_ROUTE
+  LOR_INSIGHTS_ROUTE,
 } from "../../constants/routes";
 
-function NavBar(props:any) {
+interface NavProps {
+  nav: { tab: number };
+  setTab: (tab: number) => void;
+}
+
+function NavBar(props: NavProps) {
   const { tab } = props.nav;
   let value = 0;
   switch (history.location.pathname) {
@@ -60,7 +65,7 @@ function NavBar(props:any) {
 
   //Component Did Mount
   React.useEffect(() => {
-    if(value !== tab) {
+    if (value !== tab) {
       props.setTab(value);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -137,7 +142,7 @@ function NavBar(props:any) {
           component={TabIcon}
           className="tab-icon-container rounded-tab-icon"
         />
-                <Tab
+        <Tab
           label="LoR Profile"
           to={LOR_PROFILE_ROUTE}
           image={LoR}

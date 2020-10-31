@@ -4,21 +4,25 @@ import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import SearchIcon from "@material-ui/icons/Search";
-import { requestSummoners, changeSearchRegion } from "../../actions";
+import { requestSummoners } from "../../actions";
 import { toast } from "react-toastify";
 
-function Search(props:any) {
-  const [search, setSearch] = React.useState<String>("");
-  const [option, setOption] = React.useState<Number>(0);
+interface SearchProps {
+  requestSummoners:(option: number, search:string)=>Promise<string>;
+}
+
+function Search(props:SearchProps) {
+  const [search, setSearch] = React.useState<string>("");
+  const [option, setOption] = React.useState<number>(0);
   
-  const handleSearchSubmit = (evt:any) => {
+  const handleSearchSubmit = (evt:React.KeyboardEvent<HTMLInputElement>):void => {
     if (evt.key === 'Enter') {
       submitSearch();
     }
   }
 
   const submitSearch = async () => {
-    const result = await props.requestSummoners(option, search);
+    const result:string = await props.requestSummoners(option, search);
     if (result) {
       toast(result, {
         position: "top-right",
@@ -76,5 +80,4 @@ function mapStateToProps({ search }: any) {
 
 export default connect(mapStateToProps, {
   requestSummoners,
-  changeSearchRegion,
 })(Search);
