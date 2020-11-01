@@ -38,11 +38,14 @@ async function getSummoners(serverNumber: number, name:string) {
     try{
         let rift = await axios.get('https://' + server + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=' + key);
         let tft = await axios.get('https://' + server + '/tft/summoner/v1/summoners/by-name/' + name + '?api_key=' + key);
+        
         let lor = null;
         if((rift && rift.data && rift.data.puuid) || (tft && tft.data && tft.data.puuid)) {
             let riftRankeds = await axios.get('https://' + server + '/lol/league/v4/entries/by-summoner/' + rift.data.id + '?api_key=' + key);
-            rift.data.rankeds = riftRankeds.data;
+            rift.data.riftRankeds = riftRankeds.data;
             lor = await axios.get('https://' + region + '/riot/account/v1/accounts/by-puuid/' + (rift.data.puuid ? rift.data.puuid : tft.data.puuid) + '?api_key=' + key);
+            let tftRankeds = await axios.get('https://' + server + '/tft/league/v1/entries/by-summoner/' + rift.data.id + '?api_key=' + key);
+            tft.data.tftRanked = tftRankeds.data[0];
         }
         return {
             code: 202,
