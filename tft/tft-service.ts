@@ -1,3 +1,4 @@
+import { AnyARecord } from "dns";
 import { response } from "express";
 
 const axios = require('axios');
@@ -106,7 +107,7 @@ async function getUnits(serverNumber: number) {
 
 
 async function getPlayerStatistics(topChallengers:Object, summonerId:String, server:String, region:String){
-    return new Promise(async (resolve, reject) => {
+    return new Promise<UnitObject>(async (resolve, reject) => {
             //Get summoner details
             let response = await axios.get('https://' + server + '/tft/summoner/v1/summoners/' + summonerId + '?api_key=' + key);
             //const summoner = {...challengers[0], ...response.data};
@@ -120,7 +121,7 @@ async function getPlayerStatistics(topChallengers:Object, summonerId:String, ser
             let matchesPlayed =  [...Array(totalMatches)];
             await Promise.all(
                 matchesPlayed.map((o, i) => getMatchesStatistics(matchesPlayed[i], matches[i], server, region))
-            ).then(units => {   
+            ).then((units)  => {   
                 let newUnits = mergeUnitsMatrix(units)
 
                 return resolve(newUnits);
@@ -129,7 +130,7 @@ async function getPlayerStatistics(topChallengers:Object, summonerId:String, ser
 }
 
 async function getMatchesStatistics(match:any, matchId:String, server:String, region:String){
-    return new Promise(async (resolve, reject) => {
+    return new Promise<UnitObject>(async (resolve, reject) => {
         //Retrieve the info of all the players in the match
         let response = await axios.get('https://' + region + '/tft/match/v1/matches/' + matchId + '?api_key=' + key);
         const players = response.data.info.participants;
@@ -169,7 +170,30 @@ async function getMatchesStatistics(match:any, matchId:String, server:String, re
 }
 
 //Given a multi dimensional matrix of units, converts it into 1-D
-function mergeUnitsMatrix(units){
+interface Unit{
+    win: number,
+    top: number,
+    items: any[]
+    /*[key: string]: {
+        win: number,
+        top: number,
+        items: any[]
+    }*/
+}
+
+interface UnitObject{
+    [key: string]: Unit
+}
+// {
+//    { Jax: { win: 1, top: 1, items: [Object] }, ...},
+//    { Jax: { win: 0, top: 1, items: [Object] }, ...} 
+// }
+// UnitObject
+
+
+
+function mergeUnitsMatrix(units: UnitObject[]){
+    console.log(units)
     let newUnits = Object.assign({}, units[0]);
                 
     for (let i=1; i<units.length; i++){
@@ -177,7 +201,7 @@ function mergeUnitsMatrix(units){
             //Checking if the champion already appeard in another match and combine results
             if (Object.prototype.hasOwnProperty.call(units[i], prop)) {
                 let obj1 = newUnits[prop];
-                let obj2 = (<Object>units[i])[prop];
+                let obj2 = units[i][prop];
                 
                 obj1.win = obj1.win + obj2.win;
                 obj1.top = obj1.top + obj2.top;
