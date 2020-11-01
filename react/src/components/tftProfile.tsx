@@ -7,7 +7,7 @@ import type { SearchReducer } from '../interfaces';
 
 interface TFTProfileProps {
   search:SearchReducer,
-  requestTFTProfile:(region:number, id:string) => Promise<string>;
+  requestTFTProfile?:(region:number, id:string) => Promise<string>;
 }
 
 function TFTProfile(props:TFTProfileProps) {
