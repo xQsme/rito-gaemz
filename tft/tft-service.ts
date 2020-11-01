@@ -121,7 +121,7 @@ async function getPlayerStatistics(topChallengers:Object, summonerId:String, ser
             let matchesPlayed =  [...Array(totalMatches)];
             await Promise.all(
                 matchesPlayed.map((o, i) => getMatchesStatistics(matchesPlayed[i], matches[i], server, region))
-            ).then((units)  => {   
+            ).then((units)  => {
                 let newUnits = mergeUnitsMatrix(units)
 
                 return resolve(newUnits);
@@ -173,45 +173,44 @@ async function getMatchesStatistics(match:any, matchId:String, server:String, re
 interface Unit{
     win: number,
     top: number,
-    items: any[]
-    /*[key: string]: {
-        win: number,
-        top: number,
-        items: any[]
-    }*/
+    items: Items
 }
 
 interface UnitObject{
     [key: string]: Unit
 }
-// {
-//    { Jax: { win: 1, top: 1, items: [Object] }, ...},
-//    { Jax: { win: 0, top: 1, items: [Object] }, ...} 
-// }
-// UnitObject
 
-
+interface Items{
+    [key: string]: number
+}
 
 function mergeUnitsMatrix(units: UnitObject[]){
-    console.log(units)
-    let newUnits = Object.assign({}, units[0]);
-                
-    for (let i=1; i<units.length; i++){
-        for (var prop in newUnits) {
-            //Checking if the champion already appeard in another match and combine results
-            if (Object.prototype.hasOwnProperty.call(units[i], prop)) {
-                let obj1 = newUnits[prop];
-                let obj2 = units[i][prop];
-                
-                obj1.win = obj1.win + obj2.win;
-                obj1.top = obj1.top + obj2.top;
-                obj1.items = Object.assign(obj1.items, obj2.items);
-            }
-        }
-        //Adding all the other champions that weren't found
-        newUnits = Object.assign(units[i], newUnits)
-    }
+    let newUnits:UnitObject = {}
+    // Object.assign({}, units[0]);
+    
+    //Precorre os diferentes Matches
+    for (let i=0; i<units.length; i++){
+        //Precorre os champions {Jax, Teemo, ...}
+        for (var champ in units[i]){
 
+            if (!Object.prototype.hasOwnProperty.call(newUnits, champ)) {
+                newUnits[champ] =  units[i][champ];
+            }else{
+                newUnits[champ].win = newUnits[champ].win + units[i][champ].win;
+                newUnits[champ].top = newUnits[champ].top + units[i][champ].top;
+
+                for (var item in units[i][champ].items) {
+
+                    if (Object.prototype.hasOwnProperty.call(newUnits[champ].items, item)) {
+                        newUnits[champ].items[item] = newUnits[champ].items[item] + units[i][champ].items[item]
+                    }else{
+                        newUnits[champ].items[item] = units[i][champ].items[item]
+                    }
+                }
+            }
+                
+        }
+    }
     return newUnits;
 }
 
