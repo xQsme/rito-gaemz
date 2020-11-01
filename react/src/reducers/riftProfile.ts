@@ -1,9 +1,9 @@
 import { REHYDRATE } from "redux-persist";
 
 import {
-  FAIL_RETURN_TFT_PROFILE,
-  RETURN_TFT_PROFILE,
-  START_TFT_PROFILE_REQUEST,
+  FAIL_RETURN_RIFT_PROFILE,
+  RETURN_RIFT_PROFILE,
+  START_RIFT_PROFILE_REQUEST,
   RESET_PROFILES,
 } from "../actions/types";
 
@@ -29,20 +29,20 @@ export default function (state = INITIAL_STATE, { type, payload }:any):TFTProfil
       return {
         ...INITIAL_STATE,
       };
-    case START_TFT_PROFILE_REQUEST:
+    case START_RIFT_PROFILE_REQUEST:
       return {
         ...state,
         requested: false,
         error: false,
       };
-    case RETURN_TFT_PROFILE:
+    case RETURN_RIFT_PROFILE:
       return {
         ...state,
         ...payload,
         requested: true,
         error: false,
       };
-    case FAIL_RETURN_TFT_PROFILE:
+    case FAIL_RETURN_RIFT_PROFILE:
       return {
         ...state,
         error: true,
