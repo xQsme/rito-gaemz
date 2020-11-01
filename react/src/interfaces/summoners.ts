@@ -8,10 +8,11 @@ export interface Summoner {
   profileIconId: number;
   revisionDate: number;
   summonerLevel: number;
-  rankeds: Ranked[];
+  riftRankeds: riftRanked[];
+  tftRanked: tftRanked;
 }
 
-export interface Ranked {
+export interface riftRanked {
   leagueId: string;
   queueType: string;
   tier: string;
@@ -25,6 +26,31 @@ export interface Ranked {
   inactive: boolean;
   freshBlood: boolean;
   hotStreak: boolean;
+}
+
+
+export interface tftRanked {
+  leagueId:	string;
+  summonerId:	string;
+  summonerName:	string;
+  queueType:	string;
+  tier:	string;
+  rank:	string;	
+  leaguePoints:	number;
+  wins:	number;
+  losses:	number;
+  hotStreak:	boolean;
+  veteran:	boolean;
+  freshBlood:	boolean;
+  inactive:	boolean;
+  miniSeries: MiniSeries;
+}
+
+export interface MiniSeries {
+  losses: Int16Array;
+  progress: string;
+  target: number;
+  wins: number;
 }
 
 export interface Account {

@@ -1,3 +1,8 @@
+@import 'rift';
+@import 'tft';
+@import 'lor';
+@import 'valorant';
+
 @mixin mq($width, $type: max) {
     @if $type == max {
         $width: $width - 1px;
@@ -415,7 +420,6 @@ td{
             
             .summoner-name{
                 text-align: center;
-             
                 font-size: 20px;
             }
             .label{
@@ -435,7 +439,7 @@ td{
                 height: 50px;
                 position: absolute;
             }
-            .rank-wrapper{
+            .rank-container{
                 margin-top: 10px;
                 display: block;
 
