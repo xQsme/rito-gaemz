@@ -39,8 +39,96 @@ const totalPlayers: number = 5;//5
 const totalMatches: number = 3;//3
 const topPlayers: number = 4;
 
-// my asynchronous function that returns a promise
-async function getMatchesStatistics1(match:any, matchId:String, server:String, region:String){
+async function getUnits(serverNumber: number) {
+    const server = getServer(serverNumber);
+    const region = getRegion(serverNumber);
+    let unitsMatrix: any = {};
+    let units:any = {}
+    try{
+        // const totalPlayers = 1;
+        // let totalMatches = 1;
+        // const topPlayers = 4;
+
+        //Retrieve the best challenger players
+        let response = await axios.get('https://' + server + '/tft/league/v1/challenger?api_key=' + key);
+        console.log('https://' + server + '/tft/league/v1/challenger?api_key=' + key)
+
+        const challengers = response.data.entries;
+        challengers.sort((a: any,b: any) => {
+            return b.leaguePoints - a.leaguePoints;
+        });
+    
+        //Analize top players matches asynchronous
+        let topChallengers =  [...Array(totalPlayers)];
+        await Promise.all(
+            topChallengers.map((o, i) => getPlayerStatistics(topChallengers[i], challengers[i].summonerId, server, region))
+        ).then(unitsUsed => {
+            // all values from all the statistics
+            units = mergeUnitsMatrix(unitsUsed);
+        });
+
+        let allTotalMatches:number = totalMatches*totalPlayers;
+
+        const unitsArray: any = [];
+
+        for(let key in units) {
+            const items:Object[] = [];
+            for(let itemKey in units[key].items) {
+                items.push({id: itemKey, count: units[key].items[itemKey], percent: (units[key].items[itemKey]/units[key].top*100).toFixed(0) + '%'});
+            }
+            items.sort((a: any,b: any) => {
+                return b.count - a.count;
+            });
+            units[key].items = items.slice(0, 3);
+            units[key].win = (units[key].win/allTotalMatches*100).toFixed(2) + '%';
+            units[key].top = (units[key].top/allTotalMatches*100).toFixed(2) + '%';
+            units[key].unit = key;
+            unitsArray.push(units[key]);
+        }
+
+        return {
+            code: 202,
+            data: {units: unitsArray, totalMatches},
+        }
+    } catch (error) {
+        if(error.response.data.status.status_code === 403) {
+            return {
+                code: 403,
+                data: 'Error',
+            }
+        }
+        return {
+            code: 400,
+            data: 'Error',
+        }
+    }
+}
+
+
+async function getPlayerStatistics(topChallengers:Object, summonerId:String, server:String, region:String){
+    return new Promise(async (resolve, reject) => {
+            //Get summoner details
+            let response = await axios.get('https://' + server + '/tft/summoner/v1/summoners/' + summonerId + '?api_key=' + key);
+            //const summoner = {...challengers[0], ...response.data};
+            const summoner = {...response.data};
+
+            //Get summoner matches
+            response = await axios.get('https://' + region + '/tft/match/v1/matches/by-puuid/' + summoner.puuid + '/ids?api_key=' + key);
+            const matches = response.data;
+
+            //Analize top players matches asynchronous
+            let matchesPlayed =  [...Array(totalMatches)];
+            await Promise.all(
+                matchesPlayed.map((o, i) => getMatchesStatistics(matchesPlayed[i], matches[i], server, region))
+            ).then(units => {   
+                let newUnits = mergeUnitsMatrix(units)
+
+                return resolve(newUnits);
+            });
+        });
+}
+
+async function getMatchesStatistics(match:any, matchId:String, server:String, region:String){
     return new Promise(async (resolve, reject) => {
         //Retrieve the info of all the players in the match
         let response = await axios.get('https://' + region + '/tft/match/v1/matches/' + matchId + '?api_key=' + key);
@@ -80,31 +168,7 @@ async function getMatchesStatistics1(match:any, matchId:String, server:String, r
     });
 }
 
-
-// my asynchronous function that returns a promise
-async function getPlayerStatistics1(topChallengers:Object, summonerId:String, server:String, region:String){
-    return new Promise(async (resolve, reject) => {
-            //Get summoner details
-            let response = await axios.get('https://' + server + '/tft/summoner/v1/summoners/' + summonerId + '?api_key=' + key);
-            //const summoner = {...challengers[0], ...response.data};
-            const summoner = {...response.data};
-
-            //Get summoner matches
-            response = await axios.get('https://' + region + '/tft/match/v1/matches/by-puuid/' + summoner.puuid + '/ids?api_key=' + key);
-            const matches = response.data;
-
-            //Analize top players matches asynchronous
-            let matchesPlayed =  [...Array(totalMatches)];
-            await Promise.all(
-                matchesPlayed.map((o, i) => getMatchesStatistics1(matchesPlayed[i], matches[i], server, region))
-            ).then(units => {   
-                let newUnits = mergeUnitsMatrix(units)
-
-                return resolve(newUnits);
-            });
-        });
-}
-
+//Given a multi dimensional matrix of units, converts it into 1-D
 function mergeUnitsMatrix(units){
     let newUnits = Object.assign({}, units[0]);
                 
@@ -125,73 +189,6 @@ function mergeUnitsMatrix(units){
     }
 
     return newUnits;
-}
-
-async function getUnits(serverNumber: number) {
-    const server = getServer(serverNumber);
-    const region = getRegion(serverNumber);
-    let unitsMatrix: any = {};
-    let units:any = {}
-    try{
-        // const totalPlayers = 1;
-        // let totalMatches = 1;
-        // const topPlayers = 4;
-
-        //Retrieve the best challenger players
-        let response = await axios.get('https://' + server + '/tft/league/v1/challenger?api_key=' + key);
-        console.log('https://' + server + '/tft/league/v1/challenger?api_key=' + key)
-
-        const challengers = response.data.entries;
-        challengers.sort((a: any,b: any) => {
-            return b.leaguePoints - a.leaguePoints;
-        });
-    
-        //Analize top players matches asynchronous
-        let topChallengers =  [...Array(totalPlayers)];
-        await Promise.all(
-            topChallengers.map((o, i) => getPlayerStatistics1(topChallengers[i], challengers[i].summonerId, server, region))
-        ).then(unitsUsed => {
-            // all values from all the promises
-            units = mergeUnitsMatrix(unitsUsed);
-        });
-
-    
-        //Not sure what this math does, but k?
-        let allTotalMatches:number = totalMatches*totalPlayers;
-
-        const unitsArray: any = [];
-
-        for(let key in units) {
-            const items:Object[] = [];
-            for(let itemKey in units[key].items) {
-                items.push({id: itemKey, count: units[key].items[itemKey], percent: (units[key].items[itemKey]/units[key].top*100).toFixed(0) + '%'});
-            }
-            items.sort((a: any,b: any) => {
-                return b.count - a.count;
-            });
-            units[key].items = items.slice(0, 3);
-            units[key].win = (units[key].win/allTotalMatches*100).toFixed(2) + '%';
-            units[key].top = (units[key].top/allTotalMatches*100).toFixed(2) + '%';
-            units[key].unit = key;
-            unitsArray.push(units[key]);
-        }
-
-        return {
-            code: 202,
-            data: {units: unitsArray, totalMatches},
-        }
-    } catch (error) {
-        if(error.response.data.status.status_code === 403) {
-            return {
-                code: 403,
-                data: 'Error',
-            }
-        }
-        return {
-            code: 400,
-            data: 'Error',
-        }
-    }
 }
 
 async function getProfile(serverNumber: number, summonerId: string) {
