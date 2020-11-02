@@ -158,7 +158,10 @@ async function getSummoners(serverNumber: number, name:string) {
                         })
                     })
                 })
-                console.log(rift.data);
+                setTimeout(function(){
+                    console.log(rift.data);
+                },1000)
+                
                   
                 return {
                     code: 202,
