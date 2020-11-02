@@ -1,25 +1,25 @@
 import { REHYDRATE } from "redux-persist";
 
 import {
-  FAIL_RETURN_RIFT_PROFILE,
-  RETURN_RIFT_PROFILE,
-  START_RIFT_PROFILE_REQUEST,
+  FAIL_RETURN_RIFT_MASTERY,
+  RETURN_RIFT_MASTERY,
+  START_RIFT_MASTERY_REQUEST,
   RESET_PROFILES,
 } from "../actions/types";
 
-import type { TFTProfileReducer } from '../interfaces';
+import type { RiftProfileReducer } from '../interfaces';
 
-const INITIAL_STATE: TFTProfileReducer = {
+const INITIAL_STATE: RiftProfileReducer = {
   requested: false,
   error: false,
-  rank: "",
-  tier: "",
+  masteries: [],
 };
 
-export default function (state = INITIAL_STATE, { type, payload }:any):TFTProfileReducer {
+export default function (state = INITIAL_STATE, { type, payload }:any):RiftProfileReducer {
   switch (type) {
     case REHYDRATE:
-      if (payload && payload.tftProfile) {
+      if (payload && payload.riftProfile) {
+
         return {
           ...INITIAL_STATE,
         };
@@ -29,10 +29,24 @@ export default function (state = INITIAL_STATE, { type, payload }:any):TFTProfil
       return {
         ...INITIAL_STATE,
       };
+    case START_RIFT_MASTERY_REQUEST:
+      return {
+        ...state,
+        requested: false,
+        error: false,
+      };
+
     case START_RIFT_PROFILE_REQUEST:
       return {
         ...state,
         requested: false,
+        error: false,
+      };
+    case RETURN_RIFT_MASTERY:
+       return {
+        ...state,
+        ...payload,
+        requested: true,
         error: false,
       };
     case RETURN_RIFT_PROFILE:
@@ -41,6 +55,11 @@ export default function (state = INITIAL_STATE, { type, payload }:any):TFTProfil
         ...payload,
         requested: true,
         error: false,
+      };
+    case FAIL_RETURN_RIFT_MASTERY:
+      return {
+        ...state,
+        error: true,
       };
     case FAIL_RETURN_RIFT_PROFILE:
       return {
