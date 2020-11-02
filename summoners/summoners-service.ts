@@ -165,8 +165,6 @@ async function getSummoners(serverNumber: number, name:string) {
                     data: {rift: rift ? rift.data : null, tft: tft ? tft.data : null, lor: lor ? lor.data : null},
                 }
             }
-
-            
         }
         return {
             code: 202,
