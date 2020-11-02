@@ -8,6 +8,7 @@ import tftProfile from './reducers/tftProfile';
 import search from './reducers/search';
 import nav from './reducers/nav';
 import riftProfile from './reducers/riftProfile';
+import riftChampions from './reducers/riftChampions';
 
 const isDevVersion:boolean = process.env.NODE_ENV === 'development';
 const composeEnhancers:Function = (window as { [key: string]: any })['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compose;
@@ -35,6 +36,7 @@ const reducers:any = persistCombineReducers(config, {
     tftInsights,
     tftProfile,
     riftProfile,
+    riftChampions,
 });
 
 export const configureStore = () => {

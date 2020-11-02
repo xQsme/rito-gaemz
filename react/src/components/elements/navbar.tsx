@@ -19,6 +19,7 @@ import {
   HOME_ROUTE,
   TFT_INSIGHTS_ROUTE,
   TFT_PROFILE_ROUTE,
+  RIFT_CHAMPIONS_ROUTE,
   RIFT_INSIGHTS_ROUTE,
   RIFT_PROFILE_ROUTE,
   VALORANT_PROFILE_ROUTE,
@@ -36,6 +37,9 @@ function NavBar(props: NavProps) {
   const { tab } = props.nav;
   let value = 0;
   switch (history.location.pathname) {
+    case RIFT_CHAMPIONS_ROUTE:
+      value = 9;
+      break;
     case LOR_INSIGHTS_ROUTE:
       value = 8;
       break;
@@ -110,6 +114,13 @@ function NavBar(props: NavProps) {
         <Tab
           label="Rift Insights"
           to={RIFT_INSIGHTS_ROUTE}
+          image={League}
+          component={TabIcon}
+          className="tab-icon-container"
+        />
+         <Tab
+          label="Rift Champions"
+          to={RIFT_CHAMPIONS_ROUTE}
           image={League}
           component={TabIcon}
           className="tab-icon-container"

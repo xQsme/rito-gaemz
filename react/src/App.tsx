@@ -6,6 +6,7 @@ import TFTInsights from "./components/tftInsights";
 import TFTProfile from "./components/tftProfile";
 import RiftInsights from "./components/riftInsights";
 import RiftProfile from "./components/riftProfile";
+import RiftChampions from "./components/riftChampions";
 import ValorantProfile from "./components/valorantProfile";
 import ValorantInsights from "./components/valorantInsights";
 import LoRProfile from "./components/lorProfile";
@@ -21,6 +22,7 @@ import {
   TFT_PROFILE_ROUTE,
   RIFT_INSIGHTS_ROUTE,
   RIFT_PROFILE_ROUTE,
+  RIFT_CHAMPIONS_ROUTE,
   VALORANT_PROFILE_ROUTE,
   VALORANT_INSIGHTS_ROUTE,
   LOR_INSIGHTS_ROUTE,
@@ -68,6 +70,10 @@ export default function App() {
           <RouterPage
             path={RIFT_PROFILE_ROUTE}
             pageComponent={<RiftProfile />}
+          />
+          <RouterPage
+            path={RIFT_CHAMPIONS_ROUTE}
+            pageComponent={<RiftChampions />}
           />
           <RouterPage
             path={VALORANT_PROFILE_ROUTE}
