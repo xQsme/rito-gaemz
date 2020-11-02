@@ -4,7 +4,34 @@ const { key } = require('../secretconfig');
 const imgPath = 'http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/';
 
 module.exports  = {
-    getUnits
+    getUnits,
+    getHistory,
+}
+
+function getServer(serverNumber: number) {
+    switch(serverNumber) {
+        case 0:
+            return EUW;
+        case 1:
+            return NA;
+        case 2:
+            return KR;
+        default:
+            return null;
+    }
+}
+
+function getRegion(serverNumber: number) {
+    switch(serverNumber) {
+        case 0:
+            return EUROPE;
+        case 1:
+            return AMERICAS;
+        case 2:
+            return ASIA;
+        default:
+            return null;
+    }
 }
 
 async function getUnits() {
@@ -50,36 +77,6 @@ async function getUnits() {
             code: 400,
             data: 'Error',
         }
-    }
-}
-
-module.exports  = {
-    getHistory,
-}
-
-function getServer(serverNumber: number) {
-    switch(serverNumber) {
-        case 0:
-            return EUW;
-        case 1:
-            return NA;
-        case 2:
-            return KR;
-        default:
-            return null;
-    }
-}
-
-function getRegion(serverNumber: number) {
-    switch(serverNumber) {
-        case 0:
-            return EUROPE;
-        case 1:
-            return AMERICAS;
-        case 2:
-            return ASIA;
-        default:
-            return null;
     }
 }
 
