@@ -55,118 +55,68 @@ async function getHistory(serverNumber: number, name:string) {
                 let filterGames = auxGames.slice(0,10);
                 let gamesWithDetails:any[] = [];
                 let promiseArray:any[] = [];
-
-                filterGames.forEach(async function(record:any){
-                    let gamedetails = await axios.get('https://' + server + '/lol/match/v4/matches/' + record.gameId + '?api_key=' + key);
-                    promiseArray.push(gamedetails);
-                    let userParticipantId = 0;
-                    if(gamedetails.data){
-                        let time = gamedetails.data.gameDuration;
-                        let minutes = Math.floor(time / 60);
-                        let seconds = time - minutes * 60;
-                        let duration = minutes + ':'+ seconds;
-                        let gameDate = new Date(gamedetails.data.gameCreation);
-                        gamedetails.data.participantIdentities.forEach(function (game:any){
-                            if(game.player.summonerName == name){
-                                userParticipantId = game.participantId;
-                            }
-                        })
-0
-                        gamedetails.data.participants.forEach(function (game:any){
-                            if(parseInt(game.participantId) == userParticipantId){
-                                let summoners:any[] = [];
-                                summoners.push(game.spell1Id);
-                                summoners.push(game.spell2Id);
-                                let items:any[] = [];
-                                let stats = game.stats;
-                                items.push(stats.item0);
-                                items.push(stats.item1);
-                                items.push(stats.item2);
-                                items.push(stats.item3);
-                                items.push(stats.item4);
-                                items.push(stats.item5);
-                                items.push(stats.item6);
-
-                                gamesWithDetails.push({
-                                    gameId:record.gameId,
-                                    champion:record.champion,
-                                    queue:record.queue,
-                                    win:stats.win,
-                                    kills:stats.kills,
-                                    deaths:stats.deaths,
-                                    assists:stats.assists,
-                                    kda:(stats.kills+stats.assists)/stats.deaths,
-                                    cs:stats.totalMinionsKilled,
-                                    summoners:summoners,
-                                    champLevel:stats.champLevel,
-                                    items:items,
-                                    duration:duration,
-                                    date:gameDate,
-                                    queueDetails:[],
-                                    itemDetails:[],
-                                    summonerDetails:[]
-                                });
-                            }
-                        });
-                    }
-                });
                 
-                gamesWithDetails.forEach(function (record:any){
+                filterGames.forEach(function(record:any){
+                   promiseArray.push(getGameData(filterGames,gamesWithDetails,record,server,name));
+                })
+
+                await Promise.all(promiseArray).then((values) => {
+                    console.log(values);
+                    gamesWithDetails = values;
+                    gamesWithDetails.forEach(function (record:any){
                     queue.data.forEach(function(data:any){
                         if(parseInt(record.queue) == data.queueId){
                             record.queueDetails.push({map:data.map,description:data.description});
                         }
                     })
-                })
-                rift.data.games = gamesWithDetails;
-                //champion
-                Object.keys(champions.data.data).forEach(function(key) {
-                    let champKey = champions.data.data[key].key;
+                    })
+                    rift.data.games = gamesWithDetails;
+                    //champion
+                    Object.keys(champions.data.data).forEach(function(key) {
+                        let champKey = champions.data.data[key].key;
+                        gamesWithDetails.forEach(function (record:any){
+                            if(champKey == record.champion){
+                                record.champion = key;
+                            }
+                        });
+                    })
+
+                    //items
+                    let auxItem:any []= [];
                     gamesWithDetails.forEach(function (record:any){
-                        if(champKey == record.champion){
-                            record.champion = key;
-                        }
-                    });
-                })
-
-                //items
-                let auxItem:any []= [];
-                gamesWithDetails.forEach(function (record:any){
-                    record.items.forEach(function (itemId:any){
-                        Object.keys(items.data.data).forEach(function(key) {
-                            if(key == itemId){
-                                record.itemDetails.push(items.data.data[key].name);
-                            }
+                        record.items.forEach(function (itemId:any){
+                            Object.keys(items.data.data).forEach(function(key) {
+                                if(key == itemId){
+                                    record.itemDetails.push(items.data.data[key].name);
+                                }
+                            })
                         })
                     })
-                })
 
-                //summoners
-                gamesWithDetails.forEach(function (record:any){
-                    record.summoners.forEach(function (summonerId:any){
-                        Object.keys(summoners.data.data).forEach(function(key) {
-                            let summonerKey = summoners.data.data[key].key;
+                    //summoners
+                    gamesWithDetails.forEach(function (record:any){
+                        record.summoners.forEach(function (summonerId:any){
+                            Object.keys(summoners.data.data).forEach(function(key) {
+                                let summonerKey = summoners.data.data[key].key;
 
-                            if(summonerKey == summonerId){
-                                record.summonerDetails.push({
-                                    name:key,
-                                    image:'http://ddragon.leagueoflegends.com/cdn/10.22.1/img/spell/'+key+'.png'
-                                })
-                            }
+                                if(summonerKey == summonerId){
+                                    record.summonerDetails.push({
+                                        name:key,
+                                        image:'http://ddragon.leagueoflegends.com/cdn/10.22.1/img/spell/'+key+'.png'
+                                    })
+                                }
+                            })
                         })
                     })
-                })
-
-                setTimeout(function(){
-                    console.log(rift.data);
-                },1000)
+                });
                 
-              
-                  
+                console.log(rift.data);
                 return {
                     code: 202,
                     data: {rift: rift ? rift.data : null},
                 }
+                  
+                
             }
         }
     } catch (error) {
@@ -188,4 +138,65 @@ async function getHistory(serverNumber: number, name:string) {
             data: 'Error',
         }
     }
+}
+
+async function getGameData(filterGames:any[],gamesWithDetails:any[],record:any,server:any,name:any){
+    return new Promise(async function(resolve,reject){
+        var gameA:any;
+        axios.get('https://' + server + '/lol/match/v4/matches/' + record.gameId + '?api_key=' + key).then(function (gamedetails:any) {
+            let gamesArray:any[]= [];
+            let userParticipantId = 0;
+            if(gamedetails.data){
+                let time = gamedetails.data.gameDuration;
+                let minutes = Math.floor(time / 60);
+                let seconds = time - minutes * 60;
+                let duration = minutes + ':'+ seconds;
+                let gameDate = new Date(gamedetails.data.gameCreation);
+                gamedetails.data.participantIdentities.forEach(function (game:any){
+                    if(game.player.summonerName == name){
+                        userParticipantId = game.participantId;
+                    }
+                })
+    
+                gamedetails.data.participants.forEach(function (game:any){
+                    if(parseInt(game.participantId) == userParticipantId){
+                        let summoners:any[] = [];
+                        summoners.push(game.spell1Id);
+                        summoners.push(game.spell2Id);
+                        let items:any[] = [];
+                        let stats = game.stats;
+                        items.push(stats.item0);
+                        items.push(stats.item1);
+                        items.push(stats.item2);
+                        items.push(stats.item3);
+                        items.push(stats.item4);
+                        items.push(stats.item5);
+                        items.push(stats.item6);
+
+                        gameA ={
+                            gameId:record.gameId,
+                            champion:record.champion,
+                            queue:record.queue,
+                            win:stats.win,
+                            kills:stats.kills,
+                            deaths:stats.deaths,
+                            assists:stats.assists,
+                            kda:(stats.kills+stats.assists)/stats.deaths,
+                            cs:stats.totalMinionsKilled,
+                            summoners:summoners,
+                            champLevel:stats.champLevel,
+                            items:items,
+                            duration:duration,
+                            date:gameDate,
+                            queueDetails:[],
+                            itemDetails:[],
+                            summonerDetails:[]
+                        };
+                        
+                        resolve(gameA);
+                    }
+                });
+            }
+        });
+    })
 }
