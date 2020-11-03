@@ -18,3 +18,39 @@ $main: #D53C4E;
 $background: #222222;
 $secondarybg: #303030;;
 $text: #FFFFFF;
+
+.champ-list-root {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    overflow: hidden;
+    background-color: blue;
+}
+
+.champ-list-grid-list {
+    width: 200px;
+    height: 150px;
+}
+.rift-champion-container {
+    color: white;
+    padding: 10px;
+    background-size: contain;
+    background-color: rgb(31, 31, 95);
+    height: 135px;
+    width: 240px;
+}
+
+// .champ-img {
+//     padding: 10px;
+//     top: 50%;
+// }
+
+// .paper-root {
+//     flex-grow: 1;
+// }
+// .paper-rift-champions {
+//     max-width: 500px;
+//     margin: auto;
+// }
+
+
