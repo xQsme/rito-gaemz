@@ -29,12 +29,6 @@ export default function (state = INITIAL_STATE, { type, payload }:any):RiftProfi
       return {
         ...INITIAL_STATE,
       };
-    case START_RIFT_MASTERY_REQUEST:
-      return {
-        ...state,
-        requested: false,
-        error: false,
-      };
 
     // case START_RIFT_PROFILE_REQUEST:
     //   return {
@@ -42,13 +36,6 @@ export default function (state = INITIAL_STATE, { type, payload }:any):RiftProfi
     //     requested: false,
     //     error: false,
     //   };
-    case RETURN_RIFT_MASTERY:
-       return {
-        ...state,
-        ...payload,
-        requested: true,
-        error: false,
-      };
     // case RETURN_RIFT_PROFILE:
     //   return {
     //     ...state,
@@ -56,16 +43,31 @@ export default function (state = INITIAL_STATE, { type, payload }:any):RiftProfi
     //     requested: true,
     //     error: false,
     //   };
-    case FAIL_RETURN_RIFT_MASTERY:
-      return {
-        ...state,
-        error: true,
-      };
+   
     // case FAIL_RETURN_RIFT_PROFILE:
     //   return {
     //     ...state,
     //     error: true,
     //   };
+    case START_RIFT_MASTERY_REQUEST:
+      return {
+        ...state,
+        requested: false,
+        error: false,
+      };
+    case RETURN_RIFT_MASTERY:
+       return {
+        ...state,
+        ...payload,
+        requested: true,
+        error: false,
+      };
+      case FAIL_RETURN_RIFT_MASTERY:
+        return {
+          ...state,
+          error: true,
+        };
+   
     default:
       return state;
   }
