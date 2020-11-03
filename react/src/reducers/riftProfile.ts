@@ -5,6 +5,9 @@ import {
   RETURN_RIFT_MASTERY,
   START_RIFT_MASTERY_REQUEST,
   RESET_PROFILES,
+  START_RIFT_PROFILE_REQUEST,
+  RETURN_RIFT_PROFILE,
+  FAIL_RETURN_RIFT_PROFILE
 } from "../actions/types";
 
 import type { RiftProfileReducer } from '../interfaces';
@@ -13,6 +16,7 @@ const INITIAL_STATE: RiftProfileReducer = {
   requested: false,
   error: false,
   masteries: [],
+  history:[]
 };
 
 export default function (state = INITIAL_STATE, { type, payload }:any):RiftProfileReducer {
