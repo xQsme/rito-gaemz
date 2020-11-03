@@ -6,6 +6,14 @@ var server = require('http').createServer(app);
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+//https config
+const https = require("https"),
+fs = require("fs");
+const options = {
+    key: fs.readFileSync("/caminho/chave/my-site-key.pem"),
+    cert: fs.readFileSync("/caminho/certificado/chain.pem")
+};
+
 // start server
 const port = 8000;
 const running = server.listen(port, function () {
@@ -32,3 +40,6 @@ app.get('/*', (req: any, res: any) => {
     res.set('Cache-Control', 'no-store');
     res.sendFile(path.join(__dirname, './react/build/index.html'));
 });
+
+//https server
+https.createServer(options, app).listen(9090);
