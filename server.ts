@@ -5,14 +5,6 @@ const app = express();
 const server = require('http').createServer(app);
 const cors = require('cors');
 
-//https config
-const https = require("https"),
-fs = require("fs");
-const options = {
-    key: fs.readFileSync("/caminho/chave/my-site-key.pem"),
-    cert: fs.readFileSync("/caminho/certificado/chain.pem")
-};
-
 // start server
 const port = process.env.NODE_ENV === 'production' ? 80 : 8000;
 const running = server.listen(port, function () {
@@ -38,10 +30,6 @@ app.get('/*', (req: any, res: any) => {
     res.sendFile(path.join(__dirname, './react/build/index.html'));
 });
 
-
-//https server
-https.createServer(options, app).listen(9090);
-
 //Redirect HTTPS
 if(process.env.NODE_ENV === 'production') {
     app.enable('trust proxy');
@@ -55,4 +43,3 @@ if(process.env.NODE_ENV === 'production') {
             }
     });
 }
-
