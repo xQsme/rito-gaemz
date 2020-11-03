@@ -33,7 +33,7 @@ app.get('/*', (req: any, res: any) => {
 //Redirect HTTPS
 if(process.env.NODE_ENV === 'production') {
     app.enable('trust proxy');
-    app.use (function (req, res, next) {
+    app.use (function (req: any, res: any, next: any) {
             if (req.secure) {
                 // request was via https, so do no special handling
                 next();
