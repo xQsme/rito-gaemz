@@ -31,6 +31,7 @@ function RiftProfile(props: RiftProfileProps) {
 
   const requestMastery = async (region: number, summonerId: string) => {
     const result = await props.requestRiftMastery(region, summonerId);
+
     if (result) {
       toast(result, {
         position: "top-right",
