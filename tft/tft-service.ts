@@ -7,7 +7,7 @@ const { key } = require('../secretconfig');
 
 module.exports  = {
     getUnits,
-    getProfile,
+   // getProfile,
 }
 
 function getServer(serverNumber: number) {
@@ -105,6 +105,7 @@ async function getUnits(serverNumber: number) {
     }
 }
 
+<<<<<<< HEAD
 
 async function getPlayerStatistics(topChallengers:Object, summonerId:String, server:String, region:String){
     return new Promise<UnitObject>(async (resolve, reject) => {
@@ -236,5 +237,29 @@ async function getProfile(serverNumber: number, summonerId: string) {
         }
     }
 }
+=======
+// async function getProfile(serverNumber: number, summonerId: string) {
+//     const server = getServer(serverNumber);
+//     try{
+//         let response = await axios.get('https://' + server + '/tft/league/v1/entries/by-summoner/' + summonerId + '?api_key=' + key);
+//         return {
+//             code: 202,
+//             data: response.data.length > 0 ? response.data[0] : {tier: 'Unranked'},
+//         }
+//     } catch (error) {
+//         console.log(error);
+//         if(error.response.data.status.status_code === 403) {
+//             return {
+//                 code: 403,
+//                 data: 'Error',
+//             }
+//         }
+//         return {
+//             code: 400,
+//             data: 'Error',
+//         }
+//     }
+// }
+>>>>>>> 2eb011d809988367e394d8132eec1ad249487bca
 
 export {};

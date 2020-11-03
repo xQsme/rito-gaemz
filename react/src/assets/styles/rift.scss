@@ -1,0 +1,20 @@
+@mixin mq($width, $type: max) {
+    @if $type == max {
+        $width: $width - 1px;
+    }
+    @media only screen and (#{$type}-width: $width) {
+        @content;
+    }
+}@mixin mq($width, $type: max) {
+    @if $type == max {
+        $width: $width - 1px;
+    }
+    @media only screen and (#{$type}-width: $width) {
+        @content;
+    }
+}
+
+$main: #D53C4E;
+$background: #222222;
+$secondarybg: #303030;;
+$text: #FFFFFF;
