@@ -25,6 +25,3 @@ yarn-error.log*
 key.test
 
 secretconfig.json
-
-*.key
-*.csr

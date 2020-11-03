@@ -3,7 +3,7 @@ const router = express.Router();
 const tftService = require('./tft-service');
 
 router.get('/units/:server', getUnits);
-// router.get('/profile/:server/:summonerId', getProfile);
+router.get('/profile/:server/:summonerId', getProfile);
 
 module.exports = router;
 
