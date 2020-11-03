@@ -12,19 +12,15 @@ import type { Summoner } from "../../interfaces";
 interface TFTSummonerProps {
   clickable?: boolean;
   setTab: (tab: number) => void;
-  tft: Summoner;
+  tft: any;
 }
 
 function TFTSummoner(props: TFTSummonerProps) {
   const { clickable, setTab } = props;
   const { profileIconId, name, summonerLevel, tftRanked } = props.tft;
 
-  let tftRankTier = undefined;
-  let tftRank = undefined;
- 
-    tftRankTier = toTitleCase(tftRanked.tier);
-    tftRank = process.env.PUBLIC_URL + '/shared/ranks/Emblem_' + tftRankTier + '.png';
-  
+  let tftRankTier = toTitleCase(tftRanked[0] ? tftRanked[0].tier : 'Unranked');
+  let tftRank = process.env.PUBLIC_URL + '/shared/ranks/Emblem_' + (tftRanked[0] ? tftRankTier : 'Unranked') + '.png';
   
   return (
     <div className="summoner-container">
@@ -57,8 +53,8 @@ function TFTSummoner(props: TFTSummonerProps) {
             <div className="rank">
             {tftRanked && (
               <React.Fragment>
-                <span className="label-rank">Rank: {tftRanked.tier} {tftRanked.rank}</span>
-                <img className="summoner-rank-icon" src={tftRank} alt="Rift" />
+                <span className="label-rank">Rank: {tftRankTier} {tftRanked[0].rank}</span>
+                <img className="summoner-rank-icon" src={tftRank} alt="Icon" />
               </React.Fragment>
             )}
                

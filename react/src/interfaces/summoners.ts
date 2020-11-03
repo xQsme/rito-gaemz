@@ -9,7 +9,7 @@ export interface Summoner {
   revisionDate: number;
   summonerLevel: number;
   riftRankeds: riftRanked[];
-  tftRanked: tftRanked;
+  tftRanked: tftRanked[];
 }
 
 export interface riftRanked {
