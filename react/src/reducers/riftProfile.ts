@@ -7,7 +7,10 @@ import {
   RESET_PROFILES,
   START_RIFT_PROFILE_REQUEST,
   RETURN_RIFT_PROFILE,
-  FAIL_RETURN_RIFT_PROFILE
+  FAIL_RETURN_RIFT_PROFILE,
+  START_RIFT_HISTORY_REQUEST,
+  RETURN_RIFT_HISTORY,
+  FAIL_RETURN_RIFT_HISTORY 
 } from "../actions/types";
 
 import type { RiftProfileReducer } from '../interfaces';
@@ -39,6 +42,12 @@ export default function (state = INITIAL_STATE, { type, payload }:any):RiftProfi
         requested: false,
         error: false,
       };
+    case START_RIFT_HISTORY_REQUEST:
+      return {
+        ...state,
+        requested: false,
+        error: false,
+      };
 
     case START_RIFT_PROFILE_REQUEST:
       return {
@@ -60,12 +69,24 @@ export default function (state = INITIAL_STATE, { type, payload }:any):RiftProfi
         requested: true,
         error: false,
       };
+    case RETURN_RIFT_HISTORY:
+      return {
+        ...state,
+        history: payload.rift,
+        requested: true,
+        error: false,
+      };
     case FAIL_RETURN_RIFT_MASTERY:
       return {
         ...state,
         error: true,
       };
     case FAIL_RETURN_RIFT_PROFILE:
+      return {
+        ...state,
+        error: true,
+      };
+    case FAIL_RETURN_RIFT_HISTORY:
       return {
         ...state,
         error: true,

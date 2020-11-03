@@ -60,7 +60,8 @@ export const requestRiftHistory = (region: number, summonerId:string)  => {
     return async (dispatch:(obj:{type:string, payload?: RiftHistoryResult}) => string) => {
         try {
             dispatch(startHistoryRequest());
-            const result:any = await axios.get(ADDRESS + '/history/' + region + '/' + summonerId);
+            const result:any = await axios.get(ADDRESS + '/rift/history/' + region + '/' + summonerId);
+            console.log(result);
             dispatch(returnHistory(result.data));
             return '';
         } catch (error) {
