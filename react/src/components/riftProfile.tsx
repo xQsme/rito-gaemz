@@ -6,13 +6,13 @@ import { toast } from "react-toastify";
 
 import type { SearchReducer } from '../interfaces';
 
-// import {requestRiftMastery} from '../actions';
+import {requestRiftMastery} from '../actions';
 import {requestRiftHistory} from '../actions';
 
 interface RiftProfileProps {
   search:SearchReducer,
   riftProfile:any,
-  // requestRiftMastery:Function,
+  requestRiftMastery:Function,
   requestRiftHistory:Function
 }
 
@@ -23,25 +23,25 @@ function RiftProfile(props: RiftProfileProps) {
   //Component Did Mount
   React.useEffect(() => {
 
-   // rift && !mastery && requestMastery(region, rift.id);
+   rift && !mastery && requestMastery(region, rift.id);
     rift && !history && requestHistory(region, rift.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rift]);
 
-  // const requestMastery = async (region: number, summonerId: string) => {
-  //   const result = await requestRiftMastery(region, summonerId);
-  //   if (result) {
-  //     toast(result, {
-  //       position: "top-right",
-  //       autoClose: 5000,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //     });
-  //   }
-  // };
+  const requestMastery = async (region: number, summonerId: string) => {
+    const result = await props.requestRiftMastery(region, summonerId);
+    if (result) {
+      toast(result, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
 
   const requestHistory = async (region: number, summonerId: string) => {
     const result = await requestRiftHistory(region, summonerId);
@@ -75,7 +75,7 @@ function mapStateToProps({ search, riftProfile}: any) {
 }
 
 export default connect(mapStateToProps, {
-  // requestRiftMastery,
+  requestRiftMastery,
   requestRiftHistory,
 }
 )(RiftProfile);
