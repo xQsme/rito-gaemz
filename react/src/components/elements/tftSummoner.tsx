@@ -3,21 +3,29 @@ import server from "../../constants/server";
 import TFT from "../../assets/images/tft.webp";
 import { navigate } from "@reach/router";
 import { TFT_PROFILE_ROUTE } from "../../constants/routes";
+import { toTitleCase } from "../../utils/to_title_case";
 import { setTab } from "../../actions";
 import { connect } from "react-redux";
 
-import type { Summoner, TFTProfileReducer } from "../../interfaces";
+import type { Summoner } from "../../interfaces";
 
 interface TFTSummonerProps {
   clickable?: boolean;
   setTab: (tab: number) => void;
   tft: Summoner;
-  tftProfile?: TFTProfileReducer;
 }
 
 function TFTSummoner(props: TFTSummonerProps) {
-  const { tftProfile, clickable, setTab } = props;
-  const { profileIconId, name, summonerLevel } = props.tft;
+  const { clickable, setTab } = props;
+  const { profileIconId, name, summonerLevel, tftRanked } = props.tft;
+
+  let tftRankTier = undefined;
+  let tftRank = undefined;
+ 
+    tftRankTier = toTitleCase(tftRanked.tier);
+    tftRank = process.env.PUBLIC_URL + '/shared/ranks/Emblem_' + tftRankTier + '.png';
+  
+  
   return (
     <div className="summoner-container">
       <div
@@ -39,24 +47,24 @@ function TFTSummoner(props: TFTSummonerProps) {
         </div>
         <div className="summoner-info-container">
           <span className="label">Summoner Name</span>
-          <span>{name}</span>
-          {tftProfile && (
-            <React.Fragment>
-              <span className="label">Rank</span>
-              <span className="capitalized">
-                {tftProfile.tier.toLowerCase()}
-              </span>
-              {tftProfile.rank && (
-                <React.Fragment>
-                  <span className="label">Division</span>
-                  <span>{tftProfile.rank}</span>
-                </React.Fragment>
-              )}
-            </React.Fragment>
-          )}
+          <span className="summoner-name">{name}</span>
+          
           {clickable && (
             <img className="summoner-type-icon" src={TFT} alt="TFT" />
           )}
+
+          <div className="rank-container">
+            <div className="rank">
+            {tftRanked && (
+              <React.Fragment>
+                <span className="label-rank">Rank: {tftRanked.tier} {tftRanked.rank}</span>
+                <img className="summoner-rank-icon" src={tftRank} alt="Rift" />
+              </React.Fragment>
+            )}
+               
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

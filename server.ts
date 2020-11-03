@@ -2,9 +2,8 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-var server = require('http').createServer(app);
+const server = require('http').createServer(app);
 const cors = require('cors');
-const bodyParser = require('body-parser');
 
 //https config
 const https = require("https"),
@@ -15,7 +14,7 @@ const options = {
 };
 
 // start server
-const port = 8000;
+const port = process.env.NODE_ENV === 'production' ? 80 : 8000;
 const running = server.listen(port, function () {
     console.log('Server listening on port ' + port);
 });
@@ -26,8 +25,6 @@ app.get('/', (req: any, res: any) => {
     res.sendFile(path.join(__dirname, './react/build/index.html'));
 });
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/tft', require('./tft/tft-controller'));
@@ -41,5 +38,21 @@ app.get('/*', (req: any, res: any) => {
     res.sendFile(path.join(__dirname, './react/build/index.html'));
 });
 
+
 //https server
 https.createServer(options, app).listen(9090);
+
+//Redirect HTTPS
+if(process.env.NODE_ENV === 'production') {
+    app.enable('trust proxy');
+    app.use (function (req, res, next) {
+            if (req.secure) {
+                // request was via https, so do no special handling
+                next();
+            } else {
+                // request was via http, so redirect to https
+                res.redirect('https://' + req.headers.host + req.url);
+            }
+    });
+}
+
