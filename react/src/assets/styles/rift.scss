@@ -27,11 +27,18 @@ $text: #FFFFFF;
     background-color: blue;
 }
 
+.champ-img {
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+}
+
 .champ-list-grid-list {
     width: 200px;
     height: 150px;
 }
 .rift-champion-container {
+    display: flex;
     color: white;
     // padding: 10px;
     background-size: contain;

@@ -44,7 +44,7 @@ function RiftProfile(props: RiftProfileProps) {
   };
 
   const requestHistory = async (region: number, summonerId: string) => {
-    const result = await requestRiftHistory(region, summonerId);
+    const result = await props.requestRiftHistory(region, summonerId);
     if (result) {
       toast(result, {
         position: "top-right",
