@@ -20,6 +20,7 @@ const running = server.listen(port, function () {
     console.log('Server listening on port ' + port);
 });
 
+
 //DONT CACHE PLEASE, TY
 app.get('/', (req: any, res: any) => {
     res.set('Cache-Control', 'no-store');
@@ -43,3 +44,16 @@ app.get('/*', (req: any, res: any) => {
 
 //https server
 https.createServer(options, app).listen(9090);
+//Redirect HTTPS
+if(process.env.NODE_ENV === 'production') {
+    app.enable('trust proxy');
+    app.use (function (req:any, res:any, next:any) {
+            if (req.secure) {
+                // request was via https, so do no special handling
+                next();
+            } else {
+                // request was via http, so redirect to https
+                res.redirect('https://' + req.headers.host + req.url);
+            }
+    });
+}
