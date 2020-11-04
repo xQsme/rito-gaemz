@@ -12,12 +12,12 @@ export const LOR_INSIGHTS_ROUTE = '/lor/insights';
 
 //TABS
 export const HOME_TAB = 0;
-export const TFT_INSIGHTS_TAB = 4;
-export const TFT_PROFILE_TAB = 3;
-export const RIFT_INSIGHTS_TAB = 2;
 export const RIFT_PROFILE_TAB = 1;
-export const RIFT_CHAMPIONS_TAB = 9;
-export const VALORANT_PROFILE_TAB = 5;
-export const VALORANT_INSIGHTS_TAB = 6;
-export const LOR_PROFILE_TAB = 7;
-export const LOR_INSIGHTS_TAB = 8;
+export const RIFT_INSIGHTS_TAB = 2;
+export const RIFT_CHAMPIONS_TAB = 3;
+export const TFT_PROFILE_TAB = 4;
+export const TFT_INSIGHTS_TAB = 5;
+export const VALORANT_PROFILE_TAB = 6;
+export const VALORANT_INSIGHTS_TAB = 7;
+export const LOR_PROFILE_TAB = 8;
+export const LOR_INSIGHTS_TAB = 9;

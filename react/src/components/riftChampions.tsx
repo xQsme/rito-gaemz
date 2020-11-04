@@ -75,47 +75,78 @@ function RiftChampions(props: any) {
     <div className="paper-root">
       <Paper className="paper-rift-champions">
        
-        <Grid container spacing={2} >
-         
-            <div className="rift-champion-container" style={{backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg")`}}> 
-              <Grid item > 
-                  <ButtonBase className="rift-champion-button" >
-                  <img className="champ-img" alt="complex" src={`http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/Aatrox.png`} />
-                  {/* <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" /> */}
-                </ButtonBase>
-              </Grid>
-              <Grid item xs={12} sm container>
-                <Grid item xs container direction="column" spacing={2}>
-                  <Grid item xs>
-                    <Typography gutterBottom variant="subtitle1">
-                      Standard license
-                    </Typography>
-                    <Typography variant="body2" gutterBottom>
-                      Full resolution 1920x1080 • JPEG
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary">
-                      ID: 1030114
-                    </Typography>
-                  </Grid>
-                  <Grid item>
-                    <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                      Remove
-                    </Typography>
+        <Grid container spacing={5} >
+          {Object.keys(champions).map((key) => (
+            <div className="rift-champion-container" key={champions[key].key} style={{backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champions[key].id}_0.jpg")`}}> 
+                <Grid item > 
+                    <ButtonBase className="rift-champion-button" >
+                    <img className="champ-img" alt="complex" src={`http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/${champions[key].id}.png`} />
+                    {/* <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" /> */}
+                  </ButtonBase>
+                </Grid>
+                <Grid item xs={12} className="text-grid" sm container>
+                  <Grid item xs container direction="column" spacing={2}>
+                    <Grid item xs>
+                      <Typography gutterBottom className="champ-name" variant="subtitle1">
+                        {champions[key].id}
+                      </Typography>
+                      <Typography variant="body2" gutterBottom>
+                        Mage / Bruiser
+                      </Typography>
+                    </Grid>
                   </Grid>
                 </Grid>
-                <Grid item>
-                  <Typography variant="subtitle1">$19.00</Typography>
-                </Grid>
-              </Grid>
             </div>
-       
-            
+          ))}
         </Grid>
         
        
       </Paper>
     </div>
 )
+
+  // return (
+  //   <div className="paper-root">
+  //     <Paper className="paper-rift-champions">
+       
+  //       <Grid container spacing={2} >
+  //         {Object.keys(champions).map((key) => (
+  //           <div className="rift-champion-container" key={champions[key].key} style={{backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champions[key].id}_0.jpg")`}}> 
+  //               <Grid item > 
+  //                   <ButtonBase className="rift-champion-button" >
+  //                   <img className="champ-img" alt="complex" src={`http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/${champions[key].id}.png`} />
+  //                   {/* <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" /> */}
+  //                 </ButtonBase>
+  //               </Grid>
+  //               <Grid item xs={12} sm container>
+  //                 <Grid item xs container direction="column" spacing={2}>
+  //                   <Grid item xs>
+  //                     <Typography gutterBottom variant="subtitle1">
+  //                       {champions[key].id}
+  //                     </Typography>
+  //                     <Typography variant="body2" gutterBottom>
+  //                       Roles:
+  //                     </Typography>
+  //                     <Typography variant="body2" gutterBottom>
+  //                       xxxxx xxxxx
+  //                     </Typography>
+  //                   </Grid>
+  //                 </Grid>
+  //               </Grid>
+  //           </div>
+  //         ))}
+  //       </Grid>
+        
+       
+  //     </Paper>
+  //   </div>
+
+
+
+
+
+
+
 
 
 

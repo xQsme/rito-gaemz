@@ -40,11 +40,25 @@ $text: #FFFFFF;
 .rift-champion-container {
     display: flex;
     color: white;
+    
     // padding: 10px;
-    background-size: contain;
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+    background-size: 100%;
     background-color: rgb(31, 31, 95);
-    height: 135px;
+    height: 140px;
     width: 240px;
+    flex-grow: 1;
+}
+
+.champ-name {
+    font-size: 20px !important;
+}
+.text-grid {
+   background-color: blue;
+//    border-radius: 15px;
+   margin-top: 20px !important;
+   margin-bottom: 20px !important;
+   background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) );
 }
 
 // .champ-img {
