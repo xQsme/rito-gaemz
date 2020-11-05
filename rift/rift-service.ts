@@ -2,6 +2,7 @@ const axios = require('axios');
 const { EUW,  NA, KR, AMERICAS, ASIA, EUROPE } = require('../config');
 const { key } = require('../secretconfig');
 const imgPath = 'http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/';
+const constants = require("../utils/constants.json");
 
 module.exports  = {
     getUnits,
@@ -93,16 +94,13 @@ async function getUnit(name: string) {
                 "title": unit.data.data[name].title,
                 "allytips": unit.data.data[name].allytips,
                 "enemytips": unit.data.data[name].enemytips,
+                "image": `http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/${name}.png`,
+                "skins": [],
             }
-            
-            
-            // units.data.data.forEach((element:any) => {
-            //     console.log(element);
-            // });
-            
-            //     (unit: { 'image': { path: string, full: string } }) => { // path criado por nós
-            // //     unit.image.path = imgPath + unit.image.full; 
-            // });
+
+            // Object.keys(unit.data.data[name].skins).forEach((key: any ) => {
+            //     unitReturn.skins[key.num].data.data[key].image.path = imgPath + units.data.data[key].image.full;
+            // })
         }
 
         // http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/Aatrox.png

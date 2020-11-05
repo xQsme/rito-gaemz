@@ -6,42 +6,29 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 
 import {requestRiftChampion} from '../actions';
 
-import type { SingleChampion } from "../interfaces";
+import type { SingleRiftChampion } from "../interfaces";
 
 
 
 function RiftChampion() {
   
-  const { profileIconId, name, summonerLevel, riftRankeds } = props.champion;
-  // const [spacing, setSpacing] = React.useState<GridSpacing>(2);
-  // const classes = useStyles();
-
+  // const { profileIconId, name, summonerLevel, riftRankeds } = props.champion;
+  
   // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setSpacing(Number((event.target as HTMLInputElement).value) as GridSpacing);
   // };
 
   
-  const { champion } = props.riftChampion;
+  // const { champion } = props.riftChampion;
 
   
   //Component Did Mount
   React.useEffect(() => {
 
-    Object.keys(champion).length === 0 && props.requestRiftChampion();
+    Object.keys(champion).length === 0 && requestRiftChampion(/*TODO - como obter nome?*/);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [champion]);
-  // console.log(champions);
- //<a data-featherlight={ `string${this.props.data.imageUrl}` }></a>
   
-  //   <Grid key={champions[key].key} item>
-  //     <Paper className={classes.paper} >
-  //       <img alt={champions[key].id} src={champions[key].image.path}/>
-  //     </Paper>
-  //   </Grid>
-  // ))}
-
-  //concat <a data-featherlight={ `string${this.props.data.imageUrl}` }>
-
   // background-image: url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg")
 
   return (
