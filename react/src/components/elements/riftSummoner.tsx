@@ -18,7 +18,6 @@ interface RiftSummonerProps {
 function RiftSummoner(props: RiftSummonerProps) {
   const { clickable, setTab } = props;
   const { profileIconId, name, summonerLevel, riftRankeds } = props.rift;
-
   let soloRankTier = toTitleCase(riftRankeds[1].tier);
   let flexRankTier = toTitleCase(riftRankeds[0].tier);
   

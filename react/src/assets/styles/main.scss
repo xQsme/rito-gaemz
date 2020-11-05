@@ -59,8 +59,10 @@ body{
 
 .router-container{
     width: 100%;
-    height: 100%;
     padding: 20px;
+    display: flex;
+    justify-content: center;
+
 }
 
 .tft-insights-container{
@@ -264,13 +266,13 @@ body{
         background-color: $main; // changed the color
     }
   }
+
   
-  .scrollbar{
-    div:first-of-type{
+  .scrollbar:first-child{
         right: -1px !important;
         margin: auto;
     }
-  }
+  
   
   .scrollbar:hover{
     .track-horizontal{
@@ -488,3 +490,4 @@ td{
         }
     }
   }
+

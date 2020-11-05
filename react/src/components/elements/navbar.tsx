@@ -19,12 +19,23 @@ import {
   HOME_ROUTE,
   TFT_INSIGHTS_ROUTE,
   TFT_PROFILE_ROUTE,
+  RIFT_CHAMPIONS_ROUTE,
   RIFT_INSIGHTS_ROUTE,
   RIFT_PROFILE_ROUTE,
   VALORANT_PROFILE_ROUTE,
   VALORANT_INSIGHTS_ROUTE,
   LOR_PROFILE_ROUTE,
   LOR_INSIGHTS_ROUTE,
+  HOME_TAB,
+  TFT_INSIGHTS_TAB,
+  TFT_PROFILE_TAB,
+  RIFT_CHAMPIONS_TAB,
+  RIFT_INSIGHTS_TAB,
+  RIFT_PROFILE_TAB,
+  VALORANT_PROFILE_TAB,
+  VALORANT_INSIGHTS_TAB,
+  LOR_PROFILE_TAB,
+  LOR_INSIGHTS_TAB,
 } from "../../constants/routes";
 
 interface NavProps {
@@ -34,31 +45,34 @@ interface NavProps {
 
 function NavBar(props: NavProps) {
   const { tab } = props.nav;
-  let value = 0;
+  let value = history.location.pathname.includes(RIFT_CHAMPIONS_ROUTE) ? RIFT_CHAMPIONS_TAB : HOME_TAB;
   switch (history.location.pathname) {
+    case RIFT_CHAMPIONS_ROUTE:
+      value = RIFT_CHAMPIONS_TAB;
+      break;
     case LOR_INSIGHTS_ROUTE:
-      value = 8;
+      value = LOR_INSIGHTS_TAB;
       break;
     case LOR_PROFILE_ROUTE:
-      value = 7;
+      value = LOR_PROFILE_TAB;
       break;
     case VALORANT_INSIGHTS_ROUTE:
-      value = 6;
+      value = VALORANT_INSIGHTS_TAB;
       break;
     case VALORANT_PROFILE_ROUTE:
-      value = 5;
+      value = VALORANT_PROFILE_TAB;
       break;
     case TFT_INSIGHTS_ROUTE:
-      value = 4;
+      value = TFT_INSIGHTS_TAB;
       break;
     case TFT_PROFILE_ROUTE:
-      value = 3;
+      value = TFT_PROFILE_TAB;
       break;
     case RIFT_INSIGHTS_ROUTE:
-      value = 2;
+      value = RIFT_INSIGHTS_TAB;
       break;
     case RIFT_PROFILE_ROUTE:
-      value = 1;
+      value = RIFT_PROFILE_TAB;
       break;
     default:
   }
@@ -110,6 +124,13 @@ function NavBar(props: NavProps) {
         <Tab
           label="Rift Insights"
           to={RIFT_INSIGHTS_ROUTE}
+          image={League}
+          component={TabIcon}
+          className="tab-icon-container"
+        />
+        <Tab
+          label="Rift Champions"
+          to={RIFT_CHAMPIONS_ROUTE}
           image={League}
           component={TabIcon}
           className="tab-icon-container"

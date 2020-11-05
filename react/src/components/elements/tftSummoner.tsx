@@ -22,8 +22,8 @@ function TFTSummoner(props: TFTSummonerProps) {
   let tftRankTier = undefined;
   let tftRank = undefined;
  
-    tftRankTier = toTitleCase(tftRanked.tier);
-    tftRank = process.env.PUBLIC_URL + '/shared/ranks/Emblem_' + tftRankTier + '.png';
+  tftRankTier = toTitleCase(tftRanked.tier);
+  tftRank = process.env.PUBLIC_URL + '/shared/ranks/Emblem_' + tftRankTier + '.png';
   
   
   return (

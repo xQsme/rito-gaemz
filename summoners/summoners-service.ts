@@ -45,6 +45,7 @@ async function getSummoners(serverNumber: number, name:string) {
             rift.data.riftRankeds = riftRankeds.data ? riftRankeds.data : [];
             let tftRankeds = await axios.get('https://' + server + '/tft/league/v1/entries/by-summoner/' + rift.data.id + '?api_key=' + key);
             tft.data.tftRanked = tftRankeds.data[0];
+            
         }
         return {
             code: 202,
