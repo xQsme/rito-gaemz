@@ -72,41 +72,37 @@ function RiftChampions(props: any) {
   // background-image: url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg")
 
   return (
-    <>
-     <div className="hidden-details">
-            Details
-          </div>
-      <div className="rift-champion-container"> ola </div>
     <div className="champion-grid-container">
       {Object.keys(champions).map((key) => (
-        <div className="rift-champion-container" key={champions[key].key} style={{backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champions[key].id}_0.jpg")`}}> 
-          {/* <div className="container-background-image"  /> */}
-          <div className="rift-champion-container-child">
-          
-            <ButtonBase className="rift-champion-button" >
-              <img className="champ-img" alt="complex" src={`http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/${champions[key].id}.png`} />
-              {/* <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" /> */}
-            </ButtonBase>
-                    
-          
-            <div className="text-grid">
-              <span className="champ-name">
-                  {champions[key].id}
-              </span>
-              <span>
-                Mage / Bruiser
-              </span>
-              
+        <div className="hidden-container" key={champions[key].key}>
+          <div className="rift-champion-container" key={champions[key].key} style={{backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champions[key].id}_0.jpg")`}}> 
+            {/* <div className="container-background-image"  /> */}
+            <div className="rift-champion-container-child">
+              <ButtonBase className="rift-champion-button hide" >
+                <img className="champ-img" alt="complex" src={`http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/${champions[key].id}.png`} />
+                {/* <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" /> */}
+              </ButtonBase>
+              <div className="text-grid hide">
+                <span className="champ-name">
+                    {champions[key].name}
+                </span>
+                <span>
+                  {champions[key].tags.join(" / ")}
+                </span>
+              </div>
             </div>
+          </div>
+
+          <div className="hidden-details">
+           <span><h1> {champions[key].name} </h1></span>
+            <span> Details </span>
             
           </div>
-         
+
         </div>
        
       ))}
-    </div>
-    </>
-      
+    </div>      
 )
 
 
