@@ -1,7 +1,7 @@
 import React from "react";
 import server from "../../constants/server";
 import League2 from "../../assets/images/league-of-legends2.png";
-import { navigate } from "@reach/router";
+import history from '../../utils/history';
 import { RIFT_PROFILE_ROUTE } from "../../constants/routes";
 import { toTitleCase } from "../../utils/to_title_case";
 import { setTab } from "../../actions";
@@ -31,7 +31,7 @@ function RiftSummoner(props: RiftSummonerProps) {
         className={"rift-summoner" + (clickable ? " clickable" : "")}
         onClick={() => {
           if (clickable) {
-            navigate(RIFT_PROFILE_ROUTE);
+            history.push(RIFT_PROFILE_ROUTE);
             setTab(1);
           }
         }}

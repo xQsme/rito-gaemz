@@ -2,7 +2,7 @@ import React from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import history from "../../utils/history";
-import { Link } from "@reach/router";
+import { Link } from "react-router-dom";
 import League from "../../assets/images/league-of-legends.png";
 import League2 from "../../assets/images/league-of-legends2.png";
 import LoR from "../../assets/images/runeterra.png";

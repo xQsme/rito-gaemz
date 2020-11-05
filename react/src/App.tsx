@@ -11,9 +11,10 @@ import ValorantInsights from "./components/valorantInsights";
 import LoRProfile from "./components/lorProfile";
 import LoRInsights from "./components/lorInsights";
 import NavBar from "./components/elements/navbar";
-import { Router, RouteComponentProps } from "@reach/router";
+import { Router, Route, Switch } from "react-router-dom";
 import { Scrollbars } from "react-custom-scrollbars";
 import "react-toastify/dist/ReactToastify.css";
+import history from "./utils/history";
 
 import {
   HOME_ROUTE,
@@ -27,63 +28,44 @@ import {
   LOR_PROFILE_ROUTE,
 } from "./constants/routes";
 
-const RouterPage = (
-  props: { pageComponent: JSX.Element } & RouteComponentProps
-) => {
-  return props.pageComponent;
-};
 export default function App() {
   return (
-    <React.Fragment>
+
+      <Router history={history}>
       <ToastContainer />
-      <NavBar />
-      <div className="nav-spacer"><div/></div>
-      <Scrollbars
-        autoHide
-        className="scrollbar"
-        renderTrackHorizontal={(props) => (
-          <div {...props} className="track-horizontal" />
-        )}
-        renderTrackVertical={(props) => (
-          <div {...props} className="track-vertical" />
-        )}
-        renderThumbHorizontal={(props) => (
-          <div {...props} className="thumb-horizontal" />
-        )}
-        renderThumbVertical={(props) => (
-          <div {...props} className="thumb-vertical" />
-        )}
-      >
-        <Router className="router-container">
-          <RouterPage default path={HOME_ROUTE} pageComponent={<Summoners />} />
-          <RouterPage
-            path={TFT_INSIGHTS_ROUTE}
-            pageComponent={<TFTInsights />}
-          />
-          <RouterPage path={TFT_PROFILE_ROUTE} pageComponent={<TFTProfile />} />
-          <RouterPage
-            path={RIFT_INSIGHTS_ROUTE}
-            pageComponent={<RiftInsights />}
-          />
-          <RouterPage
-            path={RIFT_PROFILE_ROUTE}
-            pageComponent={<RiftProfile />}
-          />
-          <RouterPage
-            path={VALORANT_PROFILE_ROUTE}
-            pageComponent={<ValorantProfile />}
-          />
-          <RouterPage
-            path={VALORANT_INSIGHTS_ROUTE}
-            pageComponent={<ValorantInsights />}
-          />
-          <RouterPage path={LOR_PROFILE_ROUTE} pageComponent={<LoRProfile />} />
-          <RouterPage
-            path={LOR_INSIGHTS_ROUTE}
-            pageComponent={<LoRInsights />}
-          />
-        </Router>
-      </Scrollbars>
-    </React.Fragment>
+        <NavBar />
+        <div className="nav-spacer">
+          <div />
+        </div>
+        <Scrollbars
+          autoHide
+          className="scrollbar"
+          renderTrackHorizontal={(props) => (
+            <div {...props} className="track-horizontal" />
+          )}
+          renderTrackVertical={(props) => (
+            <div {...props} className="track-vertical" />
+          )}
+          renderThumbHorizontal={(props) => (
+            <div {...props} className="thumb-horizontal" />
+          )}
+          renderThumbVertical={(props) => (
+            <div {...props} className="thumb-vertical" />
+          )}
+        >
+            <Route exact path={HOME_ROUTE} component={Summoners} />
+            <Route exact path={TFT_INSIGHTS_ROUTE} component={TFTInsights} />
+            <Route exact path={TFT_PROFILE_ROUTE} component={TFTProfile} />
+            <Route exact path={RIFT_INSIGHTS_ROUTE} component={RiftInsights} />
+            <Route exact path={RIFT_PROFILE_ROUTE} component={RiftProfile} />
+            <Route exact path={VALORANT_PROFILE_ROUTE} component={ValorantProfile} />
+            <Route
+              exact path={VALORANT_INSIGHTS_ROUTE}
+              component={ValorantInsights}
+            />
+            <Route exact path={LOR_PROFILE_ROUTE} component={LoRProfile} />
+            <Route exact path={LOR_INSIGHTS_ROUTE} component={LoRInsights} />
+        </Scrollbars>
+      </Router>
   );
 }

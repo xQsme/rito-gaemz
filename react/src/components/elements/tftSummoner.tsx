@@ -1,7 +1,7 @@
 import React from "react";
 import server from "../../constants/server";
 import TFT from "../../assets/images/tft.webp";
-import { navigate } from "@reach/router";
+import history from '../../utils/history';
 import { TFT_PROFILE_ROUTE } from "../../constants/routes";
 import { toTitleCase } from "../../utils/to_title_case";
 import { setTab } from "../../actions";
@@ -28,7 +28,7 @@ function TFTSummoner(props: TFTSummonerProps) {
         className={"tft-summoner" + (clickable ? " clickable" : "")}
         onClick={() => {
           if (clickable) {
-            navigate(TFT_PROFILE_ROUTE);
+            history.push(TFT_PROFILE_ROUTE);
             setTab(3);
           }
         }}

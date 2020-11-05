@@ -1,8 +1,4 @@
 import React from "react";
-import server from "../../constants/server";
-import TFT from "../../assets/images/tft.webp";
-import { navigate } from "@reach/router";
-import { TFT_PROFILE_ROUTE } from "../../constants/routes";
 import { toTitleCase } from "../../utils/to_title_case";
 import { setTab } from "../../actions";
 import { connect } from "react-redux";

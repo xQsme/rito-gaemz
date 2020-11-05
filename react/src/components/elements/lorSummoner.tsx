@@ -1,10 +1,9 @@
 import React from "react";
 import LoR from "../../assets/images/runeterra.png";
 import { setTab } from "../../actions";
-import { navigate } from "@reach/router";
 import { connect } from "react-redux";
 import { LOR_PROFILE_ROUTE } from "../../constants/routes";
-
+import history from '../../utils/history';
 import type { Account } from "../../interfaces";
 
 interface LoRSummonerProps {
@@ -22,7 +21,7 @@ function LoRSummoner(props: LoRSummonerProps) {
         className={"lor-summoner" + (clickable ? " clickable" : "")}
         onClick={() => {
           if (clickable) {
-            navigate(LOR_PROFILE_ROUTE);
+            history.push(LOR_PROFILE_ROUTE);
             setTab(7);
           }
         }}
