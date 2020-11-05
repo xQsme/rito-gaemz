@@ -35,6 +35,12 @@ function getUnit(req: any, res: any, next: any) {
     console.log('invoked rift.getUnit');
     const name:string = req.params.name;
     riftService.getUnit(name)
+    .then(
+        (body: Body) => {
+            res.status(body.code).json(body.data);
+        }
+    )
+    .catch((err: object) => next(err));
 }
 
 async function getSummonerMatchHistory(req: any, res: any, next: any) {

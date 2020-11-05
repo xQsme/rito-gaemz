@@ -63,6 +63,16 @@ $text: #FFFFFF;
     grid-row-gap: 20px;
     width: 100%;
 
+    a{
+        text-decoration: none;
+        color: $text;
+    }
+
+        
+    .champion-link {
+        color: inherit;
+    }
+
     .container-background-image {
         top: 0;
         left: 0;
@@ -148,6 +158,7 @@ $text: #FFFFFF;
 
     .hidden-container {
         position: relative;
+        z-index: 101;
     }
     
 

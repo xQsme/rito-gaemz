@@ -1,21 +1,21 @@
 import { REHYDRATE } from "redux-persist";
 
 import {
-  RETURN_RIFT_CHAMPIONS,
-  FAIL_RETURN_RIFT_CHAMPIONS,
-  START_RIFT_CHAMPIONS_REQUEST,
+  RETURN_RIFT_SINGLE_CHAMPION,
+  FAIL_RETURN_RIFT_SINGLE_CHAMPION,
+  START_RIFT_SINGLE_CHAMPION_REQUEST,
   RESET_PROFILES,
 } from "../actions/types";
 
-import type { RiftChampionsReducer } from '../interfaces';
+import type { RiftChampionReducer } from '../interfaces';
 
-const INITIAL_STATE: RiftChampionsReducer = {
+const INITIAL_STATE: RiftChampionReducer = {
   requested: false,
   error: false,
-  champions: {},
+  champion: {},
 };
 
-export default function (state = INITIAL_STATE, { type, payload }:any):RiftChampionsReducer {
+export default function (state = INITIAL_STATE, { type, payload }:any):RiftChampionReducer {
   switch (type) {
     case REHYDRATE:
       if (payload && payload.riftProfile) {
@@ -29,24 +29,31 @@ export default function (state = INITIAL_STATE, { type, payload }:any):RiftChamp
       return {
         ...INITIAL_STATE,
       };
-    case START_RIFT_CHAMPIONS_REQUEST:
+    case FAIL_RETURN_RIFT_SINGLE_CHAMPION:
+      return {
+        ...state,
+        error: true,
+      };
+
+    case START_RIFT_SINGLE_CHAMPION_REQUEST:
       return {
         ...state,
         requested: false,
         error: false,
       };
-    case RETURN_RIFT_CHAMPIONS:
+    case RETURN_RIFT_SINGLE_CHAMPION:
        return {
         ...state,
-        champions: payload.units, 
+        champion: payload, 
         requested: true,
         error: false,
       };
-    case FAIL_RETURN_RIFT_CHAMPIONS:
+    case FAIL_RETURN_RIFT_SINGLE_CHAMPION:
       return {
         ...state,
         error: true,
-      };   
+      };
+   
     default:
       return state;
   }
