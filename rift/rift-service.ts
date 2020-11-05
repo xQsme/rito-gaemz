@@ -109,7 +109,6 @@ async function getHistory(serverNumber: number, name:string) {
                 })
 
                 await Promise.all(promiseArray).then((values) => {
-                    console.log(values);
                     gamesWithDetails = values;
                     gamesWithDetails.forEach(function (record:any){
                     queue.data.forEach(function(data:any){
