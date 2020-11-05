@@ -1,43 +1,15 @@
 import React from 'react'
 import { connect } from "react-redux";
-// import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Grid, {  } from '@material-ui/core/Grid';
-// import FormLabel from '@material-ui/core/FormLabel';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import RadioGroup from '@material-ui/core/RadioGroup';
-// import Radio from '@material-ui/core/Radio';
-// import Paper from '@material-ui/core/Paper';
-// import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
-
-// import GridList from '@material-ui/core/GridList';
-// import GridListTile from '@material-ui/core/GridListTile';
-// import GridListTileBar from '@material-ui/core/GridListTileBar';
-// import ListSubheader from '@material-ui/core/ListSubheader';
-// import IconButton from '@material-ui/core/IconButton';
-// import InfoIcon from '@material-ui/icons/Info';
-
-
+import { Router, Link } from "@reach/router";
 // import { toast } from "react-toastify";
-
+// import RiftChampion from "./riftChampion";
 import {requestRiftChampions} from '../actions';
-import { blue } from '@material-ui/core/colors';
 
-
-// const useStyles = makeStyles((theme: Theme) =>
-//   createStyles({
-//     root: {
-//       flexGrow: 4,
-//     },
-//     paper: {
-//       height: 140,
-//       width: 100,
-//     },
-//     control: {
-//       padding: theme.spacing(2),
-//     },
-//   }),
-// );
+import {
+  RIFT_CHAMPION_ROUTE,
+} from "../constants/routes";
+import { Redirect } from 'react-router-dom';
 
 function RiftChampions(props: any) {
   // const [spacing, setSpacing] = React.useState<GridSpacing>(2);
@@ -79,29 +51,33 @@ function RiftChampions(props: any) {
       <div className="rift-champion-container"> ola </div>
     <div className="champion-grid-container">
       {Object.keys(champions).map((key) => (
-        <div className="rift-champion-container" key={champions[key].key} style={{backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champions[key].id}_0.jpg")`}}> 
-          {/* <div className="container-background-image"  /> */}
-          <div className="rift-champion-container-child">
-          
-            <ButtonBase className="rift-champion-button" >
-              <img className="champ-img" alt="complex" src={`http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/${champions[key].id}.png`} />
-              {/* <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" /> */}
-            </ButtonBase>
-                    
-          
-            <div className="text-grid">
-              <span className="champ-name">
-                  {champions[key].id}
-              </span>
-              <span>
-                Mage / Bruiser
-              </span>
+          <Link to="rift/champions/Aatrox">
+        
+            <div className="rift-champion-container" key={champions[key].key} style={{backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champions[key].id}_0.jpg")`}}> 
+              {/* <div className="container-background-image"  /> */}
+              <div className="rift-champion-container-child">
               
-            </div>
+                <ButtonBase className="rift-champion-button" >
+                  <img className="champ-img" alt="complex" src={`http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/${champions[key].id}.png`} />
+                  {/* <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" /> */}
+                </ButtonBase>
+                        
+              
+                <div className="text-grid">
+                  <span className="champ-name">
+                      {champions[key].id}
+                  </span>
+                  <span>
+                    Mage / Bruiser
+                  </span>
+                  
+                </div>
+                
+              </div>
             
-          </div>
-         
-        </div>
+            </div>
+          </Link>
+        
        
       ))}
     </div>

@@ -8,10 +8,18 @@ import {requestRiftChampion} from '../actions';
 
 import type { SingleRiftChampion } from "../interfaces";
 
+interface ChampionProps {
+  name: string
+}
 
 
-function RiftChampion() {
-  
+type Props = {path: string};
+
+export default function RiftChampion(props: Props) {
+  console.log(props);
+
+
+
   // const { profileIconId, name, summonerLevel, riftRankeds } = props.champion;
   
   // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,69 +31,17 @@ function RiftChampion() {
 
   
   //Component Did Mount
-  React.useEffect(() => {
+  // React.useEffect(() => {
 
-    Object.keys(champion).length === 0 && requestRiftChampion(/*TODO - como obter nome?*/);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [champion]);
+  //   Object.keys(champion).length === 0 && requestRiftChampion(/*TODO - como obter nome?*/);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [champion]);
   
   // background-image: url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg")
 
   return (
     <div className="summoner-container">
-    <div
-      className={"rift-summoner" + (clickable ? " clickable" : "")}
-      onClick={() => {
-        if (clickable) {
-          navigate(RIFT_PROFILE_ROUTE);
-          setTab(1);
-        }
-      }}
-    >
-      <div className="summoner-icon-container">
-        <img
-          className="summoner-icon"
-          src={server + "/shared/profileicon/" + profileIconId + ".png"}
-          alt="summoner-icon"
-        />
-        <span className="summoner-level">{summonerLevel}</span>
-      </div>
-      <div className="summoner-info-container">
-        <span className="label">Summoner Name</span>
-        <span className="summoner-name">{name}</span>
-        
-        <div className="rank-container">
-          <div className="rank">
-            <span className="label-rank">Solo: {soloRankTier} {riftRankeds[1].rank}</span>
-            <img className="summoner-rank-icon" src={soloRank} alt="Rift" />
-          </div>
-          <div className="rank">
-            <span className="label-rank">Flex: {flexRankTier} {riftRankeds[0].rank}</span>
-            <img className="summoner-rank-icon" src={flexRank} alt="Rift" />
-          </div>
-        </div>
-
-        {clickable && (
-          <img className="summoner-type-icon" src={League2} alt="Rift" />
-        )}
-        
-
-      </div>
-    </div>
-  </div>
-      
-)
-
-
-
+      <span> ola {props.name} </span>
+    </div>    
+  )
 }
-
-// function mapStateToProps({  }: any) {
-//     return {
-      
-//     };
-//   }
-
-// export default connect(mapStateToProps, {
-//   requestRiftChampion
-// })(RiftChampion);
