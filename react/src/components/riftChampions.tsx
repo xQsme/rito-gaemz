@@ -6,8 +6,8 @@ import Grid, {  } from '@material-ui/core/Grid';
 // import FormControlLabel from '@material-ui/core/FormControlLabel';
 // import RadioGroup from '@material-ui/core/RadioGroup';
 // import Radio from '@material-ui/core/Radio';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+// import Paper from '@material-ui/core/Paper';
+// import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
 // import GridList from '@material-ui/core/GridList';
@@ -72,38 +72,102 @@ function RiftChampions(props: any) {
   // background-image: url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg")
 
   return (
-    <div className="paper-root">
-      <Paper className="paper-rift-champions">
-       
-        <Grid container spacing={5} >
-          {Object.keys(champions).map((key) => (
-            <div className="rift-champion-container" key={champions[key].key} style={{backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champions[key].id}_0.jpg")`}}> 
-                <Grid item > 
-                    <ButtonBase className="rift-champion-button" >
-                    <img className="champ-img" alt="complex" src={`http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/${champions[key].id}.png`} />
-                    {/* <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" /> */}
-                  </ButtonBase>
-                </Grid>
-                <Grid item xs={12} className="text-grid" sm container>
-                  <Grid item xs container direction="column" spacing={2}>
-                    <Grid item xs>
-                      <Typography gutterBottom className="champ-name" variant="subtitle1">
-                        {champions[key].id}
-                      </Typography>
-                      <Typography variant="body2" gutterBottom>
-                        Mage / Bruiser
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
+    <div className="champion-grid-container">
+      {Object.keys(champions).map((key) => (
+        <div className="rift-champion-container" key={champions[key].key} style={{backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champions[key].id}_0.jpg")`}}> 
+          {/* <div className="container-background-image"  /> */}
+          <div className="rift-champion-container-child">
+          
+            <ButtonBase className="rift-champion-button" >
+              <img className="champ-img" alt="complex" src={`http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/${champions[key].id}.png`} />
+              {/* <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" /> */}
+            </ButtonBase>
+                    
+          
+            <div className="text-grid">
+              <span className="champ-name">
+                  {champions[key].id}
+              </span>
+              <span>
+                Mage / Bruiser
+              </span>
+              
             </div>
-          ))}
-        </Grid>
-        
+            
+          </div>
+          <span className="hidden-details">
+            Details
+          </span>
+        </div>
        
-      </Paper>
+      ))}
     </div>
+    
+      
 )
+
+
+
+// return (
+//   <div className="paper-root">
+//     <Paper className="paper-rift-champions">
+     
+//       <Grid container spacing={5} >
+//         {Object.keys(champions).map((key) => (
+//           <div className="rift-champion-container" key={champions[key].key} style={{backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champions[key].id}_0.jpg")`}}> 
+//               <Grid item container > 
+//                 <div className="grid-item-container">
+//                   <ButtonBase className="rift-champion-button" >
+//                     <img className="champ-img" alt="complex" src={`http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/${champions[key].id}.png`} />
+//                     {/* <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" /> */}
+//                   </ButtonBase>
+                        
+             
+//                 <div className="text-grid">
+//                   <Typography gutterBottom className="champ-name" variant="subtitle1">
+//                       {champions[key].id}
+//                     </Typography>
+//                     <Typography variant="body2" gutterBottom>
+//                       Mage / Bruiser
+//                     </Typography>
+              
+//                     </div>
+              
+//                 </div>
+                  
+                  
+//               </Grid>
+           
+//           </div>
+//         ))}
+//       </Grid>
+      
+     
+//     </Paper>
+//   </div>
+// )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // return (
   //   <div className="paper-root">

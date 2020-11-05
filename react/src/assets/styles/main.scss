@@ -265,12 +265,11 @@ body{
     }
   }
   
-  .scrollbar{
-    div:first-of-type{
+  .scrollbar:first-child{
         right: -1px !important;
         margin: auto;
     }
-  }
+  
   
   .scrollbar:hover{
     .track-horizontal{
@@ -488,3 +487,4 @@ td{
         }
     }
   }
+
