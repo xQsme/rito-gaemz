@@ -263,13 +263,28 @@ async function getGameData(filterGames:any[],gamesWithDetails:any[],record:any,s
                         summoners.push(game.spell2Id);
                         let items:any[] = [];
                         let stats = game.stats;
-                        items.push(stats.item0);
-                        items.push(stats.item1);
-                        items.push(stats.item2);
-                        items.push(stats.item3);
-                        items.push(stats.item4);
-                        items.push(stats.item5);
-                        items.push(stats.item6);
+                        if(stats.item0 !== 0 ){
+                            items.push(stats.item0);
+                        }
+                        if(stats.item1 !== 0 ){
+                            items.push(stats.item1);
+                        }
+                        if(stats.item2 !== 0 ){
+                            items.push(stats.item2);
+                        }
+                        if(stats.item3 !== 0 ){
+                            items.push(stats.item3);
+                        }
+                        if(stats.item4 !== 0 ){
+                            items.push(stats.item4);
+                        }
+                        if(stats.item5 !== 0 ){
+                            items.push(stats.item5);
+                        }
+                        if(stats.item6 !== 0 ){
+                            items.push(stats.item6);
+                        }
+                       
 
                         gameA ={
                             gameId:record.gameId,
