@@ -72,6 +72,11 @@ function RiftChampions(props: any) {
   // background-image: url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg")
 
   return (
+    <>
+     <div className="hidden-details">
+            Details
+          </div>
+      <div className="rift-champion-container"> ola </div>
     <div className="champion-grid-container">
       {Object.keys(champions).map((key) => (
         <div className="rift-champion-container" key={champions[key].key} style={{backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champions[key].id}_0.jpg")`}}> 
@@ -95,14 +100,12 @@ function RiftChampions(props: any) {
             </div>
             
           </div>
-          <span className="hidden-details">
-            Details
-          </span>
+         
         </div>
        
       ))}
     </div>
-    
+    </>
       
 )
 

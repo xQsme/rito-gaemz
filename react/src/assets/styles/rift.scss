@@ -123,7 +123,7 @@ $text: #FFFFFF;
 
     .rift-champion-container:hover { 
         outline-width: 6px; 
-        opacity: 0.4;
+        //opacity: 0.4;
         
     }
 
@@ -155,8 +155,16 @@ $text: #FFFFFF;
 // }
 
 
-
 @include mq(8000px) {
+    .champion-grid-container{ 
+        
+        grid-template-columns: repeat(6, 1fr); 
+
+  }
+}
+
+
+@include mq(1800px) {
     .champion-grid-container{ 
         
         grid-template-columns: repeat(5, 1fr); 

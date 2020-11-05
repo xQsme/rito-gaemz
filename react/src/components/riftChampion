@@ -1,0 +1,93 @@
+import React from 'react'
+import { connect } from "react-redux";
+import ButtonBase from '@material-ui/core/ButtonBase';
+
+// import { toast } from "react-toastify";
+
+import {requestRiftChampion} from '../actions';
+
+
+
+function RiftChampion(props: any) {
+  // const [spacing, setSpacing] = React.useState<GridSpacing>(2);
+  // const classes = useStyles();
+
+  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSpacing(Number((event.target as HTMLInputElement).value) as GridSpacing);
+  // };
+
+  
+  const { champions } = props.riftChampions;
+
+  
+  //Component Did Mount
+  React.useEffect(() => {
+
+    Object.keys(champions).length === 0 && props.requestRiftChampions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [champions]);
+  // console.log(champions);
+ //<a data-featherlight={ `string${this.props.data.imageUrl}` }></a>
+  
+  //   <Grid key={champions[key].key} item>
+  //     <Paper className={classes.paper} >
+  //       <img alt={champions[key].id} src={champions[key].image.path}/>
+  //     </Paper>
+  //   </Grid>
+  // ))}
+
+  //concat <a data-featherlight={ `string${this.props.data.imageUrl}` }>
+
+  // background-image: url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg")
+
+  return (
+    <>
+     <div className="hidden-details">
+            Details
+          </div>
+      <div className="rift-champion-container"> ola </div>
+    <div className="champion-grid-container">
+      
+        <div className="rift-champion-container" key={champions[key].key} style={{backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champions[key].id}_0.jpg")`}}> 
+          {/* <div className="container-background-image"  /> */}
+          <div className="rift-champion-container-child">
+          
+            <ButtonBase className="rift-champion-button" >
+              <img className="champ-img" alt="complex" src={`http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/${champions[key].id}.png`} />
+              {/* <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" /> */}
+            </ButtonBase>
+                    
+          
+            <div className="text-grid">
+              <span className="champ-name">
+                  {champions[key].id}
+              </span>
+              <span>
+                Mage / Bruiser
+              </span>
+              
+            </div>
+            
+          </div>
+         
+        </div>
+       
+     
+    </div>
+    </>
+      
+)
+
+
+
+}
+
+function mapStateToProps({ riftChampion }: any) {
+    return {
+      riftChampion,
+    };
+  }
+
+export default connect(mapStateToProps, {
+  requestRiftChampion
+})(RiftChampion);
