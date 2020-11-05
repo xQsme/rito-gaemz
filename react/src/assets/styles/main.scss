@@ -59,8 +59,10 @@ body{
 
 .router-container{
     width: 100%;
-    height: 100%;
     padding: 20px;
+    display: flex;
+    justify-content: center;
+
 }
 
 .tft-insights-container{
@@ -264,6 +266,7 @@ body{
         background-color: $main; // changed the color
     }
   }
+
   
   .scrollbar:first-child{
         right: -1px !important;
