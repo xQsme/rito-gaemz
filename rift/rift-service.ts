@@ -5,6 +5,7 @@ const imgPath = 'http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/';
 
 module.exports  = {
     getUnits,
+    getUnit,
     getHistory,
 }
 
@@ -57,6 +58,58 @@ async function getUnits() {
         return {
             code: 202,
             data: {units: units ? units.data.data : null},
+        }
+        
+    } catch (error) {
+        console.log(error);
+        if(error.response.data.status.status_code === 403) {
+            return {
+                code: 403,
+                data: 'Error',
+            }
+        }
+        if(error.response.data.status.status_code === 404) {
+            return {
+                code: 404,
+                data: 'Error',
+            }
+        }
+        return {
+            code: 400,
+            data: 'Error',
+        }
+    }
+}
+
+async function getUnit(name: string) {
+    try{
+        let unitReturn = null;
+        console.log(name);
+        let unit = await axios.get(`http://ddragon.leagueoflegends.com/cdn/10.22.1/data/en_US/champion/${name}.json`);
+        if (unit && unit.data) {
+            
+            unitReturn = {
+                "name": unit.data.data[name].name,
+                "title": unit.data.data[name].title,
+                "allytips": unit.data.data[name].allytips,
+                "enemytips": unit.data.data[name].enemytips,
+            }
+            
+            
+            // units.data.data.forEach((element:any) => {
+            //     console.log(element);
+            // });
+            
+            //     (unit: { 'image': { path: string, full: string } }) => { // path criado por nós
+            // //     unit.image.path = imgPath + unit.image.full; 
+            // });
+        }
+
+        // http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/Aatrox.png
+        //console.log(units);
+        return {
+            code: 202,
+            data: {unit: unitReturn ? unitReturn : null},
         }
         
     } catch (error) {
