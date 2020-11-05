@@ -21,6 +21,7 @@ app.use(cors());
 
 app.use('/tft', require('./tft/tft-controller'));
 app.use('/summoners', require('./summoners/summoners-controller'));
+app.use('/rift', require('./rift/rift-controller'));
 //Serve react pages
 app.use(express.static(path.join(__dirname, './react/build/')));
 
@@ -29,3 +30,17 @@ app.get('/*', (req: any, res: any) => {
     res.set('Cache-Control', 'no-store');
     res.sendFile(path.join(__dirname, './react/build/index.html'));
 });
+
+//Redirect HTTPS
+if(process.env.NODE_ENV === 'production') {
+    app.enable('trust proxy');
+    app.use (function (req: any, res: any, next: any) {
+            if (req.secure) {
+                // request was via https, so do no special handling
+                next();
+            } else {
+                // request was via http, so redirect to https
+                res.redirect('https://' + req.headers.host + req.url);
+            }
+    });
+}
