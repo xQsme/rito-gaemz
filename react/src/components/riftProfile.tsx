@@ -63,7 +63,7 @@ function RiftProfile(props: RiftProfileProps) {
     <React.Fragment>
       <Search />
       {rift && <RiftSummoner rift={rift} />}
-      {rift && <RiftHistory history={history} />}
+      {history.length !== 0 && <RiftHistory history={history} />}
     </React.Fragment>
   );
 }
