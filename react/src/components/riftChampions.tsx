@@ -44,45 +44,38 @@ function RiftChampions(props: any) {
   // background-image: url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg")
 
   return (
-    <>
-     <div className="hidden-details">
-            Details
-          </div>
-      <div className="rift-champion-container"> ola </div>
     <div className="champion-grid-container">
       {Object.keys(champions).map((key) => (
-          <Link to="rift/champions/Aatrox">
-        
+        <Link to="rift/champions/Aatrox">
+          <div className="hidden-container" key={champions[key].key}>
             <div className="rift-champion-container" key={champions[key].key} style={{backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champions[key].id}_0.jpg")`}}> 
               {/* <div className="container-background-image"  /> */}
               <div className="rift-champion-container-child">
-              
-                <ButtonBase className="rift-champion-button" >
+                <ButtonBase className="rift-champion-button hide" >
                   <img className="champ-img" alt="complex" src={`http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/${champions[key].id}.png`} />
                   {/* <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" /> */}
                 </ButtonBase>
-                        
-              
-                <div className="text-grid">
+                <div className="text-grid hide">
                   <span className="champ-name">
-                      {champions[key].id}
+                      {champions[key].name}
                   </span>
                   <span>
-                    Mage / Bruiser
+                    {champions[key].tags.join(" / ")}
                   </span>
-                  
                 </div>
-                
               </div>
-            
             </div>
-          </Link>
-        
-       
+
+            <div className="hidden-details">
+            <span><h1> {champions[key].name} </h1></span>
+              <span> Details </span>
+              
+            </div>
+
+          </div>
+        </Link>
       ))}
-    </div>
-    </>
-      
+    </div>      
 )
 
 
