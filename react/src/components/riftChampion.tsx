@@ -15,7 +15,7 @@ interface ChampionProps {
 
 type Props = {path: string};
 
-export default function RiftChampion(props: Props) {
+export default function RiftChampion(props: ChampionProps) {
   console.log(props);
 
 

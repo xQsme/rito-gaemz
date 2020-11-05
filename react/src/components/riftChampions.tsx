@@ -51,7 +51,7 @@ function RiftChampions(props: any) {
       <div className="rift-champion-container"> ola </div>
     <div className="champion-grid-container">
       {Object.keys(champions).map((key) => (
-          <Link to="rift/champions/Aatrox">
+          <Link to={`/rift/champions/${key}`}>
         
             <div className="rift-champion-container" key={champions[key].key} style={{backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champions[key].id}_0.jpg")`}}> 
               {/* <div className="container-background-image"  /> */}

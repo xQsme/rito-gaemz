@@ -13,7 +13,8 @@ import ValorantInsights from "./components/valorantInsights";
 import LoRProfile from "./components/lorProfile";
 import LoRInsights from "./components/lorInsights";
 import NavBar from "./components/elements/navbar";
-import { Router, RouteComponentProps } from "@reach/router";
+import { Router } from "@reach/router";
+import Route from "./components/elements/route";
 import { Scrollbars } from "react-custom-scrollbars";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -31,11 +32,6 @@ import {
   LOR_PROFILE_ROUTE,
 } from "./constants/routes";
 
-const RouterPage = (
-  props: { pageComponent: JSX.Element } & RouteComponentProps
-) => {
-  return props.pageComponent;
-};
 export default function App() {
   return (
     <React.Fragment>
@@ -59,40 +55,42 @@ export default function App() {
         )}
       >
         <Router className="router-container">
-          <RouterPage default path={HOME_ROUTE} pageComponent={<Summoners />} />
-          <RouterPage
+          <Route default path={HOME_ROUTE} component={() => <Summoners />} />
+          <Route
             path={TFT_INSIGHTS_ROUTE}
-            pageComponent={<TFTInsights />}
+            component={() => <TFTInsights />}
           />
-          <RouterPage path={TFT_PROFILE_ROUTE} pageComponent={<TFTProfile />} />
-          <RouterPage
+          <Route path={TFT_PROFILE_ROUTE} component={() => <TFTProfile />} />
+          <Route
             path={RIFT_INSIGHTS_ROUTE}
-            pageComponent={<RiftInsights />}
+            component={() => <RiftInsights />}
           />
-          <RouterPage
+          <Route
             path={RIFT_PROFILE_ROUTE}
-            pageComponent={<RiftProfile />}
+            component={() => <RiftProfile />}
           />
-          <RouterPage
+          <Route
             path={RIFT_CHAMPIONS_ROUTE}
-            pageComponent={<RiftChampions />}
+            component={() => <RiftChampions />}
           />
-          <RouterPage
+          <Route
             path={RIFT_CHAMPION_ROUTE}
-            pageComponent={<RiftChampion />}
+            component={({ name }:any) => 
+              <RiftChampion name={name} />
+            }
           />
-          <RouterPage
+          <Route
             path={VALORANT_PROFILE_ROUTE}
-            pageComponent={<ValorantProfile />}
+            component={() => <ValorantProfile />}
           />
-          <RouterPage
+          <Route
             path={VALORANT_INSIGHTS_ROUTE}
-            pageComponent={<ValorantInsights />}
+            component={() => <ValorantInsights />}
           />
-          <RouterPage path={LOR_PROFILE_ROUTE} pageComponent={<LoRProfile />} />
-          <RouterPage
+          <Route path={LOR_PROFILE_ROUTE} component={() => <LoRProfile />} />
+          <Route
             path={LOR_INSIGHTS_ROUTE}
-            pageComponent={<LoRInsights />}
+            component={() => <LoRInsights />}
           />
         </Router>
       </Scrollbars>

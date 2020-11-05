@@ -45,7 +45,7 @@ interface NavProps {
 
 function NavBar(props: NavProps) {
   const { tab } = props.nav;
-  let value = 0;
+  let value = history.location.pathname.includes(RIFT_CHAMPIONS_ROUTE) ? RIFT_CHAMPIONS_TAB : HOME_TAB;
   switch (history.location.pathname) {
     case RIFT_CHAMPIONS_ROUTE:
       value = RIFT_CHAMPIONS_TAB;

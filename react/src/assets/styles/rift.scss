@@ -57,12 +57,16 @@ $text: #FFFFFF;
 
 .champion-grid-container{ 
     display: grid;
-   
     grid-auto-rows: 1fr;
     grid-template-columns: repeat(4, 1fr); 
     grid-column-gap: 20px;
     grid-row-gap: 20px;
     width: 100%;
+
+    a{
+        text-decoration: none;
+        color: $text;
+    }
 
         
     .champion-link {
