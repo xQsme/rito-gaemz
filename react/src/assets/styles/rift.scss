@@ -19,43 +19,25 @@ $background: #222222;
 $secondarybg: #303030;;
 $text: #FFFFFF;
 
-.champ-list-root {
+//riftChampion
+.champion-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    overflow: hidden;
-    background-color: blue;
+    margin: 20px;
+
+    .rift-champion {
+        display: flex;
+        padding: 20px;
+        border-radius: 15px;
+        background-color: $secondarybg;
+
+    }
+
+
+
 }
 
-.champ-img {
-    margin: 10px;
-    width: 100px;
-    height: 100px;
-}
-
-.champ-list-grid-list {
-    width: 200px;
-    height: 150px;
-}
-// .rift-champion-container {
-//     display: flex;
-//     color: white;
-    
-//     // padding: 10px;
-//     background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
-//     background-size: 100%;
-//     background-color: rgb(31, 31, 95);
-//     height: 140px;
-//     width: 240px;
-//     flex-grow: 1;
-// }
-
-.champ-name {
-    font-size: 20px !important;
-    margin-bottom: 10px;
-}
-
-.champion-grid-container{ 
+//riftChampions
+.champion-grid-container { 
     display: grid;
     grid-auto-rows: 1fr;
     grid-template-columns: repeat(5, 1fr); 
@@ -89,12 +71,10 @@ $text: #FFFFFF;
         justify-content: space-evenly;
         width: 100%;
 
-        .container-background {
-            // position: absolute;
-            // top: 0px;
-            // left: 0px;
-            width: 100%;
-            height: 100%;
+        .champ-img {
+            margin: 10px;
+            width: 100px;
+            height: 100px;
         }
     }
 
@@ -114,7 +94,6 @@ $text: #FFFFFF;
         opacity: 1;
         transition: opacity 0.3s linear;
         z-index: 101;
-        
     
         .text-grid {
             background-color: blue;
@@ -127,8 +106,17 @@ $text: #FFFFFF;
             flex-direction: column;
             // position: absolute;
             justify-content: center;
-
             background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) );
+             
+            .champ-name {
+                font-size: 20px !important;
+                margin-bottom: 10px;
+            }
+
+            .champ-tags {
+                font-size: 15px !important;
+            }
+
         }
     }
 
@@ -151,6 +139,7 @@ $text: #FFFFFF;
         top: 50%;
         right: 50%;
         pointer-events: none;
+        width: 100%;
         
     }
 
@@ -176,54 +165,29 @@ $text: #FFFFFF;
     
 }
 
-
-// .champ-img {
-//     padding: 10px;
-//     top: 50%;
-// }
-
-// .paper-root {
-//     // flex-grow: 1;
-//     // width: 100%;
-// }
-
-// .paper-rift-champions {
-//     max-width: 500px;
-//     margin: auto;
-// }
-
-
 @include mq(1500px) {
     .champion-grid-container{ 
-        
-        grid-template-columns: repeat(4, 1fr); 
-
+        grid-template-columns: repeat(4, 1fr);
   }
 }
 
 @include mq(1200px) {
-    .champion-grid-container{ 
-        
-        grid-template-columns: repeat(3, 1fr); 
-
+    .champion-grid-container{
+        grid-template-columns: repeat(3, 1fr);
   }
 }
 
 
 @include mq(900px) {
-    .champion-grid-container{ 
-        
-        grid-template-columns: repeat(2, 1fr); 
-
+    .champion-grid-container{
+        grid-template-columns: repeat(2, 1fr);
   }
 }
 
 
 @include mq(600px) {
-    .champion-grid-container{ 
-        
-        grid-template-columns: repeat(1, 1fr); 
-
+    .champion-grid-container{
+        grid-template-columns: repeat(1, 1fr);
   }
 }
 
