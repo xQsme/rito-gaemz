@@ -10,22 +10,64 @@ export interface Summoner {
   summonerLevel: number;
   riftRankeds: riftRanked[];
   tftRanked: tftRanked[];
+  history: History[];
 }
 
 export interface riftRanked {
-  leagueId: string;
-  queueType: string;
-  tier: string;
-  rank: string;
-  summonerId: string;
-  summonerName: string;
-  leaguePoints: number;
-  wins: number;
-  losses: number;
-  veteran: boolean;
-  inactive: boolean;
-  freshBlood: boolean;
-  hotStreak: boolean;
+  leagueId?: string;
+  queueType?: string;
+  tier?: string;
+  rank?: string;
+  summonerId?: string;
+  summonerName?: string;
+  leaguePoints?: number;
+  wins?: number;
+  losses?: number;
+  veteran?: boolean;
+  inactive?: boolean;
+  freshBlood?: boolean;
+  hotStreak?: boolean;
+}
+
+export interface History {
+  id: string;
+  accountId: string;
+  puuid: string;
+  name: string;
+  profileIconId: number;
+  revisionDate: number;
+  summonerLevel: number;
+  games:Game[];
+}
+
+export interface Game {
+  gameId: string;
+  champion: string;
+  queue: string;
+  win: boolean;
+  kills: number;
+  deaths: number;
+  assists: number;
+  kda: number;
+  cs: number;
+  summoners: number[];
+  champLevel: number;
+  items: number[];
+  duration: string;
+  date:string;
+  queueDetails:QueueDetail[];
+  itemDetails:string[];
+  summonerDetails:SummonerDetail[];
+}
+
+export interface QueueDetail {
+  map:string;
+  description:string;
+}
+
+export interface SummonerDetail {
+  map:string;
+  image:string;
 }
 
 

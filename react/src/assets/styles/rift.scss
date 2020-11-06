@@ -18,3 +18,212 @@ $main: #D53C4E;
 $background: #222222;
 $secondarybg: #303030;;
 $text: #FFFFFF;
+
+.champ-list-root {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    overflow: hidden;
+    background-color: blue;
+}
+
+.champ-img {
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+.champ-list-grid-list {
+    width: 200px;
+    height: 150px;
+}
+// .rift-champion-container {
+//     display: flex;
+//     color: white;
+    
+//     // padding: 10px;
+//     background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+//     background-size: 100%;
+//     background-color: rgb(31, 31, 95);
+//     height: 140px;
+//     width: 240px;
+//     flex-grow: 1;
+// }
+
+.champ-name {
+    font-size: 20px !important;
+    margin-bottom: 10px;
+}
+
+.champion-grid-container{ 
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-template-columns: repeat(5, 1fr); 
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    width: 100%;
+
+    a{
+        text-decoration: none;
+        color: $text;
+    }
+
+        
+    .champion-link {
+        color: inherit;
+    }
+
+    .container-background-image {
+        top: 0;
+        left: 0;
+        width: 400px;
+        height: 400px;
+    }
+
+    .rift-champion-container-child {
+        position: absolute;
+        transform: translate(50%, -50%);
+        top: 50%;
+        right: 50%;
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+
+        .container-background {
+            // position: absolute;
+            // top: 0px;
+            // left: 0px;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+
+    .rift-champion-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+        padding: 20px;
+        background-size: cover;
+        // padding-top: 56.25%;
+        padding-top: 59%;
+        position: relative;
+        height: 0;
+        outline: solid 3px #998c90;
+        opacity: 1;
+        transition: opacity 0.3s linear;
+        z-index: 101;
+        
+    
+        .text-grid {
+            background-color: blue;
+            //    border-radius: 15px;
+            // margin-top: 20px !important;
+            // margin-bottom: 20px !important;
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            flex-direction: column;
+            // position: absolute;
+            justify-content: center;
+
+            background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) );
+        }
+    }
+
+    .hide {
+        transition: opacity 0.3s linear;
+    }
+
+    
+    .rift-champion-container:hover + .hidden-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hidden-details {
+        position: absolute;
+        display: none;
+        transition: opacity 0.3s linear;
+        transform: translate(50%, -50%);
+        top: 50%;
+        right: 50%;
+        pointer-events: none;
+        
+    }
+
+
+
+    .hidden-container {
+        position: relative;
+        z-index: 101;
+    }
+    
+
+    .rift-champion-container:hover {
+        outline-width: 6px; 
+        opacity: 0.3;
+        transition: opacity 0.3s linear;
+       
+        .hide {
+            display: none;
+        }
+    }
+
+   
+    
+}
+
+
+// .champ-img {
+//     padding: 10px;
+//     top: 50%;
+// }
+
+// .paper-root {
+//     // flex-grow: 1;
+//     // width: 100%;
+// }
+
+// .paper-rift-champions {
+//     max-width: 500px;
+//     margin: auto;
+// }
+
+
+@include mq(1500px) {
+    .champion-grid-container{ 
+        
+        grid-template-columns: repeat(4, 1fr); 
+
+  }
+}
+
+@include mq(1200px) {
+    .champion-grid-container{ 
+        
+        grid-template-columns: repeat(3, 1fr); 
+
+  }
+}
+
+
+@include mq(900px) {
+    .champion-grid-container{ 
+        
+        grid-template-columns: repeat(2, 1fr); 
+
+  }
+}
+
+
+@include mq(600px) {
+    .champion-grid-container{ 
+        
+        grid-template-columns: repeat(1, 1fr); 
+
+  }
+}
+

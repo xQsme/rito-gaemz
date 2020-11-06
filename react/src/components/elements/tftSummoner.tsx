@@ -6,8 +6,8 @@ import { TFT_PROFILE_ROUTE } from "../../constants/routes";
 import { toTitleCase } from "../../utils/to_title_case";
 import { setTab } from "../../actions";
 import { connect } from "react-redux";
-
-import type { Summoner } from "../../interfaces";
+import Nope from '@material-ui/icons/CancelOutlined';
+import Check from '@material-ui/icons/CheckCircleOutline';
 
 interface TFTSummonerProps {
   clickable?: boolean;
@@ -18,6 +18,7 @@ interface TFTSummonerProps {
 function TFTSummoner(props: TFTSummonerProps) {
   const { clickable, setTab } = props;
   const { profileIconId, name, summonerLevel, tftRanked } = props.tft;
+  tftRanked[0] = tftRanked[0] ? tftRanked[0] : {};
   const {
     tier,
     rank,
@@ -28,9 +29,9 @@ function TFTSummoner(props: TFTSummonerProps) {
     inactive,
     freshBlood,
     hotStreak,
-  } = tftRanked;
+  } = tftRanked[0];
 
-  let tftRankTier = toTitleCase(tftRanked[0] ? tftRanked[0].tier : "Unranked");
+  let tftRankTier = toTitleCase(tftRanked[0] ? tier : "Unranked");
   let tftRank =
     process.env.PUBLIC_URL +
     "/shared/ranks/Emblem_" +
@@ -59,39 +60,36 @@ function TFTSummoner(props: TFTSummonerProps) {
           </div>
           <span className="summoner-name">{name}</span>
         </div>
-        <div className="summoner-info-container">
-          <span className="label">Summoner Name</span>
-
-          {clickable && (
-            <img className="summoner-type-icon" src={TFT} alt="TFT" />
-          )}
-
-          <div className="tft-rank">
+        {tier && (
+          <>
             <div className="ranked-flex-container">
               <img className="summoner-rank-icon" src={tftRank} alt="Icon" />
-              <span className="label-rank">
+              <span>
                 Rank: {tftRankTier} {rank}
               </span>
-              <span className="label-rank">LP: {leaguePoints}</span>
-              <span className="label-rank">Wins: {wins}</span>
-              <span className="label-rank">Games: {wins + losses}</span>
+              <span>LP: {leaguePoints}</span>
+              <span>Wins: {wins}</span>
+              <span>Games: {wins + losses}</span>
             </div>
-            <div className="ranked-flex-container">
-              <span className="label-rank">
-                Veteran: {veteran ? "Yes" : "No"}
+            <div className="ranked-flex-container ranked-flex-text-container">
+              <span className="icon-text">
+                Veteran: {veteran ? <Check className="green" /> : <Nope className="red" />}
               </span>
-              <span className="label-rank">
-                Inactive: {inactive ? "Yes" : "No"}
+              <span className="icon-text">
+                Inactive: {inactive ? <Check className="green" /> : <Nope className="red" />}
               </span>
-              <span className="label-rank">
-                Fresh Blood: {freshBlood ? "Yes" : "No"}
+              <span className="icon-text">
+                Fresh Blood: {freshBlood ? <Check className="green" /> : <Nope className="red" />}
               </span>
-              <span className="label-rank">
-                Hot Streak: {hotStreak ? "Yes" : "No"}
+              <span className="icon-text">
+                Hot Streak: {hotStreak ? <Check className="green" /> : <Nope className="red" />}
               </span>
             </div>
-          </div>
-        </div>
+          </>
+        )}
+        {clickable && (
+          <img className="summoner-type-icon" src={TFT} alt="TFT" />
+        )}
       </div>
     </div>
   );

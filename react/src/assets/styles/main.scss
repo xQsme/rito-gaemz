@@ -23,6 +23,8 @@ $main: #D53C4E;
 $background: #222222;
 $secondarybg: #303030;;
 $text: #FFFFFF;
+$red: #EA453F;
+$green: #53AD56;
 
 *{
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
@@ -59,8 +61,11 @@ body{
 
 .router-container{
     width: 100%;
-    height: 100%;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }
 
 .tft-insights-container{
@@ -264,13 +269,13 @@ body{
         background-color: $main; // changed the color
     }
   }
+
   
-  .scrollbar{
-    div:first-of-type{
+  .scrollbar:first-child{
         right: -1px !important;
         margin: auto;
     }
-  }
+  
   
   .scrollbar:hover{
     .track-horizontal{
@@ -347,6 +352,7 @@ td{
 
 .search-container{
     display: flex;
+    margin: 10px;
 
     .search-bar{
         display: flex;
@@ -384,19 +390,28 @@ td{
 
 .summoner-container{
     display: flex;
-    margin: 20px;
+    margin: 10px;
 
     .rift-summoner, .tft-summoner, .lor-summoner{
         display: flex;
         padding: 20px;
         border-radius: 15px;
         background-color: $secondarybg;
+        position: relative;
+
+        .summoner-type-icon{
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+        }
     
         .summoner-icon-name{
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-right: 20px;
+            justify-content: center;
         }
 
         .summoner-icon-container{
@@ -438,14 +453,6 @@ td{
             span:nth-of-type(even) {
                 margin-bottom: 5px;
             }
-
-            .summoner-type-icon{
-                bottom: 0;
-                right: 0;
-                width: 50px;
-                height: 50px;
-                position: absolute;
-            }
             .rank-container{
                 margin-top: 10px;
                 display: block;
@@ -469,15 +476,50 @@ td{
                     height: 50px;
                 }
             }
-
-            
-
         }
+    }
+
+    .clickable:last-child{
+        padding-bottom: 70px;
+    }
+
+    .ranked-flex-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 20px;
+    
+        img{
+            max-width: 100px;
+        }
+
+        .icon-text{
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+
+            svg{
+                margin-left: 5px;
+            }
+        }
+    }
+
+    .ranked-flex-text-container{
+        align-items: flex-end;
     }
 }
 
 .capitalized{
     text-transform: capitalize;
+}
+
+.red{
+    color: $red;
+}
+
+.green {
+    color: $green;
 }
 
 
@@ -495,3 +537,4 @@ td{
         }
     }
   }
+
