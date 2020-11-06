@@ -18,7 +18,7 @@ function TFTProfile(props:TFTProfileProps) {
     <React.Fragment>
       <Search />
       {tft && <TFTSummoner tft={tft} />}
-      {tft && tft.tftRanked.length > 0 && <TFTDetails tftRanked={tft.tftRanked[0]} />}
+      {/* {tft && tft.tftRanked.length > 0 && <TFTDetails tftRanked={tft.tftRanked[0]} />} */}
     </React.Fragment>
   );
 }

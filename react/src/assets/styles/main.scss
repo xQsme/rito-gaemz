@@ -392,12 +392,19 @@ td{
         border-radius: 15px;
         background-color: $secondarybg;
     
+        .summoner-icon-name{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 20px;
+        }
+
         .summoner-icon-container{
             position: relative;
-            margin-right: 20px;
             
             .summoner-icon{
                 max-width: 150px;
+                border: 1px solid darkgray;
             }
         
             .summoner-level{
