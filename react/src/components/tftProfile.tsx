@@ -2,7 +2,6 @@ import React from "react";
 import Search from "./elements/search";
 import { connect } from "react-redux";
 import TFTSummoner from "./elements/tftSummoner";
-import TFTDetails from "./elements/tftDetails";
 
 import type { SearchReducer } from '../interfaces';
 
@@ -18,7 +17,6 @@ function TFTProfile(props:TFTProfileProps) {
     <React.Fragment>
       <Search />
       {tft && <TFTSummoner tft={tft} />}
-      {/* {tft && tft.tftRanked.length > 0 && <TFTDetails tftRanked={tft.tftRanked[0]} />} */}
     </React.Fragment>
   );
 }
