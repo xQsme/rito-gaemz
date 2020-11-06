@@ -32,10 +32,11 @@ function LoRSummoner(props: LoRSummonerProps) {
           <span className="summoner-name">{gameName}</span>
           <span className="label">Tag</span>
           <span className="summoner-name">#{tagLine}</span>
-          {clickable && (
+
+        </div>
+        {clickable && (
             <img className="summoner-type-icon" src={LoR} alt="LoR" />
           )}
-        </div>
       </div>
     </div>
   );

@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import ButtonBase from "@material-ui/core/ButtonBase";
-import { Router, Link } from "@reach/router";
+import { /*Router,*/ Link } from "@reach/router";
 // import { toast } from "react-toastify";
 // import RiftChampion from "./riftChampion";
 import { requestRiftChampions } from "../actions";
 
-import { RIFT_CHAMPION_ROUTE } from "../constants/routes";
-import { Redirect } from "react-router-dom";
+// import { RIFT_CHAMPION_ROUTE } from "../constants/routes";
+// import { Redirect } from "react-router-dom";
 
 function RiftChampions(props: any) {
   // const [spacing, setSpacing] = React.useState<GridSpacing>(2);

@@ -18,12 +18,18 @@ interface RiftSummonerProps {
 function RiftSummoner(props: RiftSummonerProps) {
   const { clickable, setTab } = props;
   const { profileIconId, name, summonerLevel, riftRankeds } = props.rift;
-  let soloRankTier = toTitleCase(riftRankeds[1].tier);
-  let flexRankTier = toTitleCase(riftRankeds[0].tier);
-  
-  let soloRank = process.env.PUBLIC_URL + '/shared/ranks/Emblem_' + soloRankTier + '.png';
-  let flexRank = process.env.PUBLIC_URL + '/shared/ranks/Emblem_' + flexRankTier + '.png';
-  
+
+  riftRankeds[0] = riftRankeds[0] ? riftRankeds[0] : {};
+  riftRankeds[1] = riftRankeds[1] ? riftRankeds[1] : {};
+
+  let soloRankTier = toTitleCase(riftRankeds[0].tier);
+  let flexRankTier = toTitleCase(riftRankeds[1].tier);
+
+  let soloRank =
+    process.env.PUBLIC_URL + "/shared/ranks/Emblem_" + soloRankTier + ".png";
+  let flexRank =
+    process.env.PUBLIC_URL + "/shared/ranks/Emblem_" + flexRankTier + ".png";
+
   return (
     <div className="summoner-container">
       <div
@@ -35,35 +41,36 @@ function RiftSummoner(props: RiftSummonerProps) {
           }
         }}
       >
-        <div className="summoner-icon-container">
-          <img
-            className="summoner-icon"
-            src={server + "/shared/profileicon/" + profileIconId + ".png"}
-            alt="summoner-icon"
-          />
-          <span className="summoner-level">{summonerLevel}</span>
-        </div>
-        <div className="summoner-info-container">
-          <span className="label">Summoner Name</span>
-          <span className="summoner-name">{name}</span>
-          
-          <div className="rank-container">
-            <div className="rank">
-              <span className="label-rank">Solo: {soloRankTier} {riftRankeds[1].rank}</span>
-              <img className="summoner-rank-icon" src={soloRank} alt="Rift" />
-            </div>
-            <div className="rank">
-              <span className="label-rank">Flex: {flexRankTier} {riftRankeds[0].rank}</span>
-              <img className="summoner-rank-icon" src={flexRank} alt="Rift" />
-            </div>
+        <div className="summoner-icon-name">
+          <div className="summoner-icon-container">
+            <img
+              className="summoner-icon"
+              src={server + "/shared/profileicon/" + profileIconId + ".png"}
+              alt="summoner-icon"
+            />
+            <span className="summoner-level">{summonerLevel}</span>
           </div>
-
-          {clickable && (
-            <img className="summoner-type-icon" src={League2} alt="Rift" />
-          )}
-          
-
+          <span className="summoner-name">{name}</span>
         </div>
+        {Object.keys(riftRankeds[0]).length > 0 && (
+          <div className="ranked-flex-container">
+            <img className="summoner-rank-icon" src={soloRank} alt="Icon" />
+            <span className="label-rank">
+              Solo: {soloRankTier} {riftRankeds[0].rank}
+            </span>
+          </div>
+        )}
+        {Object.keys(riftRankeds[1]).length > 0 && (
+          <div className="ranked-flex-container">
+            <img className="summoner-rank-icon" src={flexRank} alt="Icon" />
+            <span className="label-rank">
+              Flex: {flexRankTier} {riftRankeds[1].rank}
+            </span>
+          </div>
+        )}
+        {clickable && (
+          <img className="summoner-type-icon" src={League2} alt="Rift" />
+        )}
       </div>
     </div>
   );
