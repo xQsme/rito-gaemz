@@ -3,7 +3,7 @@ const router = express.Router();
 const tftService = require('./tft-service');
 
 router.get('/units/:server', getUnits);
-// router.get('/profile/:server/:summonerId', getProfile);
+router.get('/history/:server/:summonerId', getHistory);
 
 module.exports = router;
 
@@ -26,11 +26,11 @@ function getUnits(req: any, res: any, next: any) {
     .catch((err: object) => next(err));
 }
 
-function getProfile(req: any, res: any, next: any) {
-    console.log('invoked tft.getProfile');
+function getHistory(req: any, res: any, next: any) {
+    console.log('invoked tft.getHistory');
     const server = parseInt(req.params.server);
     const summonerId = req.params.summonerId;
-    tftService.getProfile(server, summonerId)
+    tftService.getHistory(server, summonerId)
     .then(
         (body: Body) => {
             res.status(body.code).json(body.data);

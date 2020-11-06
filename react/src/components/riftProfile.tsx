@@ -23,7 +23,6 @@ function RiftProfile(props: RiftProfileProps) {
 
   //Component Did Mount
   React.useEffect(() => {
-
     //rift && mastery.length === 0 && requestMastery(region, rift.id);
     rift && history.length === 0 && requestHistory(region, rift.name);
     // eslint-disable-next-line react-hooks/exhaustive-deps

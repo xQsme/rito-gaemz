@@ -1,9 +1,9 @@
 import { REHYDRATE } from "redux-persist";
 
 import {
-  FAIL_RETURN_TFT_PROFILE,
-  RETURN_TFT_PROFILE,
-  START_TFT_PROFILE_REQUEST,
+  FAIL_RETURN_TFT_HISTORY,
+  RETURN_TFT_HISTORY,
+  START_TFT_HISTORY_REQUEST,
   RESET_PROFILES,
 } from "../actions/types";
 
@@ -12,8 +12,7 @@ import type { TFTProfileReducer } from '../interfaces';
 const INITIAL_STATE: TFTProfileReducer = {
   requested: false,
   error: false,
-  rank: "",
-  tier: "",
+  history: [],
 };
 
 export default function (state = INITIAL_STATE, { type, payload }:any):TFTProfileReducer {
@@ -29,20 +28,20 @@ export default function (state = INITIAL_STATE, { type, payload }:any):TFTProfil
       return {
         ...INITIAL_STATE,
       };
-    case START_TFT_PROFILE_REQUEST:
+    case START_TFT_HISTORY_REQUEST:
       return {
         ...state,
         requested: false,
         error: false,
       };
-    case RETURN_TFT_PROFILE:
+    case RETURN_TFT_HISTORY:
       return {
         ...state,
-        ...payload,
+        history: payload,
         requested: true,
         error: false,
       };
-    case FAIL_RETURN_TFT_PROFILE:
+    case FAIL_RETURN_TFT_HISTORY:
       return {
         ...state,
         error: true,
