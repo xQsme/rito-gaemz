@@ -22,7 +22,12 @@ export interface TFTInsightsReducer extends BaseReducer, TFTInsightsResult {
   region: number;
 }
 
-export type TFTProfileResult = TFTParticipant[];
+export type TFTProfileResult = TFTMatch[];
+
+export interface TFTMatch {
+  id: number,
+  player: TFTParticipant,
+};
 
 export interface TFTProfileReducer extends BaseReducer {
   history: TFTProfileResult,
@@ -42,6 +47,22 @@ export interface TFTParticipant {
   puuid: string,
   time_eliminated: number,
   total_damage_to_players: number,
-  traits: any[],
-  units: any[],
+  traits: TFTTrait[],
+  units: TFTUnit[],
+}
+
+export interface TFTTrait {
+  name: string,
+  num_units: number,
+  style: number
+  tier_current: number,
+  tier_total: number,
+}
+
+export interface TFTUnit {
+  character_id: string
+  name: string
+  items: number[],
+  rarity: number,
+  tier: number
 }

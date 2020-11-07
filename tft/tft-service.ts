@@ -231,7 +231,7 @@ async function getHistory(serverNumber: number, puuid: string) {
         for(let i = 0; i < results.length; i++) {
             for(let j = 0; j < results[i].info.participants.length; j++) {
                 if(results[i].info.participants[j].puuid === puuid) {
-                    history.push(results[i].info.participants[j]);
+                    history.push({id: results[i].metadata.match_id, player: results[i].info.participants[j]});
                 }
             }
         }

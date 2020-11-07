@@ -109,4 +109,5 @@ export interface SearchResult {
 
 export interface SearchReducer extends BaseReducer, SearchResult {
   region: number;
+  requesting: boolean,
 }

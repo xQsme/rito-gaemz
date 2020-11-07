@@ -1,11 +1,11 @@
 import React from "react";
 import { setTab } from "../../actions";
 import { connect } from "react-redux";
-import { TFTParticipant } from "../../interfaces";
+import { TFTParticipant, TFTMatch, TFTUnit } from "../../interfaces";
 import Star from '@material-ui/icons/StarRate';
 
 interface TFTHistoryProps {
-  history: TFTParticipant[];
+  history: TFTMatch[];
 }
 
 function TFTHistory(props: TFTHistoryProps) {
@@ -13,19 +13,20 @@ function TFTHistory(props: TFTHistoryProps) {
 
   return (
     <div className="tft-history">
-      {history.map((match: TFTParticipant) => {
+      {history.map((match: TFTMatch) => {
+        const { player } = match;
         return (
-          <div className={`tft-match ${match.placement === 1 ? 'win' : match.placement === 8 ? 'loss' : '' }`}>
+          <div key={match.id} className={`tft-match ${player.placement === 1 ? 'win' : player.placement === 8 ? 'loss' : '' }`}>
             <div className="tft-placement-div">
-              <span className="placement">#{match.placement}</span>
+              <span className="placement">#{player.placement}</span>
             </div>
             <div className="tft-units-div">
-              {match.units.map(unit => {
+              {player.units.map((unit:TFTUnit, index:number) => {
                 return (
-                  <div className={`unit rarity${unit.rarity}`}>
+                  <div key={index} className={`unit rarity${unit.rarity}`}>
                     <div className="star-level">
-                    {[...Array(unit.tier)].map(e => {
-                      return (<Star />)
+                    {[...Array(unit.tier)].map((e:any, index:number) => {
+                      return (<Star key={index}/>)
                     })}
                     </div>
                     <img src={'/tft/champions/' + unit.character_id + '.png'} />

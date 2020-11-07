@@ -13,8 +13,9 @@ function LoRProfile(props:LoRProfileProps) {
   const { lor } = props.search;
   return (
     <React.Fragment>
-      <Search />
-      {lor && <LoRSummoner lor={lor} />}
+      <Search>
+        {lor && <LoRSummoner lor={lor} />}
+      </Search>
     </React.Fragment>
   );
 }
