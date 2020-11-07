@@ -16,21 +16,111 @@
 
 $main: #D53C4E;
 $background: #222222;
-$secondarybg: #303030;;
+$secondarybg: #303030;
 $text: #FFFFFF;
 
 //riftChampion
 .champion-container {
-    display: flex;
     margin: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: $secondarybg;
+    max-width: 1200px;
+    width: 100%;
 
-    .rift-champion {
-        display: flex;
-        padding: 20px;
-        border-radius: 15px;
-        background-color: $secondarybg;
+    .champion-details-container {
+        font-size: inherit;
+      
+        .background-image {
+            // background-image: url('http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg');
+            // background-size: cover;
+            // display: block;
+            // filter: blur(5px);
+            // -webkit-filter: blur(5px);
+            // height: 800px;
+            left: 0;
+            // position: fixed;
+            // right: 0;
+            // z-index: 3;
+        }
 
+        .details-container {
+            display: flex;
+            flex-direction: column;
+
+                
+            .details-top {
+                // background: rgba(255, 255, 255, 0.35);
+                // border-radius: 3px;
+                // box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+                // font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+                // top: 10px;
+                // left: 0;
+                // position: fixed;
+                // margin-left: 20px;
+                // margin-right: 20px;
+                // right: 0;
+                // z-index: 2;
+                // padding: 0 10px;
+                display: flex;
+                flex-direction: row;
+                padding: 50px;
+
+                .champion-avatar {
+                    
+                    img {
+                        width: 150px;
+                        height: 150px;
+                    }
+                }
+
+                .champion-name-title-container {
+                    display: flex;
+                    flex-direction: column;
+                    padding-left: 50px;
+                    text-align: center;
+                    padding-top: 40px;
+
+                    .champion-name {
+                        font-size: 2em;
+                        font-weight: bold;
+                    }    
+                    .champion-title {
+                        margin-top: 10px;
+                        font-size: 1.20em;
+                        // font-weight: bold;
+                        font-style: italic;
+                        
+                    }
+                }
+                
+            }
+
+            .details-bottom {
+                display: flex;
+                flex-direction: row;
+                // justify-content: center;
+            }
+
+        }
+
+      
+        
     }
+    
+   
+    .details-container {
+        z-index: 6;
+    }
+
+    .skins-list-container {
+        width: 100%;
+        border-top-style: solid;
+        border-top-width: 5px;
+        border-color: #c9c9c9;
+        
+    }
+    
 
 
 

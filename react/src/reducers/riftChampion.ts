@@ -12,8 +12,18 @@ import type { RiftChampionReducer } from '../interfaces';
 const INITIAL_STATE: RiftChampionReducer = {
   requested: false,
   error: false,
-  champion: {},
+  champion: {}
+  // unit: {
+  //   name: "",
+  //   title: "",
+  //   allytips: [],
+  //   enemytips: [],
+  //   image: "",
+  //   skins: [],
+  // } ,
 };
+
+
 
 export default function (state = INITIAL_STATE, { type, payload }:any):RiftChampionReducer {
   switch (type) {
@@ -44,14 +54,9 @@ export default function (state = INITIAL_STATE, { type, payload }:any):RiftChamp
     case RETURN_RIFT_SINGLE_CHAMPION:
        return {
         ...state,
-        champion: payload, 
+        champion: payload.unit, 
         requested: true,
         error: false,
-      };
-    case FAIL_RETURN_RIFT_SINGLE_CHAMPION:
-      return {
-        ...state,
-        error: true,
       };
    
     default:
