@@ -3,7 +3,7 @@ import Search from "./elements/search";
 import { connect } from "react-redux";
 import RiftSummoner from "./elements/riftSummoner";
 import RiftHistory from "./elements/riftHistory";
-import { toast } from "react-toastify";
+import toast from "../utils/toast";
 
 import type { SearchReducer } from '../interfaces';
 
@@ -23,7 +23,6 @@ function RiftProfile(props: RiftProfileProps) {
 
   //Component Did Mount
   React.useEffect(() => {
-
     //rift && mastery.length === 0 && requestMastery(region, rift.id);
     rift && history.length === 0 && requestHistory(region, rift.name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -33,36 +32,22 @@ function RiftProfile(props: RiftProfileProps) {
     const result = await props.requestRiftMastery(region, summonerId);
 
     if (result) {
-      toast(result, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast(result);
     }
   };
   const requestHistory = async (region: number, name: string) => {
     const result = await props.requestRiftHistory(region, name);
     if (result) {
-      toast(result, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast(result);
     }
   };
 
   return (
     <React.Fragment>
-      <Search />
-      {rift && <RiftSummoner rift={rift} />}
+      <Search>
+        {rift && <RiftSummoner rift={rift} />}
+      </Search>
+      
       {history.length !== 0 && <RiftHistory history={history} />}
     </React.Fragment>
   );
