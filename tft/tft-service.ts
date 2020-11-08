@@ -52,7 +52,6 @@ async function getUnits(serverNumber: number) {
 
         //Retrieve the best challenger players
         let response = await axios.get('https://' + server + '/tft/league/v1/challenger?api_key=' + key);
-        console.log('https://' + server + '/tft/league/v1/challenger?api_key=' + key)
 
         const challengers = response.data.entries;
         challengers.sort((a: any,b: any) => {

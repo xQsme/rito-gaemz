@@ -99,14 +99,25 @@ $yellow: #FD9C19;
             width: 100%;
 
             .unit{
-                display: inline-block;
+                display: inline-flex;
                 flex-direction: column;
                 align-items: center;
                 margin: 0 2px;
 
-                img {
+                .unit-icon {
                     border: 2px solid $secondarybg;
                     width: 55px;
+                }
+
+                .unit-items{
+                    display: flex;
+                    justify-content: center;
+
+                    .item-icon{
+                        width: 15px;
+                        margin: 1px 2px;
+                        border: 1px solid $light;
+                    }
                 }
 
                 .star-level{
@@ -124,7 +135,7 @@ $yellow: #FD9C19;
                     color: $gray;
                 }
 
-                img{
+                .unit-icon{
                     border-color: $gray;
                 }
             }
@@ -134,7 +145,7 @@ $yellow: #FD9C19;
                     color: $green;
                 }
 
-                img{
+                .unit-icon{
                     border-color: $green;
                 }
             }
@@ -144,7 +155,7 @@ $yellow: #FD9C19;
                     color: $blue;
                 }
 
-                img{
+                .unit-icon{
                     border-color: $blue;
                 }
             }
@@ -154,7 +165,7 @@ $yellow: #FD9C19;
                     color: $purple;
                 }
 
-                img{
+                .unit-icon{
                     border-color: $purple;
                 }
             }
@@ -164,7 +175,7 @@ $yellow: #FD9C19;
                     color: $yellow;
                 }
 
-                img{
+                .unit-icon{
                     border-color: $yellow;
                 }
             }
@@ -181,5 +192,29 @@ $yellow: #FD9C19;
 
     .loss {
         border-left: 10px solid $loss;
+    }
+}
+
+@include mq(650px) {
+    .tft-match{
+        display: grid !important;
+        grid-template-columns: repeat(2, auto);
+        grid-column-gap: 10px;
+    }
+
+    .tft-traits-div{
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+    }
+
+    .tft-units-div{
+        order: 2;
+        grid-column: auto / span 2;
+        display: grid;
+        grid-template-columns: repeat(4, auto);
+    }
+
+    .ranked-flex-container{
+        margin: 0 !important;
     }
 }
