@@ -61,8 +61,8 @@ function TFTHistory(props: TFTHistoryProps) {
                   return(
                     <div className="trait-container tooltip" key={trait.name}>
                       <img src={'/tft/traits/bg' + trait.style + '.png'} className="trait-background"/>
-                      <img src={'/tft/traits/' + trait.name.replace('Set4_', '') + '.svg'} className="trait-icon"/>
-                      <span className="tooltiptext">{trait.name.replace('Set4_', '')}</span>
+                      <img src={'/tft/traits/' + trait.name.replace('Set4_', '').replace('Boss', 'theboss') + '.svg'} className="trait-icon"/>
+                      <span className="tooltiptext">{trait.name.replace('Set4_', '').replace('Boss', 'The Boss')}</span>
                     </div>
                   )
                 }
