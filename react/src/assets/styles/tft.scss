@@ -54,6 +54,8 @@ $yellow: #FD9C19;
         background-color: $secondarybg;
         border: 1px solid $light;
         border-left: 10px solid $light;
+        max-width: 1200px;
+        width: 100%;
 
         .tft-placement-div{
             display: flex;
