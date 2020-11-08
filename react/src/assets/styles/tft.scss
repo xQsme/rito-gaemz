@@ -18,7 +18,14 @@ $main: #D53C4E;
 $background: #222222;
 $secondarybg: #303030;;
 $text: #FFFFFF;
-
+$loss: #EA453F33;
+$win: #53AD5633;
+$average: #FFFFFF33;
+$gray: #CCCCCC;
+$green:  #53AD56;
+$blue: #0075A1;
+$purple: #7161ef;
+$yellow: #FD9C19;
 
     
 .ranked-flex-container{
@@ -34,4 +41,103 @@ $text: #FFFFFF;
 
 .ranked-flex-container:last-of-type{
     margin-left: 50px;
+}
+
+.tft-history {
+    border-radius: 20px;
+    background-color: $secondarybg;
+    padding: 20px;
+
+    .tft-match{
+        margin-bottom: 20px;
+        padding: 20px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: $average;
+
+        .placement{
+            font-size: 20px;
+        }
+
+        .tft-units-div{
+            display: flex;
+
+            .unit{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 0 2px;
+
+                img {
+                    border: 2px solid $secondarybg;
+                    width: 55px;
+                }
+
+                .star-level{
+                    svg{
+                        font-size: 20px;
+                    }
+                }
+            }
+
+            .rarity0 {
+                svg{
+                    color: $gray;
+                }
+
+                img{
+                    border-color: $gray;
+                }
+            }
+
+            .rarity1 {
+                svg{
+                    color: $green;
+                }
+
+                img{
+                    border-color: $green;
+                }
+            }
+
+            .rarity2 {
+                svg{
+                    color: $blue;
+                }
+
+                img{
+                    border-color: $blue;
+                }
+            }
+
+            .rarity3 {
+                svg{
+                    color: $purple;
+                }
+
+                img{
+                    border-color: $purple;
+                }
+            }
+
+            .rarity4 {
+                svg{
+                    color: $yellow;
+                }
+
+                img{
+                    border-color: $yellow;
+                }
+            }
+        }
+    }
+
+    .win {
+        background-color: $win;
+    }
+
+    .loss {
+        background-color: $loss;
+    }
 }

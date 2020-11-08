@@ -4,33 +4,25 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import SpecialTable from "./elements/special_table";
 import Button from "@material-ui/core/Button";
-import { toast } from "react-toastify";
+import toast from "../utils/toast";
 import { requestInsights, changeTFTInsightsRegion } from "../actions";
 
-import type { TFTInsightsReducer } from '../interfaces';
+import type { TFTInsightsReducer } from "../interfaces";
+import ErrorLoader from "./elements/errorLoader";
 
 interface TFTInsightsProps {
-  tftInsights:TFTInsightsReducer;
-  requestInsights:(region:number) => Promise<string>;
-  changeTFTInsightsRegion:(region:number) => void;
+  tftInsights: TFTInsightsReducer;
+  requestInsights: (region: number) => Promise<string>;
+  changeTFTInsightsRegion: (region: number) => void;
 }
 
-
-function TFTInsights(props:TFTInsightsProps) {
+function TFTInsights(props: TFTInsightsProps) {
   const { requested, units, totalMatches, region, error } = props.tftInsights;
 
   const requestUnits = async (region: number) => {
     const result = await props.requestInsights(region);
     if (result) {
-      toast(result, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast(result);
     }
   };
 
@@ -58,56 +50,23 @@ function TFTInsights(props:TFTInsightsProps) {
         <Tab label="NA" />
         <Tab label="KR" />
       </Tabs>
-      {error ? (
-        <div className="full-width">
-          <Button
-            className="btn-main retry-button"
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              requestUnits(region);
-            }}
-          >
-            Retry Request
-          </Button>
+      <ErrorLoader error={error} loader={!requested} request={() => requestUnits(region)}>
+        <React.Fragment>
+          <SpecialTable
+            rows={units}
+            headers={["Unit", "1st Place", "Top 4", "Items"]}
+            elements={["unit", "win", "top", "items"]}
+            primaryKey={"Unit"}
+            orderCol="1st Place"
+            orderDir="desc"
+            rowCount={15}
+          />
           <p className="note">
-            Request limit reached, please wait a bit before retrying.
+            Data recovered from {totalMatches} of the latest matches of the top
+            Challenger players of the selected region.
           </p>
-        </div>
-      ) : (
-        <>
-          {!requested ? (
-            <div className="center">
-              <div className="lds-roller">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-            </div>
-          ) : (
-            <>
-              <SpecialTable
-                rows={units}
-                headers={["Unit", "1st Place", "Top 4", "Items"]}
-                elements={["unit", "win", "top", "items"]}
-                primaryKey={"Unit"}
-                orderCol="1st Place"
-                orderDir="desc"
-                rowCount={15}
-              />
-              <p className="note">
-                Data recovered from {totalMatches} of the latest matches of the
-                top Challenger players of the selected region.
-              </p>
-            </>
-          )}
-        </>
-      )}
+        </React.Fragment>
+      </ErrorLoader>
     </div>
   );
 }

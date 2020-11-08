@@ -7,7 +7,7 @@ const { key } = require('../secretconfig');
 
 module.exports  = {
     getUnits,
-   // getProfile,
+    getHistory,
 }
 
 function getServer(serverNumber: number) {
@@ -214,13 +214,30 @@ function mergeUnitsMatrix(units: UnitObject[]){
     return newUnits;
 }
 
-async function getProfile(serverNumber: number, summonerId: string) {
-    const server = getServer(serverNumber);
+async function getHistory(serverNumber: number, puuid: string) {
+    const region = getRegion(serverNumber);
     try{
-        let response = await axios.get('https://' + server + '/tft/league/v1/entries/by-summoner/' + summonerId + '?api_key=' + key);
+        let response = await axios.get('https://' + region + '/tft/match/v1/matches/by-puuid/' + puuid + '/ids?count=10&api_key=' + key);
+        const promises:Promise<any>[] = [];
+        response.data.forEach((matchId:string) => {
+            promises.push(axios.get('https://' + region + '/tft/match/v1/matches/' + matchId + '?api_key=' + key).then((response:any) => { 
+                return new Promise<any>(async (resolve, reject) => {
+                    resolve(response.data);
+                });
+            }));
+        });
+        const results = await Promise.all(promises);
+        const history:any[] = [];
+        for(let i = 0; i < results.length; i++) {
+            for(let j = 0; j < results[i].info.participants.length; j++) {
+                if(results[i].info.participants[j].puuid === puuid) {
+                    history.push({id: results[i].metadata.match_id, player: results[i].info.participants[j]});
+                }
+            }
+        }
         return {
             code: 202,
-            data: response.data.length > 0 ? response.data[0] : {tier: 'Unranked'},
+            data: history,
         }
     } catch (error) {
         console.log(error);
