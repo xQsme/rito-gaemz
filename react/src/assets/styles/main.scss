@@ -71,6 +71,7 @@ body {
 .tft-insights-container {
   max-width: 480px;
   padding: 5px;
+  width: 100%;
 }
 
 .nav {
@@ -532,7 +533,7 @@ td {
 }
 
 .tooltip .tooltiptext {
-  visibility: hidden;
+  display: none;
   min-width: 120px;
   background-color: $background;
   color: #fff;
@@ -561,7 +562,7 @@ td {
 }
 
 .tooltip:hover .tooltiptext {
-  visibility: visible;
+  display: block;
   opacity: 1;
 }
 

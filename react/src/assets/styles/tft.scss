@@ -195,6 +195,10 @@ $yellow: #FD9C19;
     }
 }
 
+.MuiTableContainer-root{
+    overflow-x: visible !important;
+}
+
 @include mq(650px) {
     .tft-match{
         display: grid !important;
@@ -216,5 +220,9 @@ $yellow: #FD9C19;
 
     .ranked-flex-container{
         margin: 0 !important;
+    }
+
+    .MuiTableContainer-root{
+        overflow-x: auto !important;
     }
 }
