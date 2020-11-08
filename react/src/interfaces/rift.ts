@@ -42,6 +42,7 @@ export interface RiftChampionResult {
 
 export interface RiftChampionReducer extends BaseReducer 
 {
+    // champion: SingleRiftChampion,
     champion:{
         [key: string]: SingleRiftChampion,
     },

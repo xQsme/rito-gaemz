@@ -12,15 +12,7 @@ import type { RiftChampionReducer } from '../interfaces';
 const INITIAL_STATE: RiftChampionReducer = {
   requested: false,
   error: false,
-  champion: {}
-  // unit: {
-  //   name: "",
-  //   title: "",
-  //   allytips: [],
-  //   enemytips: [],
-  //   image: "",
-  //   skins: [],
-  // } ,
+  champion: {} ,
 };
 
 
