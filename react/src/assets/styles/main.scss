@@ -352,37 +352,35 @@ td {
   margin-top: 20px !important;
 }
 
-.search-container {
+.search-bar {
   display: flex;
-  margin: 10px;
+  padding: 25px;
+  background-color: $secondarybg;
+  border-radius: 15px;
+  //max-width: 350px;
+  margin: 0 10px 10px 10px;
+  width: 100%;
 
-  .search-bar {
-    display: flex;
-    padding: 25px;
-    background-color: $secondarybg;
-    border-radius: 15px;
+  .region-dropdown {
+    margin-left: 20px;
+  }
 
-    .region-dropdown {
-      margin-left: 20px;
+  .input {
+    margin-top: 7px;
+    border-radius: 20px;
+    padding-left: 10px;
+    background-color: $background;
+
+    input {
+      padding: 10px 10px 5px 10px;
+      font-weight: normal;
     }
 
-    .input {
-      margin-top: 7px;
-      border-radius: 20px;
-      padding-left: 10px;
-      background-color: $background;
-
-      input {
-        padding: 10px 10px 5px 10px;
-        font-weight: normal;
-      }
-
-      .MuiInput-underline,
-      .MuiInput-underline::before,
-      .MuiInput-underline::after {
-        border-bottom: none;
-        color: $text;
-      }
+    .MuiInput-underline,
+    .MuiInput-underline::before,
+    .MuiInput-underline::after {
+      border-bottom: none;
+      color: $text;
     }
   }
 }
@@ -579,7 +577,7 @@ td {
     }
   }
 
-  .tft-summoner {
+  .tft-summoner, .rift-summoner, .lor-summoner {
     flex-direction: column;
   }
 }

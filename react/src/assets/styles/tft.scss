@@ -54,6 +54,8 @@ $yellow: #FD9C19;
         background-color: $secondarybg;
         border: 1px solid $light;
         border-left: 10px solid $light;
+        max-width: 1200px;
+        width: 100%;
 
         .tft-placement-div{
             display: flex;
@@ -95,7 +97,7 @@ $yellow: #FD9C19;
         }
 
         .tft-units-div{
-            max-width: 560px;
+            max-width: 540px;
             width: 100%;
 
             .unit{
@@ -124,7 +126,7 @@ $yellow: #FD9C19;
                     display: flex;
                     justify-content: center;
                     svg{
-                        font-size: 18px;
+                        font-size: 17px;
                         margin: 0;
                     }
                 }

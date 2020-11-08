@@ -207,7 +207,6 @@ function mergeUnitsMatrix(units: UnitObject[]){
                     }
                 }
             }
-                
         }
     }
     return newUnits;
