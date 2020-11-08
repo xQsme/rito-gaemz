@@ -40,12 +40,13 @@ export interface RiftChampionResult {
     }
 }
 
-export interface RiftChampionReducer extends BaseReducer 
+export interface RiftChampionReducer extends BaseReducer, SingleRiftChampion
 {
     // champion: SingleRiftChampion,
-    champion:{
-        [key: string]: SingleRiftChampion,
-    },
+    // champion:{
+    //     [key: string]: SingleRiftChampion,
+    //     // [key: string]: any,
+    // },
 }
 
 // TODO resolver com o pedro e remover o comentado abaixo

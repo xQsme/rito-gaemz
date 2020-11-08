@@ -4,7 +4,7 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import { Link } from "@reach/router";
 // import { toast } from "react-toastify";
 // import RiftChampion from "./riftChampion";
-import { requestRiftChampions } from "../actions";
+import { requestRiftChampions, resetRiftChampion } from "../actions";
 
 function RiftChampions(props: any) {
   const { champions } = props.riftChampions;
@@ -20,7 +20,7 @@ function RiftChampions(props: any) {
   return (
     <div className="champion-grid-container">
       {Object.keys(champions).map((key) => (
-        <Link to={`/rift/champions/${key}`} className="hidden-container" key={champions[key].key}>
+        <Link to={`/rift/champions/${key}`} className="hidden-container" onClick={props.resetRiftChampion} key={champions[key].key}>
           <div
             className="rift-champion-container"
             key={champions[key].key}
@@ -64,5 +64,5 @@ function mapStateToProps({ riftChampions }: any) {
 }
 
 export default connect(mapStateToProps, {
-  requestRiftChampions,
+  requestRiftChampions, resetRiftChampion
 })(RiftChampions);

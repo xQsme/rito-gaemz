@@ -4,7 +4,8 @@ import ADDRESS from '../constants/server';
 import {
     RETURN_RIFT_SINGLE_CHAMPION,
     FAIL_RETURN_RIFT_SINGLE_CHAMPION,
-    START_RIFT_SINGLE_CHAMPION_REQUEST
+    START_RIFT_SINGLE_CHAMPION_REQUEST,
+    RESET_RIFT_CHAMPION,
 } from './types';
 
 import type { RiftChampionResult } from '../interfaces';
@@ -37,6 +38,12 @@ export const requestRiftChampion = (name: string)  => {
                 return '❌ Request Limit Reached!';
             }
         }
+    };
+};
+
+export const resetRiftChampion = (name: string)  => {
+    return async (dispatch:(obj:{type:string}) => string) => {
+        dispatch({type: RESET_RIFT_CHAMPION});
     };
 };
 

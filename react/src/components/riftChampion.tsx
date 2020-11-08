@@ -12,26 +12,26 @@ import type { RiftChampionReducer } from "../interfaces";
 
 interface ChampionProps {
   name: string;
-  riftChampion?: RiftChampionReducer;
+  riftChampion: RiftChampionReducer;
   requestRiftChampion(name: string): Promise<string>;
 }
 
 function RiftChampion(props: ChampionProps) {
   // const { champion }= props.champion;
   console.log(props);
-  let riftChampion = props.riftChampion;
+  let { riftChampion, name } = props;
+  // let riftChampion = props.riftChampion;
 
   React.useEffect(() => {
     //rift && mastery.length === 0 && requestMastery(region, rift.id);
-    props.riftChampion &&
-      // Object.keys(props.riftChampion.champion).length === 0 && props.riftChampion.champion.name != props.name  &&
-      Object.keys(props.riftChampion.champion).length === 0 &&
+    riftChampion &&
+      riftChampion.name == "" &&
       requestRiftChampion();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.riftChampion, props.name]);
+  }, []);
 
   const requestRiftChampion = async () => {
-    const result = await props.requestRiftChampion(props.name);
+    const result = await props.requestRiftChampion(name);
     if (result) {
       toast(result, {
         position: "top-right",
@@ -44,6 +44,8 @@ function RiftChampion(props: ChampionProps) {
       });
     }
   };
+
+  console.log(riftChampion);
 
   // const { profileIconId, name, summonerLevel, riftRankeds } = props.champion;
 
@@ -75,23 +77,23 @@ function RiftChampion(props: ChampionProps) {
                   "http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/" +
                   props.name +
                   ".png"
-                } /*trocar props.name para o que vem do request*/
+                }
                 alt="avatar-image"
               />
             </div>
             <div className="champion-name-title-container">
               <div className="champion-name">
-                <span>{riftChampion ? riftChampion.champion.name : ""}</span>
+                <span>{riftChampion ? riftChampion.name : ""}</span>
               </div>
               <div className="champion-title">
-                <span>{riftChampion ? riftChampion.champion.title : ""}</span>
+                <span>{riftChampion ? riftChampion.title : ""}</span>
               </div>
             </div>
           </div>
 
           <div className="details-bottom">
             <div className="">
-              (div1)
+              (div1) 
               <div className="">(div1.1)</div>
               <div className="">(div1.2)</div>
             </div>
@@ -115,7 +117,7 @@ function RiftChampion(props: ChampionProps) {
           <div className="skin-image-expanded">
             {/* div ou background da div pai? */}
           </div>
-          <div className="close-skin-image-expanded">
+          <div className="close-skin-image-expanded">w
             {/* cruz para fechar o expanded */}
           </div>
         </div>
@@ -127,9 +129,16 @@ function RiftChampion(props: ChampionProps) {
           <div className="arrow-left">
             {/* puxa mais skins vindas da esquerda, só visivel se não estiver o maximo para a esquerda */}
           </div>
-            {/* {props.riftChampion ? props.riftChampion.champion.skins.map((item:any) => (
-              <img style={{width:"50px", height:"50px"}} src={`http://ddragon.leagueoflegends.com/cdn/10.22.1/img/item/${item}.png`} alt=""/>
-            )) : ""} */}
+            {riftChampion.skins.map((skin:any) => { 
+              console.log(skin)
+              return ( 
+                
+                <img
+                className="champion-avatar-img"
+                src={skin.path}
+                alt="avatar-image"
+              />
+              )})}
           <div className="arrow-right">
             {/* puxa mais skins vindas da direita, só visivel se não estiver o maximo para a direita */}
           </div>

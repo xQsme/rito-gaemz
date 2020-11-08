@@ -104,14 +104,14 @@ async function getUnit(name: string) {
                 "allytips": unit.data.data[name].allytips,
                 "enemytips": unit.data.data[name].enemytips,
                 "image": `http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/${name}.png`,
-                "skins":  { ... unit.data.data[name].skins },
+                "skins": unit.data.data[name].skins,
             }
 
-            Object.keys(unit.data.data[name].skins).forEach((key: any, index ) => {
+            unit.data.data[name].skins.forEach((skin: any) => {
                 // unitReturn.skins[index].name = unit.data.data[name].skins[index].name;
                 // unitReturn.skins[index].chromas = unit.data.data[name].skins[key].chromas;
                 // unitReturn.skins[index].num = unit.data.data[name].skins[key].num;
-                unitReturn.skins[index].path = constants.splashPath + unit.data.data[name].name + "_" + unit.data.data[name].skins[key].num + constants.splashExtension;
+                skin.path = constants.splashPath + unit.data.data[name].name + "_" + skin.num + constants.splashExtension;
             })
         }
 
