@@ -20,7 +20,8 @@ $secondarybg: #303030;;
 $text: #FFFFFF;
 $loss: #EA453F33;
 $win: #53AD5633;
-$average: #FFFFFF33;
+$light: #FFFFFF33;
+$average: #0075A166;
 $gray: #CCCCCC;
 $green:  #53AD56;
 $blue: #0075A1;
@@ -44,27 +45,61 @@ $yellow: #FD9C19;
 }
 
 .tft-history {
-    border-radius: 20px;
-    background-color: $secondarybg;
-    padding: 20px;
-
     .tft-match{
-        margin-bottom: 20px;
+        margin: 10px;
         padding: 20px;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-        background-color: $average;
+        background-color: $secondarybg;
+        border: 1px solid $light;
+        border-left: 10px solid $light;
 
+        .tft-placement-div{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 10px;
+        }
+        
         .placement{
             font-size: 20px;
         }
 
+        .tft-traits-div{
+            max-width: 235px;
+            width: 100%;
+
+            .trait-container{
+                position: relative;
+                display: inline-block;
+                width: 40px;
+                margin: 0 8px;
+
+                .trait-background{
+                }
+
+                .trait-icon{
+                    position: absolute;
+                    width: 30px;
+                    height: 30px;
+                    top: calc(50% - 3px);
+                    right: calc(50% - 6px);
+                    transform: translate(50%, -50%);
+                }
+            }
+
+            .tier1{
+                color: $blue;
+            }
+        }
+
         .tft-units-div{
-            display: flex;
+            max-width: 560px;
+            width: 100%;
 
             .unit{
-                display: flex;
+                display: inline-block;
                 flex-direction: column;
                 align-items: center;
                 margin: 0 2px;
@@ -75,8 +110,11 @@ $yellow: #FD9C19;
                 }
 
                 .star-level{
+                    display: flex;
+                    justify-content: center;
                     svg{
-                        font-size: 20px;
+                        font-size: 18px;
+                        margin: 0;
                     }
                 }
             }
@@ -134,10 +172,14 @@ $yellow: #FD9C19;
     }
 
     .win {
-        background-color: $win;
+        border-left: 10px solid $win;
+    }
+
+    .average{
+        border-left: 10px solid $average;
     }
 
     .loss {
-        background-color: $loss;
+        border-left: 10px solid $loss;
     }
 }

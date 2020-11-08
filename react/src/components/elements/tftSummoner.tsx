@@ -71,7 +71,10 @@ function TFTSummoner(props: TFTSummonerProps) {
               <span>Wins: {wins}</span>
               <span>Games: {wins + losses}</span>
             </div>
-            <div className="ranked-flex-container ranked-flex-text-container">
+
+          </>
+        )}
+                    <div className="ranked-flex-container ranked-flex-text-container">
               <span className="icon-text">
                 Veteran: {veteran ? <Check className="green" /> : <Nope className="red" />}
               </span>
@@ -85,8 +88,6 @@ function TFTSummoner(props: TFTSummonerProps) {
                 Hot Streak: {hotStreak ? <Check className="green" /> : <Nope className="red" />}
               </span>
             </div>
-          </>
-        )}
         {clickable && (
           <img className="summoner-type-icon" src={TFT} alt="TFT" />
         )}

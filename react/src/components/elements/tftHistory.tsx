@@ -1,7 +1,7 @@
 import React from "react";
 import { setTab } from "../../actions";
 import { connect } from "react-redux";
-import { TFTParticipant, TFTMatch, TFTUnit } from "../../interfaces";
+import { TFTMatch, TFTUnit, TFTTrait } from "../../interfaces";
 import Star from '@material-ui/icons/StarRate';
 
 interface TFTHistoryProps {
@@ -16,9 +16,11 @@ function TFTHistory(props: TFTHistoryProps) {
       {history.map((match: TFTMatch) => {
         const { player } = match;
         return (
-          <div key={match.id} className={`tft-match ${player.placement === 1 ? 'win' : player.placement === 8 ? 'loss' : '' }`}>
+          <div key={match.id} className={`tft-match ${player.placement === 1 ? 'win' : player.placement <= 4 ? 'average' : player.placement >= 7 ? 'loss' : '' }`}>
             <div className="tft-placement-div">
               <span className="placement">#{player.placement}</span>
+              <span>{match.ranked ? 'Ranked' : 'Normal'}</span>
+              <span>{match.length}</span>
             </div>
             <div className="tft-units-div">
               {player.units.map((unit:TFTUnit, index:number) => {
@@ -29,9 +31,22 @@ function TFTHistory(props: TFTHistoryProps) {
                       return (<Star key={index}/>)
                     })}
                     </div>
-                    <img src={'/tft/champions/' + unit.character_id + '.png'} />
+                    <img src={'/tft/champions/' + unit.character_id + '.png'} alt={unit.character_id} />
                   </div>
                 )
+              })}
+            </div>
+            <div className="tft-traits-div">
+              {player.traits.map((trait:TFTTrait) => {
+                if(trait.tier_current !== 0) {
+                  return(
+                    <div className="trait-container">
+                      <img src={'/tft/traits/bg' + trait.style + '.png'} className="trait-background"/>
+                      <img src={'/tft/traits/' + trait.name.replace('Set4_', '') + '.svg'} className="trait-icon"/>
+                    </div>
+                  )
+                }
+                return null;
               })}
             </div>
           </div>
