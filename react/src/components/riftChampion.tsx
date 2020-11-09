@@ -65,12 +65,14 @@ function RiftChampion(props: ChampionProps) {
   return (
     <div className="champion-container">
       <div className="champion-details-container">
-        <div className="background-image" 
-          style={{
-            backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${props.name}_${chosen}.jpg")`,
-          }}>
-          </div>
-        <div className="details-container">
+        
+        <div className="details-container" 
+         style={{
+          backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${props.name}_${chosen}.jpg")`,
+        }}
+        
+        >
+          <div className="background-opacity" />
           <div className="details-top">
             <div className="champion-avatar">
               <img
@@ -148,7 +150,7 @@ function RiftChampion(props: ChampionProps) {
             <div className="tips-container">
               <div className="ally-tips-container">
                 <div className="fight-as-against">Fighting As</div>
-                <div className="ally-tips">
+                <div className="tips">
                   {riftChampion.allytips.map((tip:any, i: number) => { 
                     return ( 
                       <>
@@ -161,7 +163,7 @@ function RiftChampion(props: ChampionProps) {
                   
               <div className="enemy-tips-container">
                 <div className="fight-as-against">Fighting Against</div>
-                <div className="enemy-tips">
+                <div className="tips">
                   {riftChampion.enemytips.map((tip:any, i: number) => {  
                     return ( 
                       <>
