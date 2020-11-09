@@ -1,24 +1,25 @@
 import { REHYDRATE } from "redux-persist";
 
 import {
-  FAIL_RETURN_TFT_HISTORY,
-  RETURN_TFT_HISTORY,
-  START_TFT_HISTORY_REQUEST,
+  RETURN_RIFT_CHAMPIONS,
+  FAIL_RETURN_RIFT_CHAMPIONS,
+  START_RIFT_CHAMPIONS_REQUEST,
   RESET_PROFILES,
 } from "../actions/types";
 
-import type { TFTProfileReducer } from '../interfaces';
+import type { RiftChampionsReducer } from '../interfaces';
 
-const INITIAL_STATE: TFTProfileReducer = {
+const INITIAL_STATE: RiftChampionsReducer = {
   requested: false,
   error: false,
-  history: [],
+  champions: {},
 };
 
-export default function (state = INITIAL_STATE, { type, payload }:any):TFTProfileReducer {
+export default function (state = INITIAL_STATE, { type, payload }:any):RiftChampionsReducer {
   switch (type) {
     case REHYDRATE:
-      if (payload && payload.tftProfile) {
+      if (payload && payload.riftProfile) {
+
         return {
           ...INITIAL_STATE,
         };
@@ -28,24 +29,24 @@ export default function (state = INITIAL_STATE, { type, payload }:any):TFTProfil
       return {
         ...INITIAL_STATE,
       };
-    case START_TFT_HISTORY_REQUEST:
+    case START_RIFT_CHAMPIONS_REQUEST:
       return {
         ...state,
         requested: false,
         error: false,
       };
-    case RETURN_TFT_HISTORY:
-      return {
+    case RETURN_RIFT_CHAMPIONS:
+       return {
         ...state,
-        history: payload,
+        champions: payload.units, 
         requested: true,
         error: false,
       };
-    case FAIL_RETURN_TFT_HISTORY:
+    case FAIL_RETURN_RIFT_CHAMPIONS:
       return {
         ...state,
         error: true,
-      };
+      };   
     default:
       return state;
   }

@@ -6,6 +6,7 @@ import type { SearchReducer } from '../interfaces';
 
 const INITIAL_STATE: SearchReducer = {
   requested: false,
+  requesting: false,
   rift: null,
   tft: null,
   lor: null,
@@ -25,12 +26,14 @@ export default function (state = INITIAL_STATE, { type, payload }:any):SearchRed
     case RESET_PROFILES:
       return {
         ...INITIAL_STATE,
+        requesting: true,
       };
     case RETURN_SUMMONERS:
       return {
         ...state,
         ...payload,
         requested: true,
+        requesting: false,
         error: false,
       };
     default:

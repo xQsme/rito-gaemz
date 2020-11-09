@@ -36,15 +36,15 @@ async function getSummoners(serverNumber: number, name:string) {
     const server = getServer(serverNumber);
     const region = getRegion(serverNumber);
     try{
-        let rift = await axios.get('https://' + server + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=' + key);
-        let tft = await axios.get('https://' + server + '/tft/summoner/v1/summoners/by-name/' + name + '?api_key=' + key);
+        let rift = await axios.get('https://' + server + '/lol/summoner/v4/summoners/by-name/' + encodeURIComponent(name) + '?api_key=' + key);
+        let tft = await axios.get('https://' + server + '/tft/summoner/v1/summoners/by-name/' + encodeURIComponent(name) + '?api_key=' + key);
         let lor:any = null;
         if((rift && rift.data && rift.data.puuid) || (tft && tft.data && tft.data.puuid)) {
             lor = await axios.get('https://' + region + '/riot/account/v1/accounts/by-puuid/' + (rift.data.puuid ? rift.data.puuid : tft.data.puuid) + '?api_key=' + key);
             let riftRankeds = await axios.get('https://' + server + '/lol/league/v4/entries/by-summoner/' + rift.data.id + '?api_key=' + key);
             rift.data.riftRankeds = riftRankeds.data ? riftRankeds.data : [];
             let tftRankeds = await axios.get('https://' + server + '/tft/league/v1/entries/by-summoner/' + rift.data.id + '?api_key=' + key);
-            tft.data.tftRanked = tftRankeds.data[0];
+            tft.data.tftRanked = tftRankeds.data;
         }
         return {
             code: 202,

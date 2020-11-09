@@ -18,3 +18,213 @@ $main: #D53C4E;
 $background: #222222;
 $secondarybg: #303030;;
 $text: #FFFFFF;
+$loss: #EA453F33;
+$win: #53AD5633;
+$light: #FFFFFF33;
+$average: #0075A166;
+$gray: #CCCCCC;
+$green:  #53AD56;
+$blue: #0075A1;
+$purple: #7161ef;
+$yellow: #FD9C19;
+
+    
+.ranked-flex-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img{
+        max-width: 100px;
+    }
+}
+
+.ranked-flex-container:last-of-type{
+    margin-left: 50px;
+}
+
+.tft-history {
+    .tft-match{
+        margin: 10px;
+        padding: 20px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: $secondarybg;
+        border: 1px solid $light;
+        border-left: 10px solid $light;
+        max-width: 1200px;
+        width: 100%;
+
+        .tft-placement-div{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 10px;
+        }
+        
+        .placement{
+            font-size: 20px;
+        }
+
+        .tft-traits-div{
+            max-width: 235px;
+            width: 100%;
+
+            .trait-container{
+                position: relative;
+                display: inline-block;
+                width: 40px;
+                margin: 0 8px;
+
+                .trait-background{
+                }
+
+                .trait-icon{
+                    position: absolute;
+                    width: 30px;
+                    height: 30px;
+                    top: calc(50% - 3px);
+                    right: calc(50% - 6px);
+                    transform: translate(50%, -50%);
+                }
+            }
+
+            .tier1{
+                color: $blue;
+            }
+        }
+
+        .tft-units-div{
+            max-width: 540px;
+            width: 100%;
+
+            .unit{
+                display: inline-flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 0 2px;
+
+                .unit-icon {
+                    border: 2px solid $secondarybg;
+                    width: 55px;
+                }
+
+                .unit-items{
+                    display: flex;
+                    justify-content: center;
+
+                    .item-icon{
+                        width: 15px;
+                        margin: 1px 2px;
+                        border: 1px solid $light;
+                    }
+                }
+
+                .star-level{
+                    display: flex;
+                    justify-content: center;
+                    svg{
+                        font-size: 17px;
+                        margin: 0;
+                    }
+                }
+            }
+
+            .rarity0 {
+                svg{
+                    color: $gray;
+                }
+
+                .unit-icon{
+                    border-color: $gray;
+                }
+            }
+
+            .rarity1 {
+                svg{
+                    color: $green;
+                }
+
+                .unit-icon{
+                    border-color: $green;
+                }
+            }
+
+            .rarity2 {
+                svg{
+                    color: $blue;
+                }
+
+                .unit-icon{
+                    border-color: $blue;
+                }
+            }
+
+            .rarity3 {
+                svg{
+                    color: $purple;
+                }
+
+                .unit-icon{
+                    border-color: $purple;
+                }
+            }
+
+            .rarity4 {
+                svg{
+                    color: $yellow;
+                }
+
+                .unit-icon{
+                    border-color: $yellow;
+                }
+            }
+        }
+    }
+
+    .win {
+        border-left: 10px solid $win;
+    }
+
+    .average{
+        border-left: 10px solid $average;
+    }
+
+    .loss {
+        border-left: 10px solid $loss;
+    }
+}
+
+.MuiTableContainer-root{
+    overflow-x: visible !important;
+}
+
+@include mq(650px) {
+    .tft-match{
+        display: grid !important;
+        grid-template-columns: repeat(2, auto);
+        grid-column-gap: 10px;
+    }
+
+    .tft-traits-div{
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+    }
+
+    .tft-units-div{
+        order: 2;
+        grid-column: auto / span 2;
+        display: grid;
+        grid-template-columns: repeat(4, auto);
+    }
+
+    .ranked-flex-container{
+        margin: 0 !important;
+    }
+
+    .MuiTableContainer-root{
+        overflow-x: auto !important;
+    }
+}

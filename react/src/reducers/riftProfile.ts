@@ -27,7 +27,6 @@ export default function (state = INITIAL_STATE, { type, payload }:any):RiftProfi
   switch (type) {
     case REHYDRATE:
       if (payload && payload.riftProfile) {
-
         return {
           ...INITIAL_STATE,
         };
@@ -37,12 +36,14 @@ export default function (state = INITIAL_STATE, { type, payload }:any):RiftProfi
       return {
         ...INITIAL_STATE,
       };
-    case START_RIFT_MASTERY_REQUEST:
+
+    case START_RIFT_PROFILE_REQUEST:
       return {
         ...state,
         requested: false,
         error: false,
       };
+
     case START_RIFT_HISTORY_REQUEST:
       return {
         ...state,
@@ -57,19 +58,19 @@ export default function (state = INITIAL_STATE, { type, payload }:any):RiftProfi
         requested: true,
         error: false,
       };
-      
-    case FAIL_RETURN_RIFT_MASTERY:
+   
+    case FAIL_RETURN_RIFT_PROFILE:
       return {
         ...state,
         error: true,
       };
-      
-    case START_RIFT_PROFILE_REQUEST:
+    case START_RIFT_MASTERY_REQUEST:
       return {
         ...state,
         requested: false,
         error: false,
       };
+   
     case RETURN_RIFT_HISTORY:
       return {
         ...state,
@@ -77,6 +78,7 @@ export default function (state = INITIAL_STATE, { type, payload }:any):RiftProfi
         requested: true,
         error: false,
       };
+
     case RETURN_RIFT_PROFILE:
       return {
         ...state,
@@ -84,11 +86,13 @@ export default function (state = INITIAL_STATE, { type, payload }:any):RiftProfi
         requested: true,
         error: false,
       };
-      case FAIL_RETURN_RIFT_PROFILE:
+      
+    case FAIL_RETURN_RIFT_MASTERY:
       return {
         ...state,
         error: true,
       };
+
     case FAIL_RETURN_RIFT_HISTORY:
       return {
         ...state,

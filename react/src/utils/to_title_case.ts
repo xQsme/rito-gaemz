@@ -1,4 +1,4 @@
-export const toTitleCase = (str:String) => {
+export const toTitleCase = (str:string | undefined) => {
     if(str) {
         return str.replace(
           /\w\S*/g,

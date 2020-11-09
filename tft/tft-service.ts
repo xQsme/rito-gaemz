@@ -7,7 +7,7 @@ const { key } = require('../secretconfig');
 
 module.exports  = {
     getUnits,
-   // getProfile,
+    getHistory,
 }
 
 function getServer(serverNumber: number) {
@@ -52,7 +52,6 @@ async function getUnits(serverNumber: number) {
 
         //Retrieve the best challenger players
         let response = await axios.get('https://' + server + '/tft/league/v1/challenger?api_key=' + key);
-        console.log('https://' + server + '/tft/league/v1/challenger?api_key=' + key)
 
         const challengers = response.data.entries;
         challengers.sort((a: any,b: any) => {
@@ -208,19 +207,51 @@ function mergeUnitsMatrix(units: UnitObject[]){
                     }
                 }
             }
-                
         }
     }
     return newUnits;
 }
 
-async function getProfile(serverNumber: number, summonerId: string) {
-    const server = getServer(serverNumber);
+function getGameLength(seconds:number) {
+    let hours = Math.floor(seconds/3600);
+    let minutes = Math.floor(seconds%3600/60);
+    let secs = Math.floor(seconds%60);
+
+    return hours ? (((hours < 10) ? ('0' + hours) : hours) + ':' + ((minutes < 10) ? ('0' + minutes) : minutes) + ':' + ((secs < 10) ? ('0' + secs) : secs)) : (((minutes < 10) ? ('0' + minutes) : minutes) + ':' + ((secs < 10) ? ('0' + secs) : secs));
+}
+
+function sortTraits(traits:any[]) {
+    traits.sort((a,b) => b.style-a.style);
+}
+
+async function getHistory(serverNumber: number, puuid: string) {
+    const region = getRegion(serverNumber);
     try{
-        let response = await axios.get('https://' + server + '/tft/league/v1/entries/by-summoner/' + summonerId + '?api_key=' + key);
+        let response = await axios.get('https://' + region + '/tft/match/v1/matches/by-puuid/' + puuid + '/ids?count=10&api_key=' + key);
+        const promises:Promise<any>[] = [];
+        response.data.forEach((matchId:string) => {
+            promises.push(axios.get('https://' + region + '/tft/match/v1/matches/' + matchId + '?api_key=' + key).then((response:any) => { 
+                return new Promise<any>(async (resolve, reject) => {
+                    resolve(response.data);
+                });
+            }));
+        });
+        const results = await Promise.all(promises);
+        const history:any[] = [];
+        for(let i = 0; i < results.length; i++) {
+            if(results[i].info.tft_set_number === 4) {
+                for(let j = 0; j < results[i].info.participants.length; j++) {
+                    if(results[i].info.participants[j].puuid === puuid) {
+                        sortTraits(results[i].info.participants[j].traits)
+                        let length = getGameLength(results[i].info.game_length);
+                        history.push({length, ranked: results[i].info.queue_id === 1100, id: results[i].metadata.match_id, player: results[i].info.participants[j]});
+                    }
+                }
+            }
+        }
         return {
             code: 202,
-            data: response.data.length > 0 ? response.data[0] : {tier: 'Unranked'},
+            data: history,
         }
     } catch (error) {
         console.log(error);

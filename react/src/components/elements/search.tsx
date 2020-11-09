@@ -5,13 +5,18 @@ import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import SearchIcon from "@material-ui/icons/Search";
 import { requestSummoners } from "../../actions";
-import { toast } from "react-toastify";
+import toast from "../../utils/toast";
+import ErrorLoader from "./errorLoader";
+import { SearchReducer } from "../../interfaces";
 
 interface SearchProps {
   requestSummoners:(option: number, search:string)=>Promise<string>;
+  children: any,
+  search: SearchReducer,
 }
 
 function Search(props:SearchProps) {
+  const { error, requesting } = props.search;
   const [search, setSearch] = React.useState<string>("");
   const [option, setOption] = React.useState<number>(0);
   
@@ -24,19 +29,12 @@ function Search(props:SearchProps) {
   const submitSearch = async () => {
     const result:string = await props.requestSummoners(option, search);
     if (result) {
-      toast(result, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast(result);
     }
   }
 
   return (
+    <>
     <div className="search-container">
       <div className="search-bar">
         <TextField
@@ -69,6 +67,14 @@ function Search(props:SearchProps) {
         </Select>
       </div>
     </div>
+      <ErrorLoader
+        error={error}
+        loader={requesting}
+        request={() => submitSearch()}
+      >
+        {props.children}
+      </ErrorLoader>
+    </>
   );
 }
 
