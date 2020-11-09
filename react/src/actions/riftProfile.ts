@@ -39,11 +39,13 @@ const failReturnHistory = ():{type:string} => ({
     type: FAIL_RETURN_RIFT_HISTORY,
 });
 
-export const requestRiftMastery = (region: number, summonerId:string)  => {
+export const requestRiftMastery = (region: number, summonerName:string)  => {
     return async (dispatch:(obj:{type:string, payload?: RiftMasteryResult}) => string) => {
         try {
             dispatch(startMasteryRequest());
-            const result:any = await axios.get(ADDRESS + '/rift/mastery/' + region + '/' + summonerId);
+            console.log('requesting mastery: ', ADDRESS + '/rift/mastery/' + region + '/' + summonerName)
+            const result:any = await axios.get(ADDRESS + '/rift/mastery/' + region + '/' + summonerName);
+            console.log('mastery: ', result.data)
             dispatch(returnMastery(result.data));
             return '';
         } catch (error) {

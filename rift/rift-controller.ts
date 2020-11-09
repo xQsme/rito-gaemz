@@ -5,6 +5,7 @@ const riftService = require('./rift-service');
 router.get('/units/', getUnits);
 router.get('/units/:name', getUnit);
 router.get('/history/:server/:name', getSummonerMatchHistory);
+router.get('/mastery/:server/:name', getChampionMastery);
 
 module.exports = router;
 
@@ -14,10 +15,6 @@ interface Body {
 }
 
 export {};
-
-async function getChampionMastery(serverNumber: number, name:string) {
-    
-}
 
 function getUnits(req: any, res: any, next: any) {
     console.log('invoked rift.getUnits');
@@ -37,6 +34,16 @@ function getUnit(req: any, res: any, next: any) {
     riftService.getUnit(name)
     .then(
         (body: Body) => {
+          
+async function getChampionMastery(req: any, res: any, next: any) {
+    console.log('invoked summoners.getChampionMastery');
+    const server:number = parseInt(req.params.server);
+    const name:string = req.params.name;
+    riftService.getMastery(server, name)
+    .then(
+        
+        (body: Body) => {
+            console.log(body.data)
             res.status(body.code).json(body.data);
         }
     )
