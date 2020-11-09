@@ -4,7 +4,7 @@ export interface RiftMasteryResult {}
 export interface RiftHistoryResult {}
 export interface RiftProfileReducer extends BaseReducer 
 {
-    masteries:any[],
+    mastery:any[],
     history:any[],
 }
 

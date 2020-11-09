@@ -18,11 +18,12 @@ import type { RiftProfileReducer } from '../interfaces';
 const INITIAL_STATE: RiftProfileReducer = {
   requested: false,
   error: false,
-  masteries: [],
+  mastery: [],
   history:[]
 };
 
 export default function (state = INITIAL_STATE, { type, payload }:any):RiftProfileReducer {
+  console.log(payload)
   switch (type) {
     case REHYDRATE:
       if (payload && payload.riftProfile) {

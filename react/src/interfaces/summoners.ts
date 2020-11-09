@@ -11,6 +11,25 @@ export interface Summoner {
   riftRankeds: riftRanked[];
   tftRanked: tftRanked;
   history: History[];
+  mastery: Mastery;
+}
+
+export interface Mastery{
+  masteryArray: MasteryEntry[]
+  masteryScore: number;
+}
+
+export interface MasteryEntry{
+  championId: number,
+  championLevel: number,
+  championPoints: number,
+  lastPlayTime: number,
+  championPointsSinceLastLevel: number,
+  championPointsUntilNextLevel: number,
+  chestGranted: boolean,
+  tokensEarned: number,
+  summonerId: string,
+  championName: string
 }
 
 export interface riftRanked {

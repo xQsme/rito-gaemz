@@ -4,6 +4,7 @@ const { key } = require('../secretconfig');
 
 module.exports  = {
     getHistory,
+    getMastery,
 }
 
 function getServer(serverNumber: number) {
@@ -63,11 +64,11 @@ async function getHistory(serverNumber: number, name:string) {
                 await Promise.all(promiseArray).then((values) => {
                     gamesWithDetails = values;
                     gamesWithDetails.forEach(function (record:any){
-                    queue.data.forEach(function(data:any){
-                        if(parseInt(record.queue) == data.queueId){
-                            record.queueDetails.push({map:data.map,description:data.description});
-                        }
-                    })
+                        queue.data.forEach(function(data:any){
+                            if(parseInt(record.queue) == data.queueId){
+                                record.queueDetails.push({map:data.map,description:data.description});
+                            }
+                        })
                     })
                     rift.data.games = gamesWithDetails;
                     //champion
@@ -198,4 +199,63 @@ async function getGameData(filterGames:any[],gamesWithDetails:any[],record:any,s
             }
         });
     })
+}
+
+async function getMastery(serverNumber:number, name:string) {
+    const server = getServer(serverNumber);
+    try{
+        let rift = await axios.get('https://' + server + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=' + key);
+        let champions = await axios.get('http://ddragon.leagueoflegends.com/cdn/10.22.1/data/en_US/champion.json');
+        let championsData = champions.data.data
+
+        if(rift && rift.data && rift.data.puuid) {
+            //console.log(rift.data.id);
+            let masteryScore = await axios.get('https://' + server + '/lol/champion-mastery/v4/scores/by-summoner/' + rift.data.id + '?api_key=' + key);
+            let championMastery = await axios.get('https://' + server + '/lol/champion-mastery/v4/champion-masteries/by-summoner/' + rift.data.id + '?api_key=' + key);
+            
+            //console.log(masteryScore.data);
+            //console.log(championMastery.data.slice(0, 5));
+            
+            //let top5 = championMastery.data.slice(0, 5)
+            
+
+            championMastery.data.forEach( (championMasteryEntry:any) => {
+                Object.keys(championsData).forEach( (key) => 
+                    {
+                        //console.log(championMasteryEntry.championId, championsData[key].key)
+                        if(championMasteryEntry.championId == championsData[key].key){
+                            championMasteryEntry.championName = key; 
+                            //console.log(championMasteryEntry)
+                        }
+                    }
+                );
+            });
+            //console.log(championMastery.data)
+            return {
+                code: 202,
+                data: {mastery: championMastery.data,
+                    masteryScore: masteryScore.data,
+                },
+            }
+        }
+    } catch (error) {
+        console.log('Mastery request error', error);
+        if(error.response.data.status.status_code === 403) {
+            return {
+                code: 403,
+                data: 'Error',
+            }
+        }
+        if(error.response.data.status.status_code === 404) {
+            return {
+                code: 404,
+                data: 'Error',
+            }
+        }
+        return {
+            code: 400,
+            data: 'Error',
+        }
+    }
+
 }
