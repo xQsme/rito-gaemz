@@ -89,6 +89,7 @@ class unitDetails {
     "enemytips": [];
     "image": string;
     "skins": [];
+    "stats": {};
 }
 
 async function getUnit(name: string) {
@@ -105,6 +106,7 @@ async function getUnit(name: string) {
                 "enemytips": unit.data.data[name].enemytips,
                 "image": `http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/${name}.png`,
                 "skins": unit.data.data[name].skins,
+                "stats": unit.data.data[name].stats,
             }
 
             unit.data.data[name].skins.forEach((skin: any) => {

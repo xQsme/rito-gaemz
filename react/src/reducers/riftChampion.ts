@@ -18,6 +18,28 @@ const INITIAL_STATE: RiftChampionReducer = {
   enemytips: [],
   image: "",
   skins: [],
+  stats: {
+    hp: 0,
+    hpperlevel: 0,
+    mp: 0,
+    mpperlevel: 0,
+    movespeed: 0,
+    armor: 0,
+    armorperlevel: 0,
+    spellblock: 0,
+    spellblockperlevel: 0,
+    attackrange: 0,
+    hpregen: 0,
+    hpregenperlevel: 0,
+    mpregen: 0,
+    mpregenperlevel: 0,
+    crit: 0,
+    critperlevel: 0,
+    attackdamage: 0,
+    attackdamageperlevel: 0,
+    attackspeedperlevel: 0,
+    attackspeed: 0,
+  },
 };
 
 
@@ -51,7 +73,8 @@ export default function (state = INITIAL_STATE, { type, payload }:any):RiftChamp
     case RETURN_RIFT_SINGLE_CHAMPION:
        return {
         ...state,
-        ...payload.unit, 
+        ...payload.unit,
+        stats: payload.unit.stats, 
         requested: true,
         error: false,
       };
