@@ -20,6 +20,7 @@ function RiftChampion(props: ChampionProps) {
   // const { champion }= props.champion;
   let { riftChampion, name } = props;
   const [chosen, setChosen] = React.useState<String>("0");
+  const [previewActive, setPreviewActive] = React.useState<boolean>(false);
   // let riftChampion = props.riftChampion;
 
   React.useEffect(() => {
@@ -44,6 +45,11 @@ function RiftChampion(props: ChampionProps) {
       });
     }
   };
+  
+  // const toggleActivePreview = {
+  //   if (previewActive == true) {
+  //     setPreviewActive(!previewActive : boolean);
+  // }
 
   // const { profileIconId, name, summonerLevel, riftRankeds } = props.champion;
 
@@ -64,15 +70,13 @@ function RiftChampion(props: ChampionProps) {
 
   return (
     <div className="champion-container">
-      <div className="champion-details-container">
-        
-        <div className="details-container" 
-         style={{
-          backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${props.name}_${chosen}.jpg")`,
-        }}
-        
-        >
-          <div className="background-opacity" />
+      <div className={`champion-details-container ${previewActive ? "preview-active" : "" }`}>
+        <div className="background-image" 
+          style={{
+            backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${props.name}_${chosen}.jpg")`,
+          }}>
+          </div>
+        <div className="details-container">
           <div className="details-top">
             <div className="champion-avatar">
               <img
@@ -85,11 +89,13 @@ function RiftChampion(props: ChampionProps) {
               />
             </div>
             <div className="champion-name-title-container">
-              <div className="champion-name">
-                <span>{riftChampion && riftChampion.name}</span>
-              </div>
-              <div className="champion-title">
-                <span>{riftChampion && riftChampion.title}</span>
+              <div>
+                <div className="champion-name">
+                  <span>{riftChampion && riftChampion.name}</span>
+                </div>
+                <div className="champion-title">
+                  <span>{riftChampion && riftChampion.title}</span>
+                </div>
               </div>
 
               <div className="website-references"> 
@@ -146,34 +152,8 @@ function RiftChampion(props: ChampionProps) {
 
           </div>
 
-          <div className="details-bottom">
-            <div className="tips-container">
-              <div className="ally-tips-container">
-                <div className="fight-as-against">Fighting As</div>
-                <div className="tips">
-                  {riftChampion.allytips.map((tip:any, i: number) => { 
-                    return ( 
-                      <>
-                        <span key={i} className={`tip-${i}`}> 👌 {tip}</span>
-                      </>
-                    )
-                  })}
-                </div>
-              </div>
-                  
-              <div className="enemy-tips-container">
-                <div className="fight-as-against">Fighting Against</div>
-                <div className="tips">
-                  {riftChampion.enemytips.map((tip:any, i: number) => {  
-                    return ( 
-                      <>
-                        <span className={`tip-${i}`}> 😒 {tip}</span>
-                      </>
-                    )
-                  })}
-                </div>
-              </div>
-            </div>
+          <div className="preview-button" onClick={()=>setPreviewActive(!previewActive)}>
+            { !previewActive ? "Preview image 🔎 temp text" : "Close Preview" }
           </div>
 
           <div className="skin-image-expanded">
@@ -208,6 +188,36 @@ function RiftChampion(props: ChampionProps) {
           </div>
         </div>
       </div>
+
+      <div className="details-bottom">
+            <div className="tips-container">
+              <div className="ally-tips-container">
+                <div className="fight-as-against">Fighting As</div>
+                <div className="tips">
+                  {riftChampion.allytips.map((tip:any, i: number) => { 
+                    return ( 
+                      <>
+                        <span key={i} className={`tip-${i}`}> 👌 {tip}</span>
+                      </>
+                    )
+                  })}
+                </div>
+              </div>
+                  
+              <div className="enemy-tips-container">
+                <div className="fight-as-against">Fighting Against</div>
+                <div className="tips">
+                  {riftChampion.enemytips.map((tip:any, i: number) => {  
+                    return ( 
+                      <>
+                        <span className={`tip-${i}`}> 😒 {tip}</span>
+                      </>
+                    )
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
   );
 }
