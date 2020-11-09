@@ -135,7 +135,7 @@ async function getHistory(serverNumber: number, name:string) {
     const server = getServer(serverNumber);
     const region = getRegion(serverNumber);
     try{
-        let rift = await axios.get('https://' + server + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=' + key);
+        let rift = await axios.get('https://' + server + '/lol/summoner/v4/summoners/by-name/' + encodeURIComponent(name) + '?api_key=' + key);
 
         if(rift && rift.data && rift.data.puuid) {
             let queue = await axios.get('http://static.developer.riotgames.com/docs/lol/queues.json');
