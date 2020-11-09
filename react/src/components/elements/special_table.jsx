@@ -10,6 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
 import server from '../../constants/server';
+import { findItemById } from '../../utils/items';
 
 function createData(array, headers) {
     const obj = {};
@@ -193,10 +194,13 @@ export default function SpecialTable(props) {
                               if(header === 'Items') {
                                 return (<TableCell align="center" key={header}>
                                   <div className="items">
-                                    {row[header].map(item => {
+                                    {row[header].map((item, index) => {
                                       return(
-                                        <div className="item" key={item.id}>
-                                          <img className="item-icon"  src={server + '/tft/items/' + (item.id > 9 ? item.id : '0' + item.id) + '.png'} alt="" />
+                                        <div className="item" key={index}>
+                                          <div className="tooltip">
+                                            <img className="item-icon"  src={'/tft/items/' + (item.id > 9 ? item.id : '0' + item.id) + '.png'} alt="" />
+                                            <span className="tooltiptext">{findItemById(parseInt(item.id))}</span>
+                                          </div>
                                           <span>{item.percent}</span>
                                         </div>
                                       );

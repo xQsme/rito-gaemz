@@ -26,6 +26,8 @@ export type TFTProfileResult = TFTMatch[];
 
 export interface TFTMatch {
   id: number,
+  length: number,
+  ranked: boolean,
   player: TFTParticipant,
 };
 
