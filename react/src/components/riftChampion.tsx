@@ -71,18 +71,28 @@ function RiftChampion(props: ChampionProps) {
   return (
     <div className="champion-container">
       <div className={`champion-details-container ${previewActive ? "preview-active" : "" }`}>
-        <div className="background-image" 
+        <div className={`big-image-preview ${previewActive ? "show" : "" }` }
           style={{
-            backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${props.name}_${chosen}.jpg")`,
+            backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${riftChampion.name}_${chosen}.jpg")`,
+          }
+        }>
+          
+          <div className="preview-button button-inside-preview" onClick={()=>setPreviewActive(!previewActive)}>
+            { !previewActive ? "you should not see this" : "Close Preview" }
+          </div>
+        </div>
+        <div className={`background-image ${previewActive ? "hide" : "" } `}
+          style={{
+            backgroundImage: `url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${riftChampion.name}_${chosen}.jpg")`,
           }}>
           </div>
-        <div className="details-container">
+        <div className={`details-container ${previewActive ? "hide" : "" }`}>
           <div className="details-top">
             <div className="champion-avatar">
               <img
                 className="champion-avatar-img"
                 src={
-                  `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${props.name}_${chosen}.jpg`
+                  `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${riftChampion.name}_${chosen}.jpg`
                   // `http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/${props.name}.png`
                 }
                 alt="avatar"
@@ -153,7 +163,7 @@ function RiftChampion(props: ChampionProps) {
           </div>
 
           <div className="preview-button" onClick={()=>setPreviewActive(!previewActive)}>
-            { !previewActive ? "Preview image 🔎 temp text" : "Close Preview" }
+            { !previewActive ? "Preview splash art" : "Close Preview" }
           </div>
 
           <div className="skin-image-expanded">
@@ -178,7 +188,7 @@ function RiftChampion(props: ChampionProps) {
               <img onClick={()=>setChosen(skin.num)} key={skin.id}
                 className={`champion-avatar-img clickable ${chosen !== skin.num ? "" : "chosen" }`}
                 // src={skin.path}
-                src={`http://ddragon.leagueoflegends.com/cdn/img/champion/tiles/${props.name}_${skin.num}.jpg`}
+                src={`http://ddragon.leagueoflegends.com/cdn/img/champion/tiles/${riftChampion.name}_${skin.num}.jpg`}
                 alt="avatar"
               />
 

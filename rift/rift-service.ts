@@ -108,8 +108,10 @@ async function getUnit(name: string) {
                 "skins": unit.data.data[name].skins,
                 "stats": unit.data.data[name].stats,
             }
-
-            unit.data.data[name].skins.forEach((skin: any) => {
+            if (name === "Fiddlesticks") {
+                unitReturn.name = "FiddleSticks";
+            }
+            unit.data.data[name].skins.forEach((skin: any) => {                
                 // unitReturn.skins[index].name = unit.data.data[name].skins[index].name;
                 // unitReturn.skins[index].chromas = unit.data.data[name].skins[key].chromas;
                 // unitReturn.skins[index].num = unit.data.data[name].skins[key].num;
