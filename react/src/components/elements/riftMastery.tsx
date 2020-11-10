@@ -1,9 +1,4 @@
 import React from "react";
-import server from "../../constants/server";
-import League2 from "../../assets/images/league-of-legends2.png";
-import { navigate } from "@reach/router";
-import { RIFT_PROFILE_ROUTE } from "../../constants/routes";
-import { toTitleCase } from "../../utils/to_title_case";
 import { setTab } from "../../actions";
 import { connect } from "react-redux";
 import InputLabel from '@material-ui/core/InputLabel';
@@ -64,10 +59,6 @@ function RiftSummoner(props: RiftMasteryProps) {
     }
     console.log(auxArray.slice(0, arrayLength))
     return auxArray.slice(0, arrayLength);
-  }
-
-  const handlePictureLoaded = (index:number, element:any) =>{ 
-
   }
 
   return (
@@ -159,7 +150,7 @@ class ChampionImage extends React.Component<ChampionImageProps> {
           onLoad={this.onLoad}
         />
 
-        <img className="mastery-champ-ribbon" src={process.env.PUBLIC_URL + '/rift/mastery/mastery_icon_' + masteryIcon + '.png'} hidden={!loaded}/>
+        <img className="mastery-champ-ribbon" src={process.env.PUBLIC_URL + '/rift/mastery/mastery_icon_' + masteryIcon + '.png'} hidden={!loaded} alt="champion ribbon"/>
         <span className="mastery-champ-label " hidden={!loaded}>
           {Math.floor(mastery.championPoints / 1000)}k
         </span>
