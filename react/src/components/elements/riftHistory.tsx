@@ -77,10 +77,10 @@ function Row(props:any) {
                 </TableHead>
                 <TableBody>
                   <TableCell>{game.items.map((item:any) => (
-                    <img style={{width:"50px", height:"50px"}} src={`http://ddragon.leagueoflegends.com/cdn/10.22.1/img/item/${item}.png`} alt=""/>
+                    <img key={item} style={{width:"50px", height:"50px"}} src={`http://ddragon.leagueoflegends.com/cdn/10.22.1/img/item/${item}.png`} alt=""/>
                   ))}</TableCell>
-                  <TableCell>{game.summonerDetails.map((summoner:any) => (
-                    <img style={{width:"50px", height:"50px"}} src={`${summoner.image}`} alt=""/>
+                  <TableCell>{game.summonerDetails.map((summoner:any, i:number) => (
+                    <img key={i} style={{width:"50px", height:"50px"}} src={`${summoner.image}`} alt=""/>
                   ))}</TableCell>
                 </TableBody>
               </Table>

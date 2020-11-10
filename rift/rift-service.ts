@@ -338,7 +338,12 @@ async function getMastery(serverNumber:number, name:string) {
                     {
                         //console.log(championMasteryEntry.championId, championsData[key].key)
                         if(championMasteryEntry.championId == championsData[key].key){
-                            championMasteryEntry.championName = key; 
+                            if(championMasteryEntry.championId == 9){
+                                championMasteryEntry.championName = 'FiddleSticks';     
+                            }
+                            else{
+                                championMasteryEntry.championName = key; 
+                            }
                             //console.log(championMasteryEntry)
                         }
                     }

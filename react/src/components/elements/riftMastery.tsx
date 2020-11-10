@@ -9,6 +9,9 @@ import { connect } from "react-redux";
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Fab from '@material-ui/core/Fab';
+import DownIcon from '@material-ui/icons/KeyboardArrowDown';
+import UpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import type { MasteryEntry } from "../../interfaces";
 
@@ -24,42 +27,52 @@ interface RiftMasteryProps {
 function RiftSummoner(props: RiftMasteryProps) {
   
   const { masteryScore , mastery} = props;
-  //let order:string = 'mastery level'
   const [order, setOrder] = React.useState<string>('mastery level');
+  const [fabText, setFabText] = React.useState<string>('Expand your Dongers ヽ༼ຈل͜ຈ༽ﾉ');
+  const [collapsed, setCollapsed] = React.useState<boolean>(true);
+
   let masteryByLevel:MasteryEntry[] = []
-  let masteryByScore:MasteryEntry[] = mastery;
   
   for (let i:any = 7; i > 0; i--) {
     mastery.forEach( masteryEntry => {
-      if(masteryEntry.championLevel == i){
+      if(masteryEntry.championLevel === i){
         masteryByLevel.push(masteryEntry)
       }
     });
   }
 
-  /*
-  const handleChange = (event: React.ChangeEvent<{ value: any }>) => {
-    console.log(event.target.value)
-    order = event.target.value
-    console.log(order)
-  };*/
-
   const sortChampions = () => {
-    if (order === 'mastery level'){
-      return masteryByLevel;
+    let auxArray : MasteryEntry[] = [];
+    let arrayLength : number = 24;
+    console.log('sortChampions', collapsed, arrayLength)
+    
+    switch (order) {
+      case 'mastery level':
+        console.log('switch = mastery level descending')
+        for (let i:any = 7; i > 0; i--) {
+          mastery.forEach( (masteryEntry) => {
+            if(masteryEntry.championLevel === i){
+              auxArray.push(masteryEntry)
+            }
+          });
+        }        
+        break;           
+        case 'mastery score':
+        console.log('switch = mastery score descending')
+        auxArray = mastery
+        break;
     }
-    else{
-      return masteryByScore;
-    }
+    console.log(auxArray.slice(0, arrayLength))
+    return auxArray.slice(0, arrayLength);
   }
-  
+
   return (
     <div className="mastery-container">
       <div className="mastery-summoner">
         <div className="mastery-summoner-top">
           
           <div className="mastery-score">
-            <span>Mastery Score: {masteryScore}</span>
+            <span>Champion Mastery Score: {masteryScore}</span>
           </div>
 
           <div className="mastery-filler">
@@ -77,14 +90,14 @@ function RiftSummoner(props: RiftMasteryProps) {
               <MenuItem value={'mastery score'}>Mastery Score</MenuItem>
             </Select>
           </div>
-
         </div>
         <div className="mastery-grid">
-          {sortChampions().slice(0, 24).map((mastery:MasteryEntry) => {
-            let masteryIcon = (mastery.championLevel > 5) ? mastery.championLevel : 4;
+          {sortChampions().map((mastery:MasteryEntry, index:number) => {
+            let masteryIcon = (mastery.championLevel >= 5) ? mastery.championLevel : 4;
             return (
-              <div key={mastery.championId} className="col mastery-champ-img-div">
-                <img className={"mastery-champ-img-" + mastery.championLevel}  src={'http://ddragon.leagueoflegends.com/cdn/img/champion/tiles/' + mastery.championName + '_0.jpg'} alt={mastery.championName}/>
+              <div key={mastery.championId} className="col mastery-champ-img-div" hidden={ (collapsed) && (index > 7)}>
+                <img className={"mastery-champ-img-" + mastery.championLevel}  src={'http://ddragon.leagueoflegends.com/cdn/img/champion/tiles/' + mastery.championName + '_0.jpg'}
+                  alt={mastery.championName}/>
                 <img className="mastery-champ-ribbon" src={process.env.PUBLIC_URL + '/rift/mastery/mastery_icon_' + masteryIcon + '.png'}/>
                 <span className="mastery-champ-label">
                   {Math.floor(mastery.championPoints / 1000)}k
@@ -92,6 +105,27 @@ function RiftSummoner(props: RiftMasteryProps) {
               </div>
             );
           })}
+        </div>
+        <div className="mastery-fab-container">
+          <div className="mastery-fab">
+            <Fab
+              variant="extended"
+              size="medium"
+              color="primary"
+              aria-label="add"
+              onClick={(evt) => {
+                //console.log(evt)
+                setCollapsed(!collapsed)
+                if(collapsed){
+                  setFabText(" Collapse your Dongers ヽ༼ຈل͜ຈ༽ﾉ ")  
+                }else{
+                  setFabText(" Expand your Dongers ヽ༼ຈل͜ຈ༽ﾉ ")
+                }
+              }}
+            >
+              {collapsed ? <DownIcon/> : <UpIcon/>} {fabText} {collapsed ? <DownIcon/> : <UpIcon/>}
+            </Fab>
+          </div>
         </div>
       </div>
     </div>
