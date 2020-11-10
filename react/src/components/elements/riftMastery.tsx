@@ -66,6 +66,10 @@ function RiftSummoner(props: RiftMasteryProps) {
     return auxArray.slice(0, arrayLength);
   }
 
+  const handlePictureLoaded = (index:number, element:any) =>{ 
+
+  }
+
   return (
     <div className="mastery-container">
       <div className="mastery-summoner">
@@ -95,14 +99,7 @@ function RiftSummoner(props: RiftMasteryProps) {
           {sortChampions().map((mastery:MasteryEntry, index:number) => {
             let masteryIcon = (mastery.championLevel >= 5) ? mastery.championLevel : 4;
             return (
-              <div key={mastery.championId} className="col mastery-champ-img-div" hidden={ (collapsed) && (index > 7)}>
-                <img className={"mastery-champ-img-" + mastery.championLevel}  src={'http://ddragon.leagueoflegends.com/cdn/img/champion/tiles/' + mastery.championName + '_0.jpg'}
-                  alt={mastery.championName}/>
-                <img className="mastery-champ-ribbon" src={process.env.PUBLIC_URL + '/rift/mastery/mastery_icon_' + masteryIcon + '.png'}/>
-                <span className="mastery-champ-label">
-                  {Math.floor(mastery.championPoints / 1000)}k
-                </span>
-              </div>
+              <ChampionImage mastery={mastery} index={index} masteryIcon={masteryIcon} collapsed={collapsed}/>
             );
           })}
         </div>
@@ -131,6 +128,47 @@ function RiftSummoner(props: RiftMasteryProps) {
     </div>
   );
 }
+
+
+interface ChampionImageProps {
+  mastery: MasteryEntry;
+  collapsed: boolean;
+  index: number;
+  masteryIcon: number;
+}
+
+class ChampionImage extends React.Component<ChampionImageProps> {
+  state = { loaded: false };
+
+  onLoad = () => {
+    this.setState({ loaded: true });
+    console.log("Loaded!");
+  };
+
+  render() {
+    const { loaded } = this.state;
+    const { mastery, collapsed, index, masteryIcon} = this.props;
+
+    return (
+
+      <div key={mastery.championId} className="col mastery-champ-img-div" hidden={ (collapsed) && (index > 7)}>
+        <img
+          className={ loaded ? "mastery-champ-img-" + mastery.championLevel : 'mastery-champ-img'}
+          alt={mastery.championName}
+          src={'http://ddragon.leagueoflegends.com/cdn/img/champion/tiles/' + mastery.championName + '_0.jpg'}
+          onLoad={this.onLoad}
+        />
+
+        <img className="mastery-champ-ribbon" src={process.env.PUBLIC_URL + '/rift/mastery/mastery_icon_' + masteryIcon + '.png'} hidden={!loaded}/>
+        <span className="mastery-champ-label " hidden={!loaded}>
+          {Math.floor(mastery.championPoints / 1000)}k
+        </span>
+      </div>
+      
+    );
+  }
+}
+
 
 function mapStateToProps() {
   return {};
