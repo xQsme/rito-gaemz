@@ -86,7 +86,6 @@ async function getUnits() {
 async function getUnit(name: string) {
     try{
         let unitReturn = null;
-        console.log(name);
         let unit = await axios.get(`http://ddragon.leagueoflegends.com/cdn/10.22.1/data/en_US/champion/${name}.json`);
         if (unit && unit.data) {
             
@@ -209,7 +208,6 @@ async function getHistory(serverNumber: number, name:string) {
                     })
                 });
                 
-                console.log(rift.data);
                 return {
                     code: 202,
                     data: {rift: rift ? rift.data : null},

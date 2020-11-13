@@ -382,6 +382,7 @@ td {
     .MuiInput-underline::after {
       border-bottom: none;
       color: $text;
+      content: none;
     }
   }
 }
